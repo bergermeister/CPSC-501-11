@@ -13,12 +13,16 @@ class Sets
 private:       // Private Attributes
    enum teType
    {
-      xeTypeInt    = 0,
-      xeTypeString = 1,
-      xeTypeTime   = 2
+      xeTypeInt     = 0,
+      xeTypeString  = 1,
+      xeTypeTime    = 2,
+      xeTypeUnknown = 3
    };
 
-   std::multiset< int > aoInts;
+   teType                       veType;
+   std::multiset< std::string > voSetStr;
+   std::multiset< int >         voSetInt;
+   
    // TODO: Need to implement Time class and multiset of Time Class
 
 public:        // Public Methods
@@ -31,40 +35,49 @@ public:        // Public Methods
    bool MProcess( std::string aoSet1, std::string aoSet2 );
 
    template< class GTcType >
-   std::multiset< GTcType >& MUnion( std::string aoSetStr[ 2 ] )
+   void MInsert( std::string aoWord, std::multiset< GTcType >& aorSet )
    {
-      std::multiset< GTcType > koSet;
-      std::string::iterator    koIter;
-      int                      kiIndex;
-      std::istrstream          koStream0( aoSetStr[ 0 ].c_str( ) );
-      std::istrstream          koStream1( aoSetStr[ 1 ].c_str( ) );
-      GTcType                  koTemp;
-      char                     koComma;
+      GTcType         koObject;
+      std::istrstream koStream( aoWord.c_str( ) );
 
-      while( !koStream0.eof( ) )
+      while( !koStream.eof( ) )
       {
-         koStream0 >> koTemp;
-         koStream0 >> koComma;
-         koSet.insert( koTemp );
+         koStream >> koObject;
+         aorSet.insert( koObject );
+      }
+   }
+
+   template< class GTcType >
+   std::multiset< GTcType > MUnique( std::multiset< GTcType >& aorSet )
+   {
+      std::multiset< GTcType > koResult;
+
+      for( auto koIter = aorSet.begin( ); 
+           koIter != aorSet.end( ); 
+           koIter = std::upper_bound( koIter, aorSet.end( ), *koIter ) )
+      {
+         koResult.insert( *koIter );
       }
 
-      /*
-      for( kiIndex = 0; kiIndex < 2; kiIndex++ )
-      {
-         for( koIter = aoSetStr[ kiIndex ].begin( ); koIter != aoSetStr[ kiIndex ].end( ); koIter++ )
-         {
-            //koSet.insert( *koIter );
-         }
-      }
-      */
-
-      return( koSet );
+      return( koResult );
    }
 
    friend std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets );
 
 private:       // Private Methods
+   teType mParseWord( std::string::iterator& aorBegin, const std::string::iterator aoEnd, std::string& aorWord );
 
+   template< class GTcType >
+   std::ostream& mPrint( std::ostream& aorOut, const std::multiset< GTcType >& aorSet ) const
+   {
+      for( auto koIter = aorSet.begin( ); koIter != aorSet.end( ); koIter++ )
+      {
+         aorOut << *koIter << '\t';
+      }
+      aorOut << std::endl;
+      
+      return( aorOut );
+   }
 };
 
 #endif

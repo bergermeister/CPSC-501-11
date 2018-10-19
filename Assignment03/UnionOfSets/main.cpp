@@ -41,7 +41,11 @@ int main( int aiArgc, char** acpArgv )
             std::getline( koFin, koSet[ 0 ] );
             std::getline( koFin, koSet[ 1 ] );
 
+            // Process the sets
             koSets.MProcess( koSet[ 0 ], koSet[ 1 ] );
+
+            // Print the result
+            std::cout << koSets << std::endl;
          }
 
          /* Close the file stream */
