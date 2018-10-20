@@ -1,4 +1,5 @@
 #include "Sets.h"
+#include "Time.h"
 #include <algorithm>
 #include <vector>
 #include <set>
@@ -6,7 +7,6 @@
 #include <string>
 #include <strstream>
 #include <iomanip>
-#include <cctype>
 
 Sets::Sets( void )
 {
@@ -44,6 +44,7 @@ bool Sets::MProcess( std::string aoSet1, std::string aoSet2 )
    teType keType;
 
    this->voSetInt.clear( );       // Clear the integer set
+   this->voSetTme.clear( );       // Clear the Time set
    this->voSetStr.clear( );       // Clear the string set
    this->veType = xeTypeUnknown;
 
@@ -69,37 +70,34 @@ bool Sets::MProcess( std::string aoSet1, std::string aoSet2 )
             kbStatus = false;
             break;
          }
-
-         // Build the correct multiset
-         switch( this->veType )
-         {
-         case xeTypeInt:
-            this->MInsert( koWord, this->voSetInt );
-            break;
-         case xeTypeTime:
-            // TODO:
-            break;
-         case xeTypeUnknown:  // Fall through to default
-         case xeTypeString:   // Treat default case a string
-         default:
-            this->MInsert( koWord, this->voSetStr );
-            break;
-         }
       }
    }
 
-   // TODO Create a union
-   switch( this->veType )
+   if( kbStatus )
    {
-   case xeTypeInt:
-      this->voSetInt = this->MUnique( this->voSetInt );
-      break;
-   case xeTypeString:
-      this->voSetStr = this->MUnique( this->voSetStr );
-      break;
-   case xeTypeTime:
-      // TODO: this->MUnion< 
-      break;
+      std::replace( koSetStr[ 0 ].begin( ), koSetStr[ 0 ].end( ), ',', ' ' );
+      std::replace( koSetStr[ 1 ].begin( ), koSetStr[ 1 ].end( ), ',', ' ' );
+
+      // TODO Create a union
+      switch( this->veType )
+      {
+      case xeTypeInt:      
+         this->voSetInt = this->MUnion< int >( this->MParse< int >( koSetStr[ 0 ] ), 
+                                               this->MParse< int >( koSetStr[ 1 ] ) );
+         this->voSetInt = this->MUnique( this->voSetInt );
+         break;
+      case xeTypeString:
+         this->voSetStr = this->MUnion< std::string >( this->MParse< std::string >( koSetStr[ 0 ] ), 
+                                                       this->MParse< std::string >( koSetStr[ 1 ] ) );
+         this->voSetStr = this->MUnique( this->voSetStr );
+         break;
+      case xeTypeTime:
+         //this->voSetTme = this->MParse< Time >( koSetStr[ 0 ] );
+         this->voSetTme = this->MUnion< Time >( this->MParse< Time >( koSetStr[ 0 ] ), 
+                                                this->MParse< Time >( koSetStr[ 1 ] ) );
+         // TODO: Causes problems: this->voSetTme = this->MUnique( this->voSetTme );
+         break;
+      }
    }
 
    return( kbStatus );
@@ -113,7 +111,7 @@ std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets )
       aorSets.mPrint( aorOut, aorSets.voSetInt );
       break;
    case Sets::xeTypeTime:
-      // TODO
+      aorSets.mPrint( aorOut, aorSets.voSetTme );
       break;
    case Sets::xeTypeUnknown:
    case Sets::xeTypeString:

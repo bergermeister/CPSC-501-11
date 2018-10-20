@@ -34,6 +34,8 @@ int main( int aiArgc, char** acpArgv )
       // Else parse the input file
       else
       {
+         std::cout << "Union of sequences are:" << std::endl;
+
          // Read to the end of the file
          while( !koFin.eof( ) )
          {
@@ -45,7 +47,7 @@ int main( int aiArgc, char** acpArgv )
             koSets.MProcess( koSet[ 0 ], koSet[ 1 ] );
 
             // Print the result
-            std::cout << koSets << std::endl;
+            std::cout << "[ " << koSets << " ]" << std::endl;
          }
 
          /* Close the file stream */

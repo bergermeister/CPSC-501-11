@@ -1,6 +1,7 @@
 #ifndef Sets_h
 #define Sets_h
 
+#include "Time.h"
 #include <set>
 #include <string>
 #include <iostream>
@@ -20,10 +21,9 @@ private:       // Private Attributes
    };
 
    teType                       veType;
-   std::multiset< std::string > voSetStr;
    std::multiset< int >         voSetInt;
-   
-   // TODO: Need to implement Time class and multiset of Time Class
+   std::multiset< Time >        voSetTme;
+   std::multiset< std::string > voSetStr;
 
 public:        // Public Methods
    Sets( void );
@@ -35,31 +35,44 @@ public:        // Public Methods
    bool MProcess( std::string aoSet1, std::string aoSet2 );
 
    template< class GTcType >
-   void MInsert( std::string aoWord, std::multiset< GTcType >& aorSet )
+   std::multiset< GTcType > MParse( const std::string aoSetStr )
    {
-      GTcType         koObject;
-      std::istrstream koStream( aoWord.c_str( ) );
+      GTcType                  koTemp;
+      std::multiset< GTcType > koSet;
+      std::istrstream          koStream( aoSetStr.c_str( ) );
 
-      while( !koStream.eof( ) )
+      while( !koStream.fail( ) )
       {
-         koStream >> koObject;
-         aorSet.insert( koObject );
+         koStream >> koTemp;
+         if( !koStream.fail( ) )
+         {
+            koSet.insert( koTemp );
+         }
       }
+
+      return( koSet );
    }
 
    template< class GTcType >
-   std::multiset< GTcType > MUnique( std::multiset< GTcType >& aorSet )
+   std::multiset< GTcType > MUnion( const std::multiset< GTcType >& aorSet1, const std::multiset< GTcType >& aorSet2 )
    {
-      std::multiset< GTcType > koResult;
+      std::multiset< GTcType > koUnion;
 
-      for( auto koIter = aorSet.begin( ); 
-           koIter != aorSet.end( ); 
-           koIter = std::upper_bound( koIter, aorSet.end( ), *koIter ) )
-      {
-         koResult.insert( *koIter );
-      }
+      std::set_union( aorSet1.begin( ), aorSet1.end( ), aorSet2.begin( ), aorSet2.end( ),
+                      std::insert_iterator< std::multiset< GTcType > >( koUnion, koUnion.begin( ) ) );
 
-      return( koResult );
+      return( koUnion );
+   }
+   
+   template< class GTcType >
+   std::multiset< GTcType > MUnique( const std::multiset< GTcType >& aorSet )
+   {
+      std::multiset< GTcType > koUnique;
+      
+      std::unique_copy( aorSet.begin( ), aorSet.end( ),
+                        std::insert_iterator< std::multiset< GTcType > >( koUnique, koUnique.begin( ) ) );
+
+      return( koUnique );
    }
 
    friend std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets );
@@ -72,9 +85,8 @@ private:       // Private Methods
    {
       for( auto koIter = aorSet.begin( ); koIter != aorSet.end( ); koIter++ )
       {
-         aorOut << *koIter << '\t';
+         aorOut << *koIter << ", ";
       }
-      aorOut << std::endl;
       
       return( aorOut );
    }
