@@ -1,3 +1,11 @@
+/**
+ * @file       Sets.h
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-10-20
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Interface for the Union of Sets class
+ */
 #ifndef Sets_h
 #define Sets_h
 
@@ -9,21 +17,24 @@
 #include <algorithm>
 #include <iterator>
 
+/** @brief Union of Sets class */
 class Sets
 {
 private:       // Private Attributes
+   /** @brief enumeration of supported types */
    enum teType
    {
-      xeTypeInt     = 0,
-      xeTypeString  = 1,
-      xeTypeTime    = 2,
-      xeTypeUnknown = 3
+      xeTypeUnknown = 0,
+      xeTypeInt     = 1,
+      xeTypeString  = 2,
+      xeTypeTime    = 3,
+      xeTypeDouble  = 4
    };
 
-   teType                       veType;
-   std::multiset< int >         voSetInt;
-   std::multiset< Time >        voSetTme;
-   std::multiset< std::string > voSetStr;
+   std::multiset< int >         voSetInt; /**< Unique Union Set of Integers */
+   std::multiset< Time >        voSetTme; /**< Unique Union Set of Time objects */
+   std::multiset< std::string > voSetStr; /**< Unique Union Set of Strings */
+   std::multiset< double >      voSetDbl; /**< Unique Union Set of Doubles */
 
 public:        // Public Methods
    Sets( void );
@@ -32,62 +43,172 @@ public:        // Public Methods
 
    Sets& operator=( const Sets& aorSets );
 
-   bool MProcess( std::string aoSet1, std::string aoSet2 );
+   bool MProcess( const std::string aoSetStr );
 
+   friend std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets );
+
+   /**
+    * @brief Parses a string into a multiset of generic type
+    *
+    * Template method which parses the input string into a multiset of the instantiated type.
+    *
+    * @return  std::multiset of the instantiated type
+    *
+    * @par Formal Parameters
+    * @PRM{ in, aoSetStr,     String representation of a set }
+    * @PRM{ in, abrSuccess,   Call success indication }
+    *
+    * @par Local Symbols
+    * @LOC{ koTemp,     Temporary storage for an individual element }
+    * @LOC{ koSet,      multiset of parsed data to be returned }
+    * @LOC{ koStream,   String stream used to parse the input string }
+    */
    template< class GTcType >
-   std::multiset< GTcType > MParse( const std::string aoSetStr )
+   std::multiset< GTcType > MParse( const std::string aoSetStr, bool& abrSuccess )
    {
       GTcType                  koTemp;
       std::multiset< GTcType > koSet;
       std::istrstream          koStream( aoSetStr.c_str( ) );
 
-      while( !koStream.fail( ) )
+      try
       {
-         koStream >> koTemp;
-         if( !koStream.fail( ) )
+         while( !koStream.fail( ) )
          {
-            koSet.insert( koTemp );
+            // Attempt to read an element from the string
+            koStream >> koTemp;
+
+            // Insert the element if the read was successful
+            if( !koStream.fail( ) )
+            {
+               koSet.insert( koTemp );
+            }
          }
+
+         // Success only if end of stream is reached, otherwise data was missed
+         abrSuccess = koStream.eof( );
+      }
+      catch( std::exception aoException )
+      {
+         std::cerr << "ERROR: Failed to parse string - " << aoSetStr << std::endl;
+         std::cerr << aoException.what( );
+         abrSuccess = false;
       }
 
       return( koSet );
    }
 
+   /**
+    * @brief Returns the union of two generic sets of the same type
+    *
+    * Performs std::set_union on the two given generic sets and returns the result
+    *
+    * @return  std::multiset of the union of the two sets
+    *
+    * @par Formal Parameters
+    * @PRM{ in, aorSet1,   First multiset }
+    * @PRM{ in, aorSet2,   Second multiset }
+    *
+    * @par Local Symbols
+    * @LOC{ koUnion,   multiset union of the two sets }
+    */
    template< class GTcType >
    std::multiset< GTcType > MUnion( const std::multiset< GTcType >& aorSet1, const std::multiset< GTcType >& aorSet2 )
    {
       std::multiset< GTcType > koUnion;
-
-      std::set_union( aorSet1.begin( ), aorSet1.end( ), aorSet2.begin( ), aorSet2.end( ),
-                      std::insert_iterator< std::multiset< GTcType > >( koUnion, koUnion.begin( ) ) );
+      try
+      {
+         std::set_union( aorSet1.begin( ), aorSet1.end( ), aorSet2.begin( ), aorSet2.end( ),
+                         std::insert_iterator< std::multiset< GTcType > >( koUnion, koUnion.begin( ) ) );
+      }
+      catch( std::exception aoException )
+      {
+         std::cerr << "ERROR: Failed to perform std::set_union" << std::endl;
+         std::cerr << aoException.what( );
+      }
 
       return( koUnion );
    }
    
+   /**
+    * @brief Returns a multiset of unique elements
+    *
+    * Executes std::unique_copy to find the unique elements of the given multiset and returns it
+    *
+    * @return  multiset of unique elements
+    *
+    * @par Formal Parameters
+    * @PRM{ in, aorSet,   Input multiset }
+    *
+    * @par Local Symbols
+    * @LOC{ koUnique,   multiset of unique elements }
+    */
    template< class GTcType >
    std::multiset< GTcType > MUnique( const std::multiset< GTcType >& aorSet )
    {
       std::multiset< GTcType > koUnique;
       
-      std::unique_copy( aorSet.begin( ), aorSet.end( ),
-                        std::insert_iterator< std::multiset< GTcType > >( koUnique, koUnique.begin( ) ) );
+      try
+      {
+         std::unique_copy( aorSet.begin( ), aorSet.end( ),
+                           std::insert_iterator< std::multiset< GTcType > >( koUnique, koUnique.begin( ) ) );
+      }
+      catch( std::exception aoException )
+      {
+         std::cerr << "ERROR: Failed to perform std::unique_copy" << std::endl;
+         std::cerr << aoException.what( );
+      }
 
       return( koUnique );
    }
 
-   friend std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets );
-
 private:       // Private Methods
-   teType mParseWord( std::string::iterator& aorBegin, const std::string::iterator aoEnd, std::string& aorWord );
+   teType mParseWord( std::string::iterator aoBegin, const std::string::iterator aoEnd, std::string& aorWord );
 
+   /**
+    * @brief Prints the given multiset to the given stream
+    *
+    * Prints the title and formatted multiset data to the given stream
+    *
+    * @return  Output stream
+    *
+    * @par Formal Parameters
+    * @PRM{ in, aorOut,     Output stream to print to }
+    * @PRM{ in, aorSet,     multiset to print to the stream }
+    * @PRM{ in, aorTitle,   Title to print before multiset data }
+    *
+    * @par Local Symbols
+    * @LOC{ koIter,   multiset iterator }
+    */
    template< class GTcType >
-   std::ostream& mPrint( std::ostream& aorOut, const std::multiset< GTcType >& aorSet ) const
+   std::ostream& mPrint( std::ostream& aorOut, const std::multiset< GTcType >& aorSet, const std::string aorTitle ) const
    {
-      for( auto koIter = aorSet.begin( ); koIter != aorSet.end( ); koIter++ )
+      auto koIter = aorSet.begin( );
+
+      // Print the title
+      aorOut << aorTitle << std::endl;
+
+      aorOut << "[ ";
+
+      if( aorSet.size( ) > 0 )
       {
-         aorOut << *koIter << ", ";
+         try
+         {
+            // Print the data
+            aorOut << std::setprecision( 3 ) << *koIter++;
+            for( ; koIter != aorSet.end( ); koIter++ )
+            {
+               aorOut << std::setprecision( 3 ) << ", " << *koIter ;
+            }
+         }
+         catch( std::exception aoException )
+         {
+            std::cerr << "ERROR: Failed to print set" << std::endl;
+            std::cerr << aoException.what( );
+         }
       }
-      
+
+      aorOut << " ]";
+
       return( aorOut );
    }
 };

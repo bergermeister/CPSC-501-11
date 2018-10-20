@@ -1,3 +1,11 @@
+/**
+ * @file       UTSets.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-10-20
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Unit Test methods for the Union of Sets class
+ */
 #include "CppUnitTest.h"
 #include "..\UnionOfSets\Sets.h"
 #include <string>

@@ -1,70 +1,138 @@
-// mytime3.cpp  -- implementing Time methods
+/**
+ * @file       Time.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-10-20
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Implementation for the Time class
+ */
 #include "Time.h"
 
-Time::Time(int h, int m )
+Time::Time( void )
 {
-    hours = h;
-    minutes = m;
+   viHours = viMinutes = 0;
 }
 
-void Time::AddMin(int m)
+Time::Time( int aiHours, int aiMinutes )
 {
-    minutes += m;
-    hours += minutes / 60;
-    minutes %= 60;
+   viHours = aiHours;
+   viMinutes = aiMinutes;
 }
 
-void Time::AddHr(int h)
+Time::Time( const Time& aorTime )
 {
-    hours += h;
+   *this = aorTime;
 }
 
-void Time::Reset(int h, int m)
+Time::~Time( void )
 {
-    hours = h;
-    minutes = m;
+   // Nothing to destruct
 }
 
-Time Time::operator+(const Time & t) const
+Time& Time::operator=( const Time& aorTime )
 {
-    Time sum;
-    sum.minutes = minutes + t.minutes;
-    sum.hours = hours + t.hours + sum.minutes / 60;
-    sum.minutes %= 60;
-    return sum;
+   this->viHours   = aorTime.viHours;
+   this->viMinutes = aorTime.viMinutes;
+
+   return( *this );
 }
 
-Time Time::operator-(const Time & t) const
+void Time::AddMin( int aiMinutes )
 {
-    Time diff;
-    int tot1, tot2;
-    tot1 = t.minutes + 60 * t.hours;
-    tot2 = minutes + 60 * hours;
-    diff.minutes = (tot2 - tot1) % 60;
-    diff.hours = (tot2 - tot1) / 60;
-    return diff;
+   viMinutes += aiMinutes;
+   viHours   += viMinutes / 60;
+   viMinutes %= 60;
 }
 
-Time Time::operator*(double mult) const
+void Time::AddHr( int aiHours )
 {
-    Time result;
-    long totalminutes = hours * mult * 60 + minutes * mult;
-    result.hours = totalminutes / 60;
-    result.minutes = totalminutes % 60;
-    return result;
+   viHours += aiHours;
 }
 
-/*
-std::ostream & operator<<(std::ostream & os, const Time & t)
+void Time::Reset( int aiHours, int aiMinutes )
+{
+   viHours   = aiHours;
+   viMinutes = aiMinutes;
+}
+
+Time Time::operator+( const Time& aorTime ) const
+{
+   Time koSum;
+
+   koSum.viMinutes = viMinutes + aorTime.viMinutes;
+   koSum.viHours   = viHours + aorTime.viHours + ( koSum.viMinutes / 60 );
+   koSum.viMinutes %= 60;
+
+   return( koSum );
+}
+
+Time Time::operator-( const Time& aorTime ) const
+{
+   Time koDiff;
+   int  kiTot1, kiTot2;
+
+   kiTot1           = aorTime.viMinutes + ( 60 * aorTime.viHours );
+   kiTot2           = viMinutes + ( 60 * viHours );
+   koDiff.viMinutes = ( kiTot2 - kiTot1 ) % 60;
+   koDiff.viHours   = ( kiTot2 - kiTot1 ) / 60;
+
+   return( koDiff );
+}
+
+Time Time::operator*( double adFactor ) const
+{
+   Time koResult;
+   long kiTotalMin    = ( long )( ( double )viHours * adFactor * 60.0 ) + ( ( double )viMinutes * adFactor );
+   koResult.viHours   = kiTotalMin / 60;
+   koResult.viMinutes = kiTotalMin % 60;
+   return( koResult );
+}
+
+bool Time::operator<( const Time& aorTime ) const
+{
+   bool kbLT = false;
+
+   if( this->viHours < aorTime.viHours )
+   {
+      kbLT = true;
+   }
+   else if( ( this->viHours == aorTime.viHours ) && ( this->viMinutes < aorTime.viMinutes ) )
+   {
+      kbLT = true;
+   }
+
+   return( kbLT );
+}
+
+bool Time::operator()( const Time& aorT1, const Time& aorT2 ) const
+{
+   return( aorT1 < aorT2 );
+}
+
+Time operator*( double adFactor, const Time& aorTime )
+{ 
+   return( aorTime * adFactor ); 
+}
+
+std::ostream& operator<<( std::ostream& aorOut, const Time& aorTime )
 {
    std::tm koTM;
-   koTM.tm_hour = t.hours;
-   koTM.tm_min  = t.minutes;
+   koTM.tm_hour = aorTime.viHours;
+   koTM.tm_min  = aorTime.viMinutes;
 
-   std::put_time( &koTM, "%H:%M" );
+   // put_time errors out on 4:60, which is not a valid time
+   // TODO: os << std::put_time( &koTM, "%H:%M" );
 
-    //os << t.hours << ":" << t.minutes;
+   aorOut << aorTime.viHours << ":" << aorTime.viMinutes;
 
-    return os; 
+   return( aorOut ); 
 }
-*/
+
+std::istream& operator>>( std::istream& aorIn, Time& aorTime )
+{
+   char kcColon;
+
+   aorIn >> aorTime.viHours >> kcColon >> aorTime.viMinutes;
+
+   return( aorIn );
+}

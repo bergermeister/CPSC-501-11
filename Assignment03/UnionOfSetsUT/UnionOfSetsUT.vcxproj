@@ -153,10 +153,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\UnionOfSets\Sets.h" />
+    <ClInclude Include="..\UnionOfSets\Time.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\UnionOfSets\Sets.cpp" />
+    <ClCompile Include="..\UnionOfSets\Time.cpp" />
     <ClCompile Include="UTSets.cpp" />
   </ItemGroup>
   <ItemGroup>

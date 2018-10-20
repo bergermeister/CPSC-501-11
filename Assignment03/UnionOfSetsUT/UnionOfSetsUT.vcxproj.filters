@@ -21,12 +21,18 @@
     <ClInclude Include="..\UnionOfSets\Sets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\UnionOfSets\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="UTSets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\UnionOfSets\Sets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\UnionOfSets\Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
