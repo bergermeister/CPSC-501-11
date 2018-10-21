@@ -162,6 +162,7 @@ bool Sets::MProcess( const std::string aoSetStr )
             auto koSet     = this->MParse< double >( koSetStr, kbStatus );    // Create a set of doubles from the string
             this->voSetDbl = this->MUnion< double >( this->voSetDbl, koSet ); // Union the new set with the working set
             this->voSetDbl = this->MUnique( this->voSetDbl );                 // Remove duplicate values
+            break;
          }
          default:
             kbStatus = false;
@@ -175,6 +176,26 @@ bool Sets::MProcess( const std::string aoSetStr )
    }
 
    return( kbStatus );
+}
+
+std::multiset< int > Sets::MGetSetInt( void ) const
+{
+   return( this->voSetInt );
+}
+
+std::multiset< Time > Sets::MGetSetTme( void ) const
+{
+   return( this->voSetTme );
+}
+
+std::multiset< std::string > Sets::MGetSetStr( void ) const
+{
+   return( this->voSetStr );
+}
+
+std::multiset< double > Sets::MGetSetDbl( void ) const
+{
+   return( this->voSetDbl );
 }
 
 /**

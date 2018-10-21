@@ -44,6 +44,10 @@ public:        // Public Methods
    Sets& operator=( const Sets& aorSets );
 
    bool MProcess( const std::string aoSetStr );
+   std::multiset< int >         MGetSetInt( void ) const;
+   std::multiset< Time >        MGetSetTme( void ) const;
+   std::multiset< std::string > MGetSetStr( void ) const;
+   std::multiset< double >      MGetSetDbl( void ) const;
 
    friend std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets );
 
