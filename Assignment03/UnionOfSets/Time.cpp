@@ -109,6 +109,11 @@ bool Time::operator()( const Time& aorT1, const Time& aorT2 ) const
    return( aorT1 < aorT2 );
 }
 
+bool Time::operator==( const Time& aorTime ) const
+{
+   return( ( this->viHours == aorTime.viHours ) && ( this->viMinutes == aorTime.viMinutes ) );
+}
+
 Time operator*( double adFactor, const Time& aorTime )
 { 
    return( aorTime * adFactor ); 
@@ -121,9 +126,7 @@ std::ostream& operator<<( std::ostream& aorOut, const Time& aorTime )
    koTM.tm_min  = aorTime.viMinutes;
 
    // put_time errors out on 4:60, which is not a valid time
-   // TODO: os << std::put_time( &koTM, "%H:%M" );
-
-   aorOut << aorTime.viHours << ":" << aorTime.viMinutes;
+   aorOut << std::put_time( &koTM, "%H:%M" );
 
    return( aorOut ); 
 }
@@ -133,6 +136,12 @@ std::istream& operator>>( std::istream& aorIn, Time& aorTime )
    char kcColon;
 
    aorIn >> aorTime.viHours >> kcColon >> aorTime.viMinutes;
+
+   if( aorTime.viMinutes >= 60 )
+   {
+      aorTime.viHours   += aorTime.viMinutes / 60;
+      aorTime.viMinutes %= 60;
+   }
 
    return( aorIn );
 }

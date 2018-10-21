@@ -154,7 +154,7 @@ bool Sets::MProcess( const std::string aoSetStr )
          {
             auto koSet     = this->MParse< Time >( koSetStr, kbStatus );      // Create a set of Time objects from the string
             this->voSetTme = this->MUnion< Time >( this->voSetTme, koSet );   // Union the new set with the working set
-            // TODO: this->voSetTme = this->MUnique( this->voSetTme );        // Remove duplicate values (TODO: Fix Error)
+            this->voSetTme = this->MUnique( this->voSetTme );                 // Remove duplicate values
             break;
          }
          case xeTypeDouble:

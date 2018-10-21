@@ -36,6 +36,7 @@ public:
    Time operator*( double adFactor ) const;
    bool operator<( const Time& aorTime ) const;
    bool operator()( const Time& aorT1, const Time& aorT2 ) const;
+   bool operator==( const Time& aorTime ) const;
    friend Time operator*( double adFactor, const Time& aorTime );
    friend std::ostream& operator<<( std::ostream& aorOut, const Time& aorTime );
    friend std::istream& operator>>( std::istream& aorIn,  Time& aorTime );
