@@ -194,10 +194,10 @@ private:       // Private Methods
          try
          {
             // Print the data
-            aorOut << std::setprecision( 3 ) << *koIter++;
+            aorOut << *koIter++;
             for( ; koIter != aorSet.end( ); koIter++ )
             {
-               aorOut << std::setprecision( 3 ) << ", " << *koIter ;
+               aorOut << ", " << *koIter ;
             }
          }
          catch( std::exception aoException )

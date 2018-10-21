@@ -193,6 +193,8 @@ bool Sets::MProcess( const std::string aoSetStr )
  */
 std::ostream& operator<<( std::ostream& aorOut, const Sets& aorSets )
 {
+   aorOut << std::fixed << std::setprecision( 2 );
+
    aorSets.mPrint( aorOut, aorSets.voSetInt, "Union of Integers:" );
    aorOut << std::endl << std::endl;
 
