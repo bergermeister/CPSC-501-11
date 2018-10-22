@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input.txt" />
+    <Text Include="InputTiming.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
