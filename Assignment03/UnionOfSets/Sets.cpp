@@ -116,6 +116,8 @@ Sets& Sets::operator=( const Sets& aorSets )
  */
 bool Sets::MProcess( const std::string aoSetStr )
 {
+
+
    using std::string;
    using std::multiset;
    using std::vector;
@@ -139,8 +141,10 @@ bool Sets::MProcess( const std::string aoSetStr )
          case xeTypeInt:
          {
             auto koSet     = this->MParse< int >( koSetStr, kbStatus );    // Create set of integers from the string
-            this->voSetInt = this->MUnion< int >( this->voSetInt, koSet ); // Union the new set with the working set
+			clock_t begin_time = clock();
+			this->voSetInt = this->MUnion< int >( this->voSetInt, koSet ); // Union the new set with the working set
             this->voSetInt = this->MUnique( this->voSetInt );              // Remove duplicate values
+			std::cout << "\n Time taken in seconds " << float(clock() - begin_time ) / CLOCKS_PER_SEC << "\n";
             break;
          }
          case xeTypeString:
