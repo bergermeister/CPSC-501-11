@@ -186,7 +186,7 @@ private:       // Private Methods
    template< class GTcType >
    std::ostream& mPrint( std::ostream& aorOut, const std::multiset< GTcType >& aorSet, const std::string aorTitle ) const
    {
-      auto koIter = aorSet.begin( );
+      std::ostream_iterator< GTcType, char > koOut( aorOut, ", " );
 
       // Print the title
       aorOut << aorTitle << std::endl;
@@ -197,12 +197,7 @@ private:       // Private Methods
       {
          try
          {
-            // Print the data
-            aorOut << *koIter++;
-            for( ; koIter != aorSet.end( ); koIter++ )
-            {
-               aorOut << ", " << *koIter ;
-            }
+            std::copy( aorSet.begin( ), aorSet.end( ), koOut );
          }
          catch( std::exception aoException )
          {
@@ -211,7 +206,7 @@ private:       // Private Methods
          }
       }
 
-      aorOut << " ]";
+      aorOut << "]";
 
       return( aorOut );
    }

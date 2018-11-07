@@ -10,6 +10,8 @@
 #include <iostream>
 #include <fstream>
 
+static void MGenerateFile( const int aiInitialSize, const int aiSetCount );
+
 /**
  * @brief Main driver application entry
  *
@@ -37,6 +39,8 @@ int main( int aiArgc, char** acpArgv )
    std::string   koSetStr;
    std::ifstream koFin;
    Sets          koSets;
+
+   MGenerateFile( 100, 5 );
 
    // If no arguments were specified 
    if( aiArgc < 2 )
@@ -91,4 +95,40 @@ int main( int aiArgc, char** acpArgv )
    getchar( );
 
    return( kiStatus );
+}
+
+static void MGenerateFile( const int aiInitialSize, const int aiSetCount )
+{
+   int kiSize = aiInitialSize;
+   int kiIdx;
+   int kiSet;
+   int kiLoop;
+   int kiVal;
+   std::ofstream koOut;
+
+   srand( time( NULL ) );
+
+   koOut.open( "InputTiming.txt" );
+
+   for( kiSet = 0; kiSet < aiSetCount; kiSet++ )
+   {
+      for( kiLoop = 0; kiLoop < 2; kiLoop++ )
+      {
+         for( kiIdx = 0; kiIdx < kiSize; kiIdx++ )
+         {
+            kiVal = rand( ) % kiSize;
+
+            koOut << kiVal; 
+            if( kiIdx < kiSize - 1 )
+            {
+               koOut << ",";
+            }
+            else
+            {
+               koOut << std::endl;
+            }
+         }
+      }
+      kiSize *= 10;
+   }
 }
