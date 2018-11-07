@@ -38,7 +38,8 @@ int main( int aiArgc, char** acpArgv )
    int           kiLineNum = 0;
    std::string   koSetStr;
    std::ifstream koFin;
-   Sets          koSets;
+   int Count = 10;
+
 
    MGenerateFile( 100, 5 );
 
@@ -70,24 +71,28 @@ int main( int aiArgc, char** acpArgv )
          // Read to the end of the file
          while( !koFin.eof( ) )
          {
+			 Count = Count * 10;
+			 std::cout << "Number of Elements are :" << Count;
+			 Sets          koSets;
             // Read a line. Each line is expected to be a set
             std::getline( koFin, koSetStr );
             kiLineNum++;
 
             // Process the sets
-            if( koSets.MProcess( koSetStr ) == false )
-            {
-               std::cerr << "ERROR: Processing line " << kiLineNum << " encountered errors." << std::endl;
-               kiStatus = kiLineNum + 2;
-            }
+			koSets.MProcess(koSetStr);
+			std::getline(koFin, koSetStr);
+			kiLineNum++;
+
+			// Process the sets
+			koSets.MProcess(koSetStr);
          }
 
          // Close the file stream
          koFin.close( );
 
          // Print the results
-         std::cout << "Union of sequences are:" << std::endl;
-         std::cout << koSets << std::endl;
+         //std::cout << "Union of sequences are:" << std::endl;
+        // std::cout << koSets << std::endl;
       }
    }
 
