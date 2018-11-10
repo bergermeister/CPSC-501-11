@@ -1,6 +1,9 @@
 #include "Contact.h"
 #include "PersonContact.h"
 #include "BusinessContact.h"
+#include "PersonAddressContact.h"
+#include "PersonPhoneContact.h"
+#include "PersonEmailContact.h"
 
 int main( int aiArgc, char** aiArgv )
 {

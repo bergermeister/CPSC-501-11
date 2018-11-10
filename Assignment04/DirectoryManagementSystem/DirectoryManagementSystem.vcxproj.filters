@@ -24,6 +24,15 @@
     <ClInclude Include="BusinessContact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PersonAddressContact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonPhoneContact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PersonEmailContact.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contact.cpp">
@@ -36,6 +45,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BusinessContact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonAddressContact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonPhoneContact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PersonEmailContact.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
