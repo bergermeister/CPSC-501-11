@@ -1,0 +1,5 @@
+Reasoning for final selection:
+1. Models the requirements 
+2. New specializations can be added by modifying only the leaf classes
+3. New directories can be added by modifying the Person/Business level
+   of the hierarchy and adding new leaf classes
