@@ -28,5 +28,7 @@ int main( int aiArgc, char** aiArgv )
       kopDir[ kiIndex ]->display( );
    }
 
+   std::cin.get();
+
    return( kiStatus );
 }

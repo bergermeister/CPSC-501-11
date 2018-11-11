@@ -28,5 +28,5 @@ Contact& Contact::operator=( const Contact& aorContact )
 
 void Contact::display( void )
 {
-   std::cout << "Contact object" << std::endl;
+   std::cout << "Contact" << std::endl;
 }

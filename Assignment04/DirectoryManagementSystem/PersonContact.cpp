@@ -32,5 +32,6 @@ PersonContact& PersonContact::operator=( const PersonContact& aorPerson )
 
 void PersonContact::display( void )
 {
-   std::cout << "Person Contact object" << std::endl;
+   std::cout << "Person Contact \t -> ";
+   Contact::display( );
 }

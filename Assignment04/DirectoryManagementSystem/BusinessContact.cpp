@@ -32,5 +32,6 @@ BusinessContact& BusinessContact::operator=( const BusinessContact& aorBusiness 
 
 void BusinessContact::display( void )
 {
-   std::cout << "Business Contact object" << std::endl;
+   std::cout << "Business Contact \t -> ";
+   Contact::display( );
 }

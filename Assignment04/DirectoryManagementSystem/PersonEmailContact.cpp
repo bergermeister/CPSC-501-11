@@ -25,9 +25,8 @@ PersonEmailContact & PersonEmailContact::operator=(const PersonEmailContact & oP
 
 void PersonEmailContact::display(void)
 {
-	Contact::display();
-	PersonContact::display();
-	cout << " The address is " << Email;
+	cout << "Person Email Contact    \t -> ";
+   PersonContact::display( );
 }
 
 PersonEmailContact::~PersonEmailContact()  // Destructor

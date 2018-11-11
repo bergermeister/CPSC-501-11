@@ -25,9 +25,8 @@ BusinessAddressContact & BusinessAddressContact::operator=(const BusinessAddress
 
 void BusinessAddressContact::display(void)
 {
-	Contact::display();
-	BusinessContact::display();
-	cout << " The address is " << Address;
+	cout << "Business Address Contact    \t -> ";
+   BusinessContact::display( );
 }
 
 BusinessAddressContact::~BusinessAddressContact()  // Destructor

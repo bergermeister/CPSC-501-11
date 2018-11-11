@@ -25,9 +25,8 @@ PersonPhoneContact & PersonPhoneContact::operator=(const PersonPhoneContact & oP
 
 void PersonPhoneContact::display(void)
 {
-	Contact::display();
-	PersonContact::display();
-	cout << " The Phone Number is  is " << Phone;
+	cout << "Person Phone Contact    \t -> ";
+   PersonContact::display( );
 }
 
 PersonPhoneContact::~PersonPhoneContact()  // Destructor

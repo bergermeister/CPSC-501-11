@@ -25,9 +25,8 @@ BusinessWebContact & BusinessWebContact::operator=(const BusinessWebContact & oB
 
 void BusinessWebContact::display(void)
 {
-	Contact::display();
-	BusinessContact::display();
-	cout << " The address is " << Website;
+	cout << "Business Web Contact    \t -> ";
+   BusinessContact::display( );
 }
 
 BusinessWebContact::~BusinessWebContact()  // Destructor
