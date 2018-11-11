@@ -1,3 +1,14 @@
+/**
+ * @file       BusinessPhoneContact.h
+ * @author     Udaya Sree Reddy Teegulla, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Business Phone Contact class interface
+ */
+#ifndef BusinessPhoneContact_h
+#define BusinessPhoneContact_h
+
 #include <string>
 #include <iostream>
 #include "BusinessContact.h"
@@ -16,6 +27,5 @@ private:
 	int Phone;
 };
 
+#endif
 
-
-#pragma once

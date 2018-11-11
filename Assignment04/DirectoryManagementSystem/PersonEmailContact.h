@@ -1,4 +1,13 @@
-#pragma once
+/**
+ * @file       PersonEmailContact.h
+ * @author     Zainab Al Taweel, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Email Contact class interface
+ */
+#ifndef PersonEmailContact_h
+#define PersonEmailContact_h
 
 #include <string>
 #include <iostream>
@@ -18,5 +27,5 @@ private:
 	string Email;
 };
 
-
+#endif
 

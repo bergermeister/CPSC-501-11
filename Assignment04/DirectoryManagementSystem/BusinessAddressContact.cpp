@@ -1,3 +1,11 @@
+/**
+ * @file       BusinessAddressContact.cpp
+ * @author     Udaya Sree Reddy Teegulla, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Business Address Contact class implementation
+ */
 #include "BusinessAddressContact.h"
 #include <string>
 #include <iostream>

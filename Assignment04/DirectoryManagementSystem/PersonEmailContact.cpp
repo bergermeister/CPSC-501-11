@@ -1,3 +1,11 @@
+/**
+ * @file       PersonEmailContact.cpp
+ * @author     Zainab Al Taweel, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Email Contact class implementation
+ */
 #include "PersonEmailContact.h"
 #include <string>
 #include <iostream>

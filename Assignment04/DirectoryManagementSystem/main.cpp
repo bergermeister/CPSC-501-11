@@ -1,3 +1,11 @@
+/**
+ * @file       main.cpp
+ * @author     Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Main driver application for the Contact Hierarchy of classess
+ */
 #include "Contact.h"
 #include "PersonContact.h"
 #include "BusinessContact.h"

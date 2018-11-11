@@ -1,3 +1,13 @@
+/**
+ * @file       PersonPhoneContact.h
+ * @author     Zainab Al Taweel, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Phone Contact class interface
+ */
+#ifndef PersonPhoneContact_h
+#define PersonPhoneContact_h
 
 #include <string>
 #include <iostream>
@@ -17,6 +27,4 @@ private:
 	int Phone;
 };
 
-
-
-#pragma once
+#endif

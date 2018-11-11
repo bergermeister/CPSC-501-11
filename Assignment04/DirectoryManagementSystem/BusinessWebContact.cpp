@@ -1,3 +1,11 @@
+/**
+ * @file       BusinessWebContact.cpp
+ * @author     Udaya Sree Reddy Teegulla, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Business Web Contact class implementation
+ */
 #include "BusinessWebContact.h"
 #include <string>
 #include <iostream>

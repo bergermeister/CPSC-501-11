@@ -1,3 +1,11 @@
+/**
+ * @file       BusinessContact.h
+ * @author     Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Business Contact class interface
+ */
 #ifndef BusinessContact_h
 #define BusinessContact_h
 

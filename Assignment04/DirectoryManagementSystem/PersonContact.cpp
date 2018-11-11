@@ -1,3 +1,11 @@
+/**
+ * @file       PersonContact.cpp
+ * @author     Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Contact class implementation
+ */
 #include "PersonContact.h"
 #include <string>
 #include <iostream>

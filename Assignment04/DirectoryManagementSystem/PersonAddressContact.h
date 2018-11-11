@@ -1,3 +1,13 @@
+/**
+ * @file       PersonAddressContact.h
+ * @author     Zainab Al Taweel, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Address Contact class interface
+ */
+#ifndef PersonAddressContact_h
+#define PersonAddressContact_h
 
 #include <string>
 #include <iostream>
@@ -17,5 +27,5 @@ private:
 	string Address;
 };
 
-
+#endif
 

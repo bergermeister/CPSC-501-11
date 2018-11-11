@@ -1,3 +1,11 @@
+/**
+ * @file       PersonAddressContact.cpp
+ * @author     Zainab Al Taweel, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Address Contact class implementation
+ */
 #include "PersonAddressContact.h"
 #include <string>
 #include <iostream>

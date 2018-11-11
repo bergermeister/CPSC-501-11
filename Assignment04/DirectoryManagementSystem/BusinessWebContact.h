@@ -1,3 +1,14 @@
+/**
+ * @file       BusinessWebContact.h
+ * @author     Udaya Sree Reddy Teegulla, Edward Eisenberger
+ * @date       2018-11-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Business Web Contact class interface
+ */
+#ifndef BusinessWebContact_h
+#define BusinessWebContact_h
+
 #include <string>
 #include <iostream>
 #include "BusinessContact.h"
@@ -15,4 +26,6 @@ public:
 private:
 	string Website;
 };
+
+#endif
 
