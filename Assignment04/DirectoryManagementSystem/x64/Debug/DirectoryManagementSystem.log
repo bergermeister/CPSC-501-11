@@ -1,0 +1,12 @@
+﻿  BusinessAddressContact.cpp
+  BusinessContact.cpp
+  BusinessPhoneContact.cpp
+  BusinessWebContact.cpp
+  Contact.cpp
+  main.cpp
+  PersonAddressContact.cpp
+  PersonContact.cpp
+  PersonEmailContact.cpp
+  PersonPhoneContact.cpp
+  Generating Code...
+  DirectoryManagementSystem.vcxproj -> F:\git\Assignment04\x64\Debug\DirectoryManagementSystem.exe

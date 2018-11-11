@@ -115,7 +115,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BusinessAddressContact.h" />
+    <ClInclude Include="BusinessPhoneContact.h" />
     <ClInclude Include="BusinessContact.h" />
+    <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
@@ -123,7 +126,10 @@
     <ClInclude Include="PersonPhoneContact.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BusinessAddressContact.cpp" />
     <ClCompile Include="BusinessContact.cpp" />
+    <ClCompile Include="BusinessPhoneContact.cpp" />
+    <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
