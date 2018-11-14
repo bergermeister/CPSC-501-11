@@ -25,6 +25,8 @@ public:
    PersonContact& operator=( const PersonContact& aorPerson );
 
    virtual void display( void );
+
+   std::string MGetGender( void ) const;
 };
 
 #endif

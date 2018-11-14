@@ -42,6 +42,9 @@
     <ClInclude Include="BusinessWebContact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DMS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contact.cpp">
@@ -72,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BusinessAddressContact.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DMS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

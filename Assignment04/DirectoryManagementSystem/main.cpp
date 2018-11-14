@@ -15,6 +15,7 @@
 #include "BusinessPhoneContact.h"
 #include "BusinessAddressContact.h"
 #include "BusinessWebContact.h"
+#include "DMS.h"
 
 int main( int aiArgc, char** aiArgv )
 {
@@ -23,6 +24,7 @@ int main( int aiArgc, char** aiArgv )
    int      kiStatus = 0;
    int      kiIndex;
    Contact* kopDir[ xiCount ];
+   DMS      koDMS;
 
    kopDir[ 0 ] = new PersonAddressContact();
    kopDir[ 1 ] = new PersonPhoneContact();

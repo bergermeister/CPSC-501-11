@@ -120,6 +120,7 @@
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="DMS.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
     <ClInclude Include="PersonEmailContact.h" />
@@ -131,6 +132,7 @@
     <ClCompile Include="BusinessPhoneContact.cpp" />
     <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="DMS.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />

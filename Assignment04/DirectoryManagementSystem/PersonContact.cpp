@@ -43,3 +43,8 @@ void PersonContact::display( void )
    std::cout << "Person Contact \t -> ";
    Contact::display( );
 }
+
+std::string PersonContact::MGetGender( void ) const
+{
+   return( this->voGender );
+}

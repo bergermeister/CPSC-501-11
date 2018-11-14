@@ -38,3 +38,69 @@ void Contact::display( void )
 {
    std::cout << "Contact" << std::endl;
 }
+
+std::string Contact::MGetFullName( void ) const
+{
+   return( this->voName );
+}
+
+std::string Contact::MGetFirstName( void ) const
+{
+   return( mSplit( this->voName, ' ' )[ 0 ] );
+}
+
+std::string Contact::MGetMiddleName( void ) const
+{
+   std::vector< std::string > koWords = mSplit( this->voName, ' ' );
+   std::string                koMiddle = "";
+   auto                       koIter = koWords.begin( );
+   auto                       koEnd  = koWords.end( );
+
+   if( koWords.size( ) > 2 )
+   {
+      koIter++;   // Skip the first word
+      koEnd--;    // Skip the last word
+      while( koIter != koEnd )
+      {
+         koMiddle += *koIter + " ";
+      }
+   }
+
+   return( koMiddle );
+}
+
+std::string Contact::MGetLastName( void ) const
+{
+   std::vector< std::string > koWords = mSplit( this->voName, ' ' );
+   std::string                koLast = "";
+
+   if( koWords.size( ) > 1 )
+   {
+      koLast = koWords[ koWords.size( ) - 1 ];
+   }
+
+   return( koLast );
+}
+
+std::vector< std::string > Contact::mSplit( std::string aoString, char acDelim )
+{
+   std::vector< std::string > koWords;
+   std::string                koWord = "";
+
+   for( auto koIter = aoString.begin( ); koIter != aoString.end( ); koIter++ )
+   {
+      if( *koIter == acDelim )
+      {
+         koWords.push_back( koWord );
+         koWord = "";
+      }
+      else
+      {
+         koWord += *koIter;
+      }
+   }
+
+   koWords.push_back( koWord );
+
+   return( koWords );
+}

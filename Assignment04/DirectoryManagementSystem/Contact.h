@@ -10,6 +10,7 @@
 #define Contact_h
 
 #include <string>
+#include <vector>
 
 class Contact
 {
@@ -24,6 +25,13 @@ public:
    Contact& operator=( const Contact& aorContact );
 
    virtual void display( void );
+   std::string MGetFullName( void ) const;
+   std::string MGetFirstName( void ) const;
+   std::string MGetMiddleName( void ) const;
+   std::string MGetLastName( void ) const;
+
+protected:
+   static std::vector< std::string > mSplit( std::string aoString, char acDelim );
 };
 
 #endif
