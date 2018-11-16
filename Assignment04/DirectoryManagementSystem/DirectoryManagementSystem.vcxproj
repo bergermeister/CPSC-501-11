@@ -139,6 +139,9 @@
     <ClCompile Include="PersonEmailContact.cpp" />
     <ClCompile Include="PersonPhoneContact.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input1.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
