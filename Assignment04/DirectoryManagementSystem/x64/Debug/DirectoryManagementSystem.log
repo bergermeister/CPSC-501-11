@@ -1,14 +1,4 @@
-﻿  BusinessAddressContact.cpp
-  BusinessContact.cpp
-  BusinessPhoneContact.cpp
-  BusinessWebContact.cpp
-  Contact.cpp
-  DMS.cpp
-  main.cpp
-  PersonAddressContact.cpp
-  PersonContact.cpp
-  PersonEmailContact.cpp
-  PersonPhoneContact.cpp
-  Generating Code...
-  LINK : C:\Users\UDAYASREE\Source\Repos\CPSC-501-11\Assignment04\x64\Debug\DirectoryManagementSystem.exe not found or not built by the last incremental link; performing full link
-  DirectoryManagementSystem.vcxproj -> C:\Users\UDAYASREE\Source\Repos\CPSC-501-11\Assignment04\x64\Debug\DirectoryManagementSystem.exe
+﻿  DMS.cpp
+c:\users\zainab altaweel\documents\github\cpsc-501-11\assignment04\directorymanagementsystem\dms.cpp(23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\cpsc-501-11\assignment04\directorymanagementsystem\dms.cpp(29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\CPSC-501-11\Assignment04\x64\Debug\DirectoryManagementSystem.exe

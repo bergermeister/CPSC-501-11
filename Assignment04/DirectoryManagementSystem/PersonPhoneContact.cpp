@@ -13,7 +13,7 @@
 using namespace std;
 
 
-PersonPhoneContact::PersonPhoneContact(const string & oName, const string & oGender, const int & oPhoneNo)
+PersonPhoneContact::PersonPhoneContact(const string & oName, const string & oGender, const string & oPhoneNo)
 	: PersonContact(oName, oGender) // Deafult Constructor
 {
 	this->Phone = oPhoneNo;

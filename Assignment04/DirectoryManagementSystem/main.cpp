@@ -26,6 +26,7 @@ int main( int aiArgc, char** aiArgv )
    Contact* kopDir[ xiCount ];
    DMS      koDMS;
 
+   koDMS.PopulateDirectory("Input1.txt");
    kopDir[ 0 ] = new PersonAddressContact();
    kopDir[ 1 ] = new PersonPhoneContact();
    kopDir[ 2 ] = new PersonEmailContact();
