@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <iostream>
 #include <typeinfo>
+#include <vector>
 
 DMS::DMS( void )
 {
@@ -57,4 +58,49 @@ DMS& DMS::operator=( const DMS& aorDMS )
    }
 
    return( *this );
+}
+
+void DMS::populateDirectory( const std::string& aorFile )
+{
+
+}
+
+void DMS::query( const char acResponse )
+{
+   using namespace std;
+
+   //vector< string > koWords = Contact::mSplit( aorResponse, ' ' );
+   //multimap< string, Contact* >::iterator koIter;
+
+   switch( acResponse )
+   {
+   case 'f':   // Query by first name
+      this->mQueryFirstName( );
+      break;
+   case 'l':   // Query by last name
+      break;
+   case 'w':   // Query by whole name
+      break;
+   }
+}
+
+void mQueryHelper( const std::vector< std::string >& aorWords, const int aiIndex )
+{
+
+}
+
+void mQueryFirstName( void )
+{
+   using namespace std;
+
+   string koFirstName;
+   char   kcOrder;
+
+   cout << "Enter the contact's first name: ";
+   cin  >> koFirstName;
+
+   cout << "Enter order column:";
+   cin  >> kcOrder;
+
+   
 }

@@ -30,7 +30,7 @@ public:
    std::string MGetMiddleName( void ) const;
    std::string MGetLastName( void ) const;
 
-protected:
+public:
    static std::vector< std::string > mSplit( std::string aoString, char acDelim );
 };
 

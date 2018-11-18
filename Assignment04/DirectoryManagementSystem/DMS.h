@@ -4,6 +4,7 @@
 #include "Contact.h"
 #include <string>
 #include <map>
+#include <vector>
 
 class DMS
 {
@@ -17,9 +18,16 @@ public:        // Public Methods
 
    DMS& operator=( const DMS& aorDMS );
 
+   void populateDirectory( const std::string& aorFile );
+   void query( const char acResponse );
+
    // TODO Implement input file read (validate each field)
    // TODO Implement Search Query
    // TODO Implement Display Query
+  
+private:       // Private Methods
+   void mQueryHelper( const std::vector< std::string >& aorWords, const int aiIndex );
+   void mQueryFirstName( void );
 };
 
 #endif
