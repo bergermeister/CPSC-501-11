@@ -110,7 +110,7 @@ void DMS::PopulateDirectory(string FileName)
 	ContType = p->at(1);
 	p->clear();
 
-	Contact* PersonContacts[18]; // create array of pointers of type Contact. This array should be of constant size, I dont know how to do it here.
+	Contact* PersonContacts[3]; // create array of pointers of type Contact. This array should be of constant size, I dont know how to do it here.
 
 	if (ContType == "person")
 	{
@@ -126,7 +126,7 @@ void DMS::PopulateDirectory(string FileName)
 		string ZipCode;
 		
 		DMS Directory;
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < ContNum; i++)
 		{
 			getline(inFile, Line);
 			vector<string>* p;
@@ -147,13 +147,13 @@ void DMS::PopulateDirectory(string FileName)
 				StreetAdd = PoBox + StreetAdd;
 				p->clear();
 
-				PersonContacts[i] = new PersonPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new PersonEmailContact(Name, Gender, Email);
-				PersonContacts[i + 2] = new PersonAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
+				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Phone);
+				PersonContacts[1] = new PersonEmailContact(Name, Gender, Email);
+				PersonContacts[2] = new PersonAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 2]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
+				Directory.CreateDirectory(Name, PersonContacts[1]);
+				Directory.CreateDirectory(Name, PersonContacts[2]);
 
 			}
 			if (p->size() == 8)
@@ -169,13 +169,13 @@ void DMS::PopulateDirectory(string FileName)
 				ZipCode = p->at(7);
 
 				p->clear();
-				PersonContacts[i] = new PersonPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new PersonEmailContact(Name, Gender, Email);
-				PersonContacts[i + 2] = new PersonAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
+				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Phone);
+				PersonContacts[1] = new PersonEmailContact(Name, Gender, Email);
+				PersonContacts[2] = new PersonAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 2]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
+				Directory.CreateDirectory(Name, PersonContacts[1]);
+				Directory.CreateDirectory(Name, PersonContacts[2]);
 
 			}
 			else if (p->size() == 4)
@@ -187,11 +187,11 @@ void DMS::PopulateDirectory(string FileName)
 				Email = p->at(3);
 				
 				p->clear();
-				PersonContacts[i] = new PersonPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new PersonEmailContact(Name, Gender, Email);
+				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Phone);
+				PersonContacts[1] = new PersonEmailContact(Name, Gender, Email);
 				
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
+				Directory.CreateDirectory(Name, PersonContacts[1]);
 			}
 			else if (p->size() == 3)
 			{
@@ -200,9 +200,9 @@ void DMS::PopulateDirectory(string FileName)
 				Phone = p->at(2);
 
 				p->clear();
-				PersonContacts[i] = new PersonPhoneContact(Name, Gender, Phone);
+				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Phone);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
 			}
 		}
 		Directory.DisplayDirectory();
@@ -223,13 +223,13 @@ void DMS::PopulateDirectory(string FileName)
 		string ZipCode;
 
 		DMS Directory;
-		for (int i = 0; i < 6; i++)
+		for (int i = 0; i < ContNum; i++)
 		{
 			getline(inFile, Line);
 			vector<string>* p;
 			p = new vector<string>();
 			split(Line, *p);
-			if (p->size() == 9)
+			if (p->size() == 10)
 			{
 				// storing the contacts info
 				Name = p->at(0);
@@ -245,35 +245,36 @@ void DMS::PopulateDirectory(string FileName)
 				StreetAdd = PoBox + StreetAdd;
 				p->clear();
 
-				PersonContacts[i] = new BusinessPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new BusinessWebContact(Name, Gender, Email, web);
-				PersonContacts[i + 2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
+				PersonContacts[0] = new BusinessPhoneContact(Name, Gender, Phone);
+				PersonContacts[1] = new BusinessWebContact(Name, Gender, Email, web);
+				PersonContacts[2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 2]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
+				Directory.CreateDirectory(Name, PersonContacts[1]);
+				Directory.CreateDirectory(Name, PersonContacts[2]);
 
 			}
-			if (p->size() == 8)
+			if (p->size() == 9)
 			{
 				// storing the contacts info
 				Name = p->at(0);
 				Gender = p->at(1);
 				Phone = p->at(2);
 				Email = p->at(3);
+				web = p->at(4);
 				StreetAdd = p->at(4);
 				District = p->at(5);
 				State = p->at(6);
 				ZipCode = p->at(7);
 
 				p->clear();
-				PersonContacts[i] = new BusinessPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new BusinessWebContact(Name, Gender, Email);
-				PersonContacts[i + 2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
+				PersonContacts[0] = new BusinessPhoneContact(Name, Gender, Phone);
+				PersonContacts[1] = new BusinessWebContact(Name, Gender, Email,web);
+				PersonContacts[2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 2]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
+				Directory.CreateDirectory(Name, PersonContacts[1]);
+				Directory.CreateDirectory(Name, PersonContacts[2]);
 
 			}
 			else if (p->size() == 4)
@@ -281,26 +282,24 @@ void DMS::PopulateDirectory(string FileName)
 				// storing the contacts info
 				Name = p->at(0);
 				Gender = p->at(1);
-				Phone = p->at(2);
-				Email = p->at(3);
+				Email = p->at(2);
+				web = p->at(3);
 
 				p->clear();
-				PersonContacts[i] = new BusinessPhoneContact(Name, Gender, Phone);
-				PersonContacts[i + 1] = new BusinessWebContact(Name, Gender, Email);
+				PersonContacts[0] = new BusinessWebContact(Name, Gender, Email,web);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
-				Directory.CreateDirectory(Name, PersonContacts[i + 1]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
 			}
 			else if (p->size() == 3)
 			{
 				Name = p->at(0);
 				Gender = p->at(1);
-				Phone = p->at(2);
+				Email = p->at(2);
 
 				p->clear();
-				PersonContacts[i] = new PersonPhoneContact(Name, Gender, Phone);
+				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Email);
 
-				Directory.CreateDirectory(Name, PersonContacts[i]);
+				Directory.CreateDirectory(Name, PersonContacts[0]);
 			}
 		}
 		Directory.DisplayDirectory();
