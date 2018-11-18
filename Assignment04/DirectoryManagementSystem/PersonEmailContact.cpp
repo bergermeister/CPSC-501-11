@@ -33,8 +33,7 @@ PersonEmailContact & PersonEmailContact::operator=(const PersonEmailContact & oP
 
 void PersonEmailContact::display(void)
 {
-	cout << "Person Email Contact    \t -> ";
-   PersonContact::display( );
+	cout << this->Email;
 }
 
 PersonEmailContact::~PersonEmailContact()  // Destructor

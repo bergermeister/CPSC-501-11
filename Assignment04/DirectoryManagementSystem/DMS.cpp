@@ -9,6 +9,7 @@
 #include "BusinessWebContact.h"
 #include <string>
 #include <map>
+#include <set>
 #include <algorithm>
 #include <iostream>
 #include <fstream>
@@ -58,8 +59,10 @@ void DMS::DisplayDirectory( void )
 {
 	for (auto koIter = voDirectory.begin(); koIter != voDirectory.end(); koIter++)
 	{
-		cout << "Key: " + koIter->first + " \t|\t Type of Value: ";
-		cout << typeid(*koIter->second).name() << std::endl;
+		cout << "Key: " + koIter->first + " \t|\t ";
+      koIter->second->display( );
+      cout << std::endl;
+		//cout << koIter->second->display( ) << std::endl;
 	}
 }
 
@@ -215,15 +218,32 @@ void DMS::query( const char acResponse )
    //vector< string > koWords = Contact::mSplit( aorResponse, ' ' );
    //multimap< string, Contact* >::iterator koIter;
 
+   this->voResults.clear( );
+
    switch( acResponse )
    {
-   case 'f':   // Query by first name
-      //this->mQueryFirstName( );
+   case 'd':   // Display entire directory
+      this->DisplayDirectory( );
       break;
-   case 'l':   // Query by last name
+   case '1':   // Query by name ordered by type (Gender or category)
+      this->mQuery1( );
       break;
-   case 'w':   // Query by whole name
+   case '2':   // Query by whole name
       break;
+   case '3':   // 
+      break;
+   case '4':   //
+      break;
+   case '5':   //
+      break;
+   }
+}
+
+void DMS::display_results( void )
+{
+   for( auto koIter = this->voResults.begin( ); koIter != this->voResults.end( ); koIter++ )
+   {
+      cout << *koIter << endl;
    }
 }
 
@@ -409,4 +429,67 @@ bool DMS::mIsNumber( const char acChar )
    }
 
    return( kbIsNumber );
+}
+
+void DMS::mQuery1( void )
+{
+   string                       koName;
+   multiset< string >           koResults;
+   multiset< string >::iterator koSetIter;
+   PersonAddressContact*        kopPerson;
+   BusinessAddressContact*      kopBusiness;
+
+   cout << "Enter the name: ";
+   cin >> koName;
+
+   // Iterate through the directory and save all Contacts 
+   for( auto koIter = this->voDirectory.begin( ); koIter != this->voDirectory.end( ); koIter++ )
+   {
+      // If the contact contains the name provided
+      if( koIter->second->MGetFullName( ).find( koName ) != string::npos )
+      {
+         // Ensure pointers are null to start
+         kopPerson   = nullptr;
+         kopBusiness = nullptr;
+
+         // Attempt to cast to Person and Business Address Contact Pointers
+         kopPerson   = dynamic_cast< PersonAddressContact* >( koIter->second );
+         kopBusiness = dynamic_cast< BusinessAddressContact* >( koIter->second );
+
+         // If the Contact was a PersonAddressContact
+         if( kopPerson != nullptr )
+         {
+            koResults.insert( kopPerson->MGetState( ) );
+         }
+         // If the Contact was a BusinessAddressContact
+         else if( kopBusiness != nullptr )
+         {
+            koResults.insert( kopBusiness->MGetState( ) );
+         }
+      }
+   }
+
+   koSetIter = koResults.begin( );
+
+   while( koSetIter != koResults.end( ) )
+   {
+      this->voResults.push_back( *koSetIter + "\t" + to_string( koResults.count( *koSetIter ) ) );
+      koSetIter = koResults.upper_bound( *koSetIter );
+   }
+}
+
+bool DMS::mCompareAddress( Contact* aopContact1, Contact* aopContact2 )
+{
+   string                  koState1;
+   string                  koState2;
+   const PersonAddressContact*   kopPerson;
+   const BusinessAddressContact* kopBusiness;
+
+   kopPerson   = dynamic_cast< PersonAddressContact* >( aopContact1 );
+   kopBusiness = dynamic_cast< BusinessAddressContact* >( aopContact1 );
+   if( kopPerson != nullptr )
+   {
+      //koState1 = kopPerson.
+   }
+   return( koState1 < koState2 );
 }

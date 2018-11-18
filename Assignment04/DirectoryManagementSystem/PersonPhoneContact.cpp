@@ -33,8 +33,7 @@ PersonPhoneContact & PersonPhoneContact::operator=(const PersonPhoneContact & oP
 
 void PersonPhoneContact::display(void)
 {
-	cout << "Person Phone Contact    \t -> ";
-   PersonContact::display( );
+	cout << this->Phone;
 }
 
 PersonPhoneContact::~PersonPhoneContact()  // Destructor

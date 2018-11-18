@@ -24,6 +24,8 @@ public:
 	virtual void display(void);  // modified display functoin 
 	virtual ~BusinessAddressContact(); // Virtual Destructor
 
+   string MGetState( void ) const;
+
 private:
 	string StreetAddress;
 	string District;

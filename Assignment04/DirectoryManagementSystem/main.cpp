@@ -17,6 +17,8 @@
 #include "BusinessWebContact.h"
 #include "DMS.h"
 
+void mPrintMenu( void );
+
 int main( int aiArgc, char** acpArgv )
 {
    DMS dms;
@@ -48,17 +50,22 @@ int main( int aiArgc, char** acpArgv )
       {
          dms.populateDirectory( acpArgv[ kiIndex] );
       }
-      dms.DisplayDirectory( );
    }
 
    //This section should be replaced by an interactive menu      
-   cout << "Querying the Directory Management System(DMS). Enter n to stop." << endl;
+   cout << "Querying the Directory Management System(DMS). Enter h for help or n to stop." << endl;
    cin >> response;          
    while( response != 'n' )
    {           
-      dms.query( response );         
-      // TODO dms.display_results( );
-      //This section should be replaced by an interactive menu  
+      if( response == 'h' )
+      {
+         mPrintMenu( );
+      }
+      else
+      {
+         dms.query( response );         
+         dms.display_results( );
+      }
       cout << "Querying the Directory Management System(DMS). Enter n to stop." << endl; 
       cin >> response;
    }          
@@ -66,4 +73,12 @@ int main( int aiArgc, char** acpArgv )
    cout << "Exiting the Directory Management System." << endl;
    
    return 0; 
+}
+
+void mPrintMenu( void )
+{
+   cout << "n \t Stop program"                      << endl;
+   cout << "h \t Display Help Menu"                 << endl;
+   cout << "d \t Display entire directory"          << endl;
+   cout << "1 \t Query by name ordered by category" << endl;
 }

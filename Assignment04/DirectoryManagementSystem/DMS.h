@@ -9,16 +9,8 @@
 class DMS
 {
 private:       // Private Attributes
-   enum teField
-   {
-      xeFieldName = 0,
-      xeFieldType,
-      xeFieldPPhone,
-      xeFieldEmail,
-      xeField
-   };
-
    std::multimap< std::string, Contact* > voDirectory;
+   std::vector< std::string >             voResults;
 
 public:        // Public Methods
 	DMS( void );
@@ -31,14 +23,9 @@ public:        // Public Methods
 	void DisplayDirectory( void ); // Display just for testing :)
    void populateDirectory( const std::string& aorFile );
    void query( const char acResponse );
-
-   // TODO Implement input file read (validate each field)
-   // TODO Implement Search Query
-   // TODO Implement Display Query
+   void display_results( void );
   
 private:       // Private Methods
-   //void mQueryHelper( const std::vector< std::string >& aorWords, const int aiIndex );
-   //void mQueryFirstName( void );
    void split( const std::string& s, std::vector< std::string >& v );
    void mParsePerson( const std::string& aorLine );
    void mParseBusiness( const std::string& aorLine );
@@ -46,6 +33,9 @@ private:       // Private Methods
    bool mIsPhoneNum( const std::string& aorStr );
    bool mIsEmail( const std::string& aorStr );
    bool mIsNumber( const char acChar );
+
+   void mQuery1( void );
+   static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
 };
 
 #endif

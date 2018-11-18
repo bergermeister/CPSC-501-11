@@ -12,15 +12,31 @@
 
 using namespace std;
 
-
 PersonAddressContact::PersonAddressContact(const string & oName, const string & oGender, const string & oStreetAdd, const string & oDistrict,
 	const string & oState, const string & oZipcode)
 	: PersonContact(oName, oGender) // Deafult Constructor
 {
-	this->StreetAddress = oStreetAdd;
-	this->District = oDistrict;
-	this->State = oState;
-	this->ZipCode = oZipcode;
+   if( oDistrict.length( ) > 0 )
+   {
+	   this->StreetAddress = oStreetAdd;
+	   this->District = oDistrict;
+	   this->State = oState;
+	   this->ZipCode = oZipcode;
+   }
+   else
+   {
+      vector< string > Words = Contact::mSplit( oStreetAdd, ',' );
+
+      this->StreetAddress = Words[ 0 ];
+      for( int i = 1; i < Words.size() - 3; i++ )
+      {
+         this->StreetAddress += "," + Words[ i ];
+      }
+
+      this->District = Words[ Words.size( ) - 3 ];
+      this->State    = Words[ Words.size( ) - 2 ];
+      this->ZipCode  = Words[ Words.size( ) - 1 ];
+   }
 }
 
 PersonAddressContact::PersonAddressContact(const PersonAddressContact & oPAC) // Copy constructor
@@ -40,10 +56,15 @@ PersonAddressContact & PersonAddressContact::operator=(const PersonAddressContac
 
 void PersonAddressContact::display(void)
 {
-	cout << "Person Address Contact    \t -> ";
-   PersonContact::display( );
+	cout << this->StreetAddress << ", " << this->District << ", " << this->State << ", " << this->ZipCode;
 }
 
 PersonAddressContact::~PersonAddressContact()  // Destructor
 {
 }
+
+string PersonAddressContact::MGetState( void ) const
+{
+   return( this->State );
+}
+

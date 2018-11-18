@@ -47,3 +47,8 @@ void BusinessAddressContact::display(void)
 BusinessAddressContact::~BusinessAddressContact()  // Destructor
 {
 }
+
+string BusinessAddressContact::MGetState( void ) const
+{
+   return( this->State );
+}
