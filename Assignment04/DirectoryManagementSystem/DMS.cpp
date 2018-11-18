@@ -62,7 +62,6 @@ void DMS::DisplayDirectory( void )
 		cout << "Key: " + koIter->first + " \t|\t ";
       koIter->second->display( );
       cout << std::endl;
-		//cout << koIter->second->display( ) << std::endl;
 	}
 }
 
@@ -89,10 +88,8 @@ void DMS::populateDirectory( const std::string& FileName )
 		cout << p.at(i) << "\n";
    }
 	ContNum = stoi( p.at( 0 ) );     // Get the number of contacts
-	ContType = p.at( 1 );            // Get the type of contacts
+	ContType = mTrim( p.at( 1 ) );            // Get the type of contacts
 	p.clear( );
-
-	Contact* PersonContacts[3]; // create array of pointers of type Contact. This array should be of constant size, I dont know how to do it here.
 
    for( int i = 0; i < ContNum; i++ )
    {
@@ -106,108 +103,6 @@ void DMS::populateDirectory( const std::string& FileName )
          this->mParseBusiness( Line );
       }
    }
-   /*
-	if (ContType == "person")
-	{
-	}
-
-	if (ContType == "business")
-	{
-		string Line;
-		string Name;
-		string Gender;
-		string Phone;
-		string Email;
-		string web;
-		string PoBox;
-		string StreetAdd;
-		string District;
-		string State;
-		string ZipCode;
-
-		DMS Directory;
-		for (int i = 0; i < ContNum; i++)
-		{
-			getline(inFile, Line);
-			vector<string>* p;
-			p = new vector<string>();
-			split(Line, *p);
-			if (p->size() == 10)
-			{
-				// storing the contacts info
-				Name = p->at(0);
-				Gender = p->at(1);
-				Phone = p->at(2);
-				Email = p->at(3);
-				web = p->at(4);
-				PoBox = p->at(5);
-				StreetAdd = p->at(6);
-				District = p->at(7);
-				State = p->at(8);
-				ZipCode = p->at(9);
-				StreetAdd = PoBox + StreetAdd;
-				p->clear();
-
-				PersonContacts[0] = new BusinessPhoneContact(Name, Gender, Phone);
-				PersonContacts[1] = new BusinessWebContact(Name, Gender, Email, web);
-				PersonContacts[2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
-
-				Directory.CreateDirectory(Name, PersonContacts[0]);
-				Directory.CreateDirectory(Name, PersonContacts[1]);
-				Directory.CreateDirectory(Name, PersonContacts[2]);
-
-			}
-			if (p->size() == 9)
-			{
-				// storing the contacts info
-				Name = p->at(0);
-				Gender = p->at(1);
-				Phone = p->at(2);
-				Email = p->at(3);
-				web = p->at(4);
-				StreetAdd = p->at(4);
-				District = p->at(5);
-				State = p->at(6);
-				ZipCode = p->at(7);
-
-				p->clear();
-				PersonContacts[0] = new BusinessPhoneContact(Name, Gender, Phone);
-				PersonContacts[1] = new BusinessWebContact(Name, Gender, Email,web);
-				PersonContacts[2] = new BusinessAddressContact(Name, Gender, StreetAdd, District, State, ZipCode);
-
-				Directory.CreateDirectory(Name, PersonContacts[0]);
-				Directory.CreateDirectory(Name, PersonContacts[1]);
-				Directory.CreateDirectory(Name, PersonContacts[2]);
-
-			}
-			else if (p->size() == 4)
-			{
-				// storing the contacts info
-				Name = p->at(0);
-				Gender = p->at(1);
-				Email = p->at(2);
-				web = p->at(3);
-
-				p->clear();
-				PersonContacts[0] = new BusinessWebContact(Name, Gender, Email,web);
-
-				Directory.CreateDirectory(Name, PersonContacts[0]);
-			}
-			else if (p->size() == 3)
-			{
-				Name = p->at(0);
-				Gender = p->at(1);
-				Email = p->at(2);
-
-				p->clear();
-				PersonContacts[0] = new PersonPhoneContact(Name, Gender, Email);
-
-				Directory.CreateDirectory(Name, PersonContacts[0]);
-			}
-		}
-		Directory.DisplayDirectory();
-	}
-   */
 }
 
 
@@ -277,13 +172,13 @@ void DMS::split( const string& s, vector< string >& v )
 
 	while (j >= 0)
 	{
-		v.push_back(s.substr(i, j - i));
+		v.push_back(mTrim(s.substr(i, j - i)));
 		i = ++j;
 		j = s.find(",", j);
 
 		if (j < 0)
 		{
-			v.push_back(s.substr(i, s.length()));
+			v.push_back(mTrim(s.substr(i, s.length())));
 		}
 	}
 }
@@ -492,4 +387,21 @@ bool DMS::mCompareAddress( Contact* aopContact1, Contact* aopContact2 )
       //koState1 = kopPerson.
    }
    return( koState1 < koState2 );
+}
+
+std::string DMS::mTrim( const std::string& aorStr )
+{
+   string koResult;
+   size_t kiFirst = aorStr.find_first_not_of( ' ' );
+   size_t kiLast  = aorStr.find_last_not_of( ' ' );
+   if( string::npos == kiFirst )
+   {
+      koResult = aorStr;
+   }
+   else
+   {
+      koResult = aorStr.substr( kiFirst, ( kiLast - kiFirst + 1 ) );
+   }
+   
+   return( koResult );
 }
