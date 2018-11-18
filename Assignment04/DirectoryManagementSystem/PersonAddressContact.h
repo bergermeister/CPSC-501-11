@@ -17,14 +17,18 @@ using namespace std;
 class PersonAddressContact : public PersonContact
 {
 public:
-	PersonAddressContact(const string & oName="", const string & oGender = "", const string & oAddress = ""); // Default constructor
+	PersonAddressContact(const string & oName="", const string & oGender = "", const string & oStreetAdd = "", const string & oDistrict = "",
+		const string & oState = "", const string & oZipcode = ""); // Default constructor
 	PersonAddressContact(const PersonAddressContact & oPAC);   // Copy Constructor
 	PersonAddressContact& operator = (const PersonAddressContact & oPAC);  // = operator overloading
 	virtual void display(void);  // modified display functoin 
 	virtual ~PersonAddressContact(); // Virtual Destructor
 
 private:
-	string Address;
+	string StreetAddress;
+	string District;
+	string State;
+	string ZipCode;
 };
 
 #endif

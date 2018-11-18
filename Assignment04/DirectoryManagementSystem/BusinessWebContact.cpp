@@ -13,8 +13,8 @@
 using namespace std;
 
 
-BusinessWebContact::BusinessWebContact(const string & oName, const string & oGender, const string & oWebsite)
-	: BusinessContact(oName, oGender) // Deafult Constructor
+BusinessWebContact::BusinessWebContact(const string & oName, const string & oCategory, const string & oEmail, const string & oWebsite)
+	: BusinessContact(oName, oCategory) // Deafult Constructor
 {
 	this->Website = oWebsite;
 }
@@ -28,6 +28,7 @@ BusinessWebContact & BusinessWebContact::operator=(const BusinessWebContact & oB
 {
 	BusinessContact::operator=(static_cast<BusinessContact>(oBWC));
 	this->Website = oBWC.Website;
+	this->Email = oBWC.Email;
 	return *this;
 }
 

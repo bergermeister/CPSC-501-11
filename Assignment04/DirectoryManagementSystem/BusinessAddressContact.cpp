@@ -13,10 +13,14 @@
 using namespace std;
 
 
-BusinessAddressContact::BusinessAddressContact(const string & oName, const string & oGender, const string & oAddress)
-	: BusinessContact(oName, oGender) // Deafult Constructor
+BusinessAddressContact::BusinessAddressContact(const string & oName, const string & oCategory, const string & oStreetAdd, const string & oDistrict,
+	const string & oState, const string & oZipcode)
+	: BusinessContact(oName, oCategory) // Deafult Constructor
 {
-	this->Address = oAddress;
+	this->StreetAddress = oStreetAdd;
+	this->District = oDistrict;
+	this->State = oState;
+	this->ZipCode = oZipcode;
 }
 
 BusinessAddressContact::BusinessAddressContact(const BusinessAddressContact & oBAC) // Copy constructor
@@ -27,7 +31,10 @@ BusinessAddressContact::BusinessAddressContact(const BusinessAddressContact & oB
 BusinessAddressContact & BusinessAddressContact::operator=(const BusinessAddressContact & oPAC) // Copy Constructor 
 {
 	BusinessContact::operator=(static_cast<BusinessContact>(oPAC));
-	this->Address = oPAC.Address;
+	this->StreetAddress = oPAC.StreetAddress;
+	this->District = oPAC.District;
+	this->State = oPAC.State;
+	this->ZipCode = oPAC.ZipCode;
 	return *this;
 }
 

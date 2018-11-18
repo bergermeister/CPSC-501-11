@@ -25,6 +25,8 @@ public:
    Contact& operator=( const Contact& aorContact );
 
    virtual void display( void );
+   virtual bool MIsValid( const std::string& aorStr );
+
    std::string MGetFullName( void ) const;
    std::string MGetFirstName( void ) const;
    std::string MGetMiddleName( void ) const;

@@ -22,24 +22,35 @@ int main( int aiArgc, char** acpArgv )
    DMS dms;
    int file_count;
    char response;
-     
-   cout << "Enter the number of input files: " << endl;
-   cin >> file_count;
-   string* file_names = new string[ file_count ];
-   cout << "Enter the file names: " << endl; 
-   for( int i = 0; i < file_count; i++ )
-   {         
-      cin >> file_names[ i ];
-      try
-      {             
-         dms.populateDirectory( file_names[ i ] );
-      } 
-      catch( exception e )
-      {             
-         cout << "Unable to read from file!" << endl;
+   
+   if( aiArgc < 2 )
+   {
+      cout << "Enter the number of input files: " << endl;
+      cin >> file_count;
+      string* file_names = new string[ file_count ];
+      cout << "Enter the file names: " << endl; 
+      for( int i = 0; i < file_count; i++ )
+      {         
+         cin >> file_names[ i ];
+         try
+         {             
+            dms.populateDirectory( file_names[ i ] );
+         } 
+         catch( exception e )
+         {             
+            cout << "Unable to read from file!" << endl;
+         }
       }
    }
-   
+   else
+   {
+      for( int kiIndex = 1; kiIndex < aiArgc; kiIndex++ )
+      {
+         dms.populateDirectory( acpArgv[ kiIndex] );
+      }
+      dms.DisplayDirectory( );
+   }
+
    //This section should be replaced by an interactive menu      
    cout << "Querying the Directory Management System(DMS). Enter n to stop." << endl;
    cin >> response;          

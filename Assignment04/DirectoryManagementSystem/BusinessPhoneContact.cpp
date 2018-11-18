@@ -13,8 +13,8 @@
 using namespace std;
 
 
-BusinessPhoneContact::BusinessPhoneContact(const string & oName, const string & oGender, const int & oPhoneNo)
-	: BusinessContact(oName, oGender) // Deafult Constructor
+BusinessPhoneContact::BusinessPhoneContact(const string & oName, const string & oCategory, const string & oPhoneNo)
+	: BusinessContact(oName, oCategory) // Deafult Constructor
 {
 	this->Phone = oPhoneNo;
 }

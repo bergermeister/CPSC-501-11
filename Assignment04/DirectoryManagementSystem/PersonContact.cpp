@@ -44,6 +44,18 @@ void PersonContact::display( void )
    Contact::display( );
 }
 
+bool PersonContact::MIsValid( const std::string& aorStr )
+{
+   bool kbIsValid = false;
+
+   if( ( aorStr == "Female" ) || (aorStr == "Male" ) )
+   {
+      kbIsValid = true;
+   }
+
+   return( kbIsValid );
+}
+
 std::string PersonContact::MGetGender( void ) const
 {
    return( this->voGender );

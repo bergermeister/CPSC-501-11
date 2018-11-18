@@ -43,3 +43,23 @@ void BusinessContact::display( void )
    std::cout << "Business Contact \t -> ";
    Contact::display( );
 }
+
+bool BusinessContact::MIsValid( const std::string& aorStr )
+{
+   const int  kiNumInvalid = 12;
+   const char kcInvalid[ kiNumInvalid ] = { '@', '-', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+   int        kiIndex;
+   bool       kbIsValid = true;
+
+   for( kiIndex = 0; kiIndex < kiNumInvalid; kiIndex++ )
+   {
+      if( aorStr.find( kcInvalid[ kiIndex ] ) != std::string::npos )
+      {
+         kbIsValid = false;
+         break;
+      }
+   }
+
+   return( kbIsValid );
+}
+

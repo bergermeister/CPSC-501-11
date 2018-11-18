@@ -23,6 +23,7 @@ public:
    BusinessContact& operator=( const BusinessContact& aorBusiness );
 
    virtual void display( void );
+   static  bool MIsValid( const std::string& aorStr );
 };
 
 #endif

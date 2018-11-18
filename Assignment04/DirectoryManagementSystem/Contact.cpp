@@ -39,6 +39,18 @@ void Contact::display( void )
    std::cout << "Contact" << std::endl;
 }
 
+bool Contact::MIsValid( const std::string& aorStr )
+{
+   bool kbIsValid = false;
+
+   if( aorStr.length( ) > 0 )
+   {
+      kbIsValid = true;
+   }
+
+   return( kbIsValid );
+}
+
 std::string Contact::MGetFullName( void ) const
 {
    return( this->voName );
