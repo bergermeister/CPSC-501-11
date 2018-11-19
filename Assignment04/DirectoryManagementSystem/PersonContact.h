@@ -25,6 +25,7 @@ public:
    PersonContact& operator=( const PersonContact& aorPerson );
 
    virtual void display( void );
+   virtual std::string MToString( void ) const;
    static  bool MIsValid( const std::string& aorStr );
 
    std::string MGetGender( void ) const;

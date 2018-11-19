@@ -35,6 +35,7 @@ private:       // Private Methods
    bool mIsNumber( const char acChar );
 
    void mQuery1( void );
+   void mDisplay2( void );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
    static std::string mTrim( const std::string& aorStr );
 };

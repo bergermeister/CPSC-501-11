@@ -39,3 +39,8 @@ void PersonEmailContact::display(void)
 PersonEmailContact::~PersonEmailContact()  // Destructor
 {
 }
+
+string PersonEmailContact::MToString( void ) const
+{
+   return( string( "Email:\t" + this->Email ) );
+}

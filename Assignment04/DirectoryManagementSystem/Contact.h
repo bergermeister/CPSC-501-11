@@ -25,7 +25,8 @@ public:
    Contact& operator=( const Contact& aorContact );
 
    virtual void display( void );
-   virtual bool MIsValid( const std::string& aorStr );
+   static bool MIsValid( const std::string& aorStr );
+   virtual std::string MToString( void ) const;
 
    std::string MGetFullName( void ) const;
    std::string MGetFirstName( void ) const;

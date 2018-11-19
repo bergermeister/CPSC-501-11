@@ -44,6 +44,11 @@ void PersonContact::display( void )
    Contact::display( );
 }
 
+std::string PersonContact::MToString( void ) const
+{
+   return( std::string( "Gender:\t" + this->voGender ) );
+}
+
 bool PersonContact::MIsValid( const std::string& aorStr )
 {
    bool kbIsValid = false;

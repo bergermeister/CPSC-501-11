@@ -51,6 +51,11 @@ bool Contact::MIsValid( const std::string& aorStr )
    return( kbIsValid );
 }
 
+std::string Contact::MToString( void ) const
+{
+   return( std::string( "Name:\t" + this->voName ) );
+}
+
 std::string Contact::MGetFullName( void ) const
 {
    return( this->voName );

@@ -39,3 +39,8 @@ void PersonPhoneContact::display(void)
 PersonPhoneContact::~PersonPhoneContact()  // Destructor
 {
 }
+
+string PersonPhoneContact::MToString( void ) const
+{
+   return( "Phone Number:\t" + this->Phone );
+}

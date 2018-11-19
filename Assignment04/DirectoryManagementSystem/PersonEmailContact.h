@@ -23,6 +23,8 @@ public:
 	virtual void display(void);  // modified display functoin 
 	virtual ~PersonEmailContact(); // Virtual Destructor
 
+   virtual string MToString( void ) const;
+
 private:
 	string Email;
 };

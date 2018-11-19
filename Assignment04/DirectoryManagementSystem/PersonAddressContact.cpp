@@ -68,3 +68,11 @@ string PersonAddressContact::MGetState( void ) const
    return( this->State );
 }
 
+string PersonAddressContact::MToString( void ) const
+{
+   return( "Address:\n\tStreet:  \t" + this->StreetAddress + "\n" +
+                      "\tDistrict:\t" + this->District      + "\n" + 
+                      "\tState:   \t" + this->State         + "\n" + 
+                      "\tZip:     \t" + this->ZipCode       + "\n" );
+}
+

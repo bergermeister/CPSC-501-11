@@ -131,6 +131,9 @@ void DMS::query( const char acResponse )
       break;
    case '5':   //
       break;
+   case 'P':
+      this->mDisplay2( );
+      break;
    }
 }
 
@@ -370,6 +373,47 @@ void DMS::mQuery1( void )
    {
       this->voResults.push_back( *koSetIter + "\t" + to_string( koResults.count( *koSetIter ) ) );
       koSetIter = koResults.upper_bound( *koSetIter );
+   }
+}
+
+void DMS::mDisplay2( void )
+{
+   string                  koName;
+   multimap< string, Contact* >::iterator koIter;
+   multimap< string, Contact* >::iterator koEnd;
+   string                  koDetails;
+   PersonContact*          kopPerson;
+   PersonPhoneContact*     kopPhone;
+   PersonEmailContact*     kopEmail;
+   PersonAddressContact*   kopAddr;
+
+   cout << "Enter the name: ";
+   cin >> koName;
+
+   koIter = this->voDirectory.begin( );
+   while( koIter != this->voDirectory.end( ) )
+   {
+      // If the contact contains the name provided
+      if( koIter->second->MGetFullName( ).find( koName ) != string::npos )
+      {
+         kopPerson = dynamic_cast< PersonContact* >( koIter->second );
+         koDetails =  "Name:   \t" + kopPerson->MGetFullName( ) + "\n";
+         koDetails += "Gender: \t" + kopPerson->MGetGender( )   + "\n";
+         koEnd = this->voDirectory.upper_bound( koIter->first );
+         while( koIter != koEnd )
+         {
+            koDetails += koIter->second->MToString( ) + "\n";
+            koIter++;
+         }
+         this->voResults.push_back( koDetails );
+      }
+      // Contact does not match, skip its details
+      else
+      {
+         koIter = this->voDirectory.upper_bound( koIter->first );
+      }
+
+      //koIter++;
    }
 }
 

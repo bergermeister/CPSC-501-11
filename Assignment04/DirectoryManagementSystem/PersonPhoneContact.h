@@ -23,6 +23,8 @@ public:
 	virtual void display(void);  // modified display functoin 
 	virtual ~PersonPhoneContact(); // Virtual Destructor
 
+   virtual std::string MToString( void ) const;
+
 private:
 	string Phone;
 };
