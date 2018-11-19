@@ -42,5 +42,5 @@ PersonEmailContact::~PersonEmailContact()  // Destructor
 
 string PersonEmailContact::MToString( void ) const
 {
-   return( string( "Email:\t\t" + this->Email ) );
+   return( string( "Email:\t" + this->Email ) );
 }

@@ -81,5 +81,4 @@ void mPrintMenu( void )
    cout << "h \t Display Help Menu"                 << endl;
    cout << "d \t Display entire directory"          << endl;
    cout << "1 \t Query by name ordered by category" << endl;
-   cout << "p \t Display details of person"         << endl;
 }
