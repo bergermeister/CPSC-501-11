@@ -132,6 +132,7 @@ void DMS::query( const char acResponse )
    case '5':   //
       break;
    case 'P':
+   case 'p':
       this->mDisplay2( );
       break;
    }
