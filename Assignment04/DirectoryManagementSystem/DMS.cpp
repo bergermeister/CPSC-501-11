@@ -131,7 +131,8 @@ void DMS::query( const char acResponse )
       break;
    case '5':   //
       break;
-   case 'P':
+   case 'P':   // Fall through
+   case 'p':   // Display details of a person
       this->mDisplay2( );
       break;
    }
@@ -383,9 +384,6 @@ void DMS::mDisplay2( void )
    multimap< string, Contact* >::iterator koEnd;
    string                  koDetails;
    PersonContact*          kopPerson;
-   PersonPhoneContact*     kopPhone;
-   PersonEmailContact*     kopEmail;
-   PersonAddressContact*   kopAddr;
 
    cout << "Enter the name: ";
    cin >> koName;
@@ -412,8 +410,6 @@ void DMS::mDisplay2( void )
       {
          koIter = this->voDirectory.upper_bound( koIter->first );
       }
-
-      //koIter++;
    }
 }
 
