@@ -1,4 +1,22 @@
-﻿  DMS.cpp
-c:\users\zainab altaweel\documents\github\cpsc-501-11\assignment04\directorymanagementsystem\dms.cpp(23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-c:\users\zainab altaweel\documents\github\cpsc-501-11\assignment04\directorymanagementsystem\dms.cpp(29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-  DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\CPSC-501-11\Assignment04\x64\Debug\DirectoryManagementSystem.exe
+﻿  BusinessAddressContact.cpp
+  BusinessContact.cpp
+  BusinessPhoneContact.cpp
+  BusinessWebContact.cpp
+  DMS.cpp
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(180): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(186): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(419): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
+          with
+          [
+              _Elem=char
+          ]
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(419): warning C4309: 'argument': truncation of constant value
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(479): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(503): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(505): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(547): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  main.cpp
+  PersonEmailContact.cpp
+  PersonPhoneContact.cpp
+  Generating Code...
+  DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\Assignment04\x64\Debug\DirectoryManagementSystem.exe

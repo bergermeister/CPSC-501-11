@@ -24,6 +24,8 @@ public:
 	virtual ~PersonEmailContact(); // Virtual Destructor
 
    virtual string MToString( void ) const;
+   string GetPersonEmail();
+
 
 private:
 	string Email;

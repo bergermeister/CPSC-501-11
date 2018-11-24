@@ -63,3 +63,9 @@ bool BusinessContact::MIsValid( const std::string& aorStr )
    return( kbIsValid );
 }
 
+std::string BusinessContact::GetCategory()
+{
+	return voType;
+}
+
+

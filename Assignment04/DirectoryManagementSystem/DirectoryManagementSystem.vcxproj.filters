@@ -45,6 +45,9 @@
     <ClInclude Include="DMS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Contact.cpp">
@@ -80,6 +83,9 @@
     <ClCompile Include="DMS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input1.txt">
@@ -91,5 +97,10 @@
     <Text Include="Input3.txt">
       <Filter>Resource Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\UB MS\OOP\Assignment04\VBE6EXT.OLB" />
+    <None Include="D:\UB MS\OOP\Assignment04\MSO.DLL" />
+    <None Include="D:\UB MS\OOP\Assignment04\EXCEL.EXE" />
   </ItemGroup>
 </Project>

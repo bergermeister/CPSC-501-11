@@ -33,8 +33,12 @@ private:       // Private Methods
    bool mIsPhoneNum( const std::string& aorStr );
    bool mIsEmail( const std::string& aorStr );
    bool mIsNumber( const char acChar );
+   bool mIsWeb(const std::string& aorStr);
 
    void mQuery1( void );
+   void mQuery2(void);
+   void mQuery3(void);
+   void mQuery5(void);
    void mDisplay2( void );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
    static std::string mTrim( const std::string& aorStr );

@@ -24,6 +24,7 @@ public:
 	virtual ~PersonPhoneContact(); // Virtual Destructor
 
    virtual std::string MToString( void ) const;
+   std::string GetPersonPhone();
 
 private:
 	string Phone;

@@ -44,3 +44,9 @@ string PersonPhoneContact::MToString( void ) const
 {
    return( "Phone Number:\t" + this->Phone );
 }
+
+string PersonPhoneContact::GetPersonPhone()
+{
+	return Phone;
+}
+

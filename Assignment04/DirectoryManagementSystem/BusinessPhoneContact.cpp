@@ -40,3 +40,9 @@ void BusinessPhoneContact::display(void)
 BusinessPhoneContact::~BusinessPhoneContact()  // Destructor
 {
 }
+
+
+string BusinessPhoneContact::GetBusinessPhone()
+{
+	return Phone;
+}

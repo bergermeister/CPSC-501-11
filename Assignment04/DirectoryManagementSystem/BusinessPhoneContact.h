@@ -23,6 +23,9 @@ public:
 	virtual void display(void);  // modified display functoin 
 	virtual ~BusinessPhoneContact(); // Virtual Destructor
 
+	string GetBusinessPhone();
+
+
 private:
 	string Phone;
 };

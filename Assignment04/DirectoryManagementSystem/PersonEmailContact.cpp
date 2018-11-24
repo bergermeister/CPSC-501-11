@@ -44,3 +44,8 @@ string PersonEmailContact::MToString( void ) const
 {
    return( string( "Email:\t\t" + this->Email ) );
 }
+
+string PersonEmailContact::GetPersonEmail()
+{
+	return Email;
+}

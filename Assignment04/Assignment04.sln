@@ -7,6 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DirectoryManagementSystem",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UTDirectoryManagementSystem", "UTDirectoryManagementSystem\UTDirectoryManagementSystem.vcxproj", "{7E87DC04-F962-4970-8108-9019C5EBA09E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8602C9E9-038B-46AE-BBD2-9ED33C9C6374}"
+	ProjectSection(SolutionItems) = preProject
+		D:\UB MS\OOP\Assignment04\EXCEL.EXE = D:\UB MS\OOP\Assignment04\EXCEL.EXE
+		D:\UB MS\OOP\Assignment04\MSO.DLL = D:\UB MS\OOP\Assignment04\MSO.DLL
+		D:\UB MS\OOP\Assignment04\VBE6EXT.OLB = D:\UB MS\OOP\Assignment04\VBE6EXT.OLB
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

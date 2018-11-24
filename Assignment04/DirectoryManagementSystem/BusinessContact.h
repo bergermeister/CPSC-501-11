@@ -24,6 +24,8 @@ public:
 
    virtual void display( void );
    static  bool MIsValid( const std::string& aorStr );
+   std::string GetCategory();
+
 };
 
 #endif
