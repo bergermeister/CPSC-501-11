@@ -22,6 +22,9 @@ public:
 	BusinessWebContact& operator = (const BusinessWebContact & oBWC);  // = operator overloading
 	virtual void display(void);  // modified display functoin 
 	virtual ~BusinessWebContact(); // Virtual Destructor
+	virtual string MToString(void) const;
+	string GetBusinessEmail();
+
 
 private:
 	string Email;
