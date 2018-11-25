@@ -48,6 +48,9 @@
     <ClInclude Include="..\DirectoryManagementSystem\BusinessAddressContact.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\DirectoryManagementSystem\Graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DirectoryManagementSystem\DMS.cpp">
@@ -83,5 +86,13 @@
     <ClCompile Include="UTDMS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\DirectoryManagementSystem\Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\DirectoryManagementSystem\EXCEL.EXE" />
+    <None Include="..\DirectoryManagementSystem\MSO.DLL" />
+    <None Include="..\DirectoryManagementSystem\VBE6EXT.OLB" />
   </ItemGroup>
 </Project>

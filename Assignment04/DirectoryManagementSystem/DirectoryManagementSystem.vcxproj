@@ -120,8 +120,8 @@
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
-    <ClInclude Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.h" />
     <ClInclude Include="DMS.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
     <ClInclude Include="PersonEmailContact.h" />
@@ -133,8 +133,8 @@
     <ClCompile Include="BusinessPhoneContact.cpp" />
     <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
-    <ClCompile Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.cpp" />
     <ClCompile Include="DMS.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />
@@ -147,9 +147,11 @@
     <Text Include="Input2.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BusinessDataSet.csv" />
     <None Include="D:\UB MS\OOP\Assignment04\EXCEL.EXE" />
     <None Include="D:\UB MS\OOP\Assignment04\MSO.DLL" />
     <None Include="D:\UB MS\OOP\Assignment04\VBE6EXT.OLB" />
+    <None Include="PeopleDataSet.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

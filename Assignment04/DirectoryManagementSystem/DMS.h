@@ -40,6 +40,7 @@ private:       // Private Methods
    void mQuery3(void);
    void mQuery4(void);
    void mQuery5(void);
+   void mDisplay1( void );
    void mDisplay2( void );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
    static std::string mTrim( const std::string& aorStr );

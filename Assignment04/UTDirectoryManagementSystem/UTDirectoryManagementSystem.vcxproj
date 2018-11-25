@@ -103,7 +103,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -158,6 +158,7 @@
     <ClInclude Include="..\DirectoryManagementSystem\BusinessWebContact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\Contact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\DMS.h" />
+    <ClInclude Include="..\DirectoryManagementSystem\Graph.h" />
     <ClInclude Include="..\DirectoryManagementSystem\PersonAddressContact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\PersonContact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\PersonEmailContact.h" />
@@ -171,11 +172,17 @@
     <ClCompile Include="..\DirectoryManagementSystem\BusinessWebContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\Contact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\DMS.cpp" />
+    <ClCompile Include="..\DirectoryManagementSystem\Graph.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonAddressContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonEmailContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonPhoneContact.cpp" />
     <ClCompile Include="UTDMS.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\DirectoryManagementSystem\EXCEL.EXE" />
+    <None Include="..\DirectoryManagementSystem\MSO.DLL" />
+    <None Include="..\DirectoryManagementSystem\VBE6EXT.OLB" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

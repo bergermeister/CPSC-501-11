@@ -45,7 +45,7 @@
     <ClInclude Include="DMS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.h">
+    <ClInclude Include="Graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,7 +83,7 @@
     <ClCompile Include="DMS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\UB MS\OOP\Assignment04\Interfacing+with+Excel\Interfacing with Excel\Graph.cpp">
+    <ClCompile Include="Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -102,5 +102,11 @@
     <None Include="D:\UB MS\OOP\Assignment04\VBE6EXT.OLB" />
     <None Include="D:\UB MS\OOP\Assignment04\MSO.DLL" />
     <None Include="D:\UB MS\OOP\Assignment04\EXCEL.EXE" />
+    <None Include="BusinessDataSet.csv">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="PeopleDataSet.csv">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

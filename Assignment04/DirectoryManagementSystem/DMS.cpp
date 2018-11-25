@@ -96,11 +96,11 @@ void DMS::populateDirectory(const std::string& FileName)
 	for (int i = 0; i < ContNum; i++)
 	{
 		getline(inFile, Line);
-		if (ContType == "person")
+		if (ContType.find( "erson" ) != string::npos )
 		{
 			this->mParsePerson(Line);
 		}
-		else if (ContType == "business")
+		else if (ContType.find( "usiness" ) != string::npos )
 		{
 			this->mParseBusiness(Line);
 		}
@@ -137,6 +137,10 @@ void DMS::query(const char acResponse)
 	case '5':   //Query by phone numbers out-of-state area codes ordered by the state.
 		this->mQuery5();
 		break;
+   case 'B':   // Fall through
+   case 'b':   // Display details of a Business
+      this->mDisplay1();
+      break;
 	case 'P':   // Fall through
 	case 'p':   // Display details of a person
 		this->mDisplay2();
@@ -150,27 +154,6 @@ void DMS::display_results(void)
 	{
 		cout << *koIter << endl;
 	}
-}
-
-void mQueryHelper(const std::vector< std::string >& aorWords, const int aiIndex)
-{
-
-}
-
-void mQueryFirstName(void)
-{
-	using namespace std;
-
-	string koFirstName;
-	char   kcOrder;
-
-	cout << "Enter the contact's first name: ";
-	cin >> koFirstName;
-
-	cout << "Enter order column:";
-	cin >> kcOrder;
-
-
 }
 
 // Split function to seprate each piece of information and store it in a vector
@@ -565,14 +548,14 @@ void DMS::mQuery4()
 	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
 	{
 		BIt = dynamic_cast<BusinessWebContact*>(It->second);
-		if (PIt != nullptr)
+		if (BIt != nullptr)
 		{
-			PWeb = PIt->GetBusinessEmail();
-			int i = PEmail.find('@');
-			PWebAt = (PWeb.substr(i + 1, PWeb.length()));
+			PWeb = BIt->GetBusinessEmail();
+			//int i = PEmail.find('@');
+			//PWebAt = (PWeb.substr(i + 1, PWeb.length()));
 			int j = PWebAt.find("com");
-			if(j=="com")
-			BCategory.insert(BIt->GetCategory());
+			//if(j=="com")
+			//BCategory.insert(BIt->GetCategory());
 		}
 	}
 	BCI = BCategory.begin();
@@ -616,40 +599,45 @@ void DMS::mQuery5()
 				}
 			}
 		}
-
-		/*multiset< string > Result;
-		multiset< string >::iterator RIt;
-		PersonPhoneContact* PIt = nullptr;
-		PersonAddressContact* AIt = nullptr;
-		string AreaCode;
-		string PhoneNo;
-		for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
-		{
-			PIt = dynamic_cast<PersonPhoneContact*>(It->second);
-			if (PIt != nullptr)
-			{
-				PhoneNo = PIt->GetPersonPhone();
-				AreaCode = PhoneNo.substr(2, 3);
-				if (AreaCode != "203") // || AreaCode == "475" || AreaCode == "860" || AreaCode == "959")
-				{
-					AIt = dynamic_cast<PersonAddressContact*>(It->second);
-					if (AIt != nullptr)
-					{
-						Result.insert(AIt->MGetState());
-					}
-				}
-			}
-			//cout << PhoneNo << "\t" << AreaCode << "\n";
-		}
-		cout << PIt << "  the pointers are " << AIt;
-		RIt = Result.begin();
-		while (RIt != Result.end())
-		{
-			this->voResults.push_back(*RIt + "\t" + to_string(Result.count(*RIt)));
-			RIt = Result.upper_bound(*RIt);
-		}*/
 	}
 }
+
+void DMS::mDisplay1( void )
+{
+   string                                 koName;
+	multimap< string, Contact* >::iterator koIter;
+	multimap< string, Contact* >::iterator koEnd;
+	string                                 koDetails;
+	BusinessContact*                       kopBusiness;
+
+	cout << "Enter the name: ";
+	cin >> koName;
+
+	koIter = this->voDirectory.begin();
+	while( koIter != this->voDirectory.end( ) )
+	{
+		// If the contact contains the name provided
+		if( koIter->second->MGetFullName( ).find( koName ) != string::npos )
+		{
+			kopBusiness = dynamic_cast< BusinessContact* >( koIter->second );
+			koDetails =  "Name:     \t" + kopBusiness->MGetFullName( ) + "\n";
+			koDetails += "Category: \t" + kopBusiness->GetCategory( ) + "\n";
+			koEnd = this->voDirectory.upper_bound( koIter->first );
+			while( koIter != koEnd )
+			{
+				koDetails += koIter->second->MToString( ) + "\n";
+				koIter++;
+			}
+			this->voResults.push_back( koDetails );
+		}
+		// Contact does not match, skip its details
+		else
+		{
+			koIter = this->voDirectory.upper_bound( koIter->first );
+		}
+	}
+}
+
 void DMS::mDisplay2(void)
 {
 	string                  koName;
