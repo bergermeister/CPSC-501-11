@@ -109,6 +109,8 @@ void DMS::query(const char acResponse)
 	using namespace std;
 
    string koTerm;
+   string koTitleG, koTitleX, koTitleY;
+   vector< pair< string, int > > koResults;
    
    cout << "Enter search term: ";
    cin  >> koTerm;
@@ -121,19 +123,31 @@ void DMS::query(const char acResponse)
 		this->DisplayDirectory();
 		break;
 	case '1':   // Query by name ordered by type (Gender or category)
-		this->mQuery1( koTerm );
+		koResults = this->mQuery1( koTerm );
+      koTitleX = "State";
+      koTitleY = "Number of " + koTerm;
+      koTitleG = "Search Query 1";
 		break;
 	case '2':   // Query by email domain is “.edu” ordered by the gender.
-		this->mQuery2( koTerm );
+		koResults = this->mQuery2( koTerm );
+      koTitleX = "Gender";
+      koTitleY = "No of Males and Females";
+      koTitleG = "Search Query 2";
 		break;
 	case '3':   //query Organization by phone number that start with the area code ‘203’ ordered by category.
-		this->mQuery3( koTerm );
+		koResults = this->mQuery3( koTerm );
+      koTitleX = "Category";
+      koTitleY = "Number of organazation with phone number starts with " + koTerm;
+      koTitleG = "Search Query 3";
 		break;
 	case '4':   //Query Organisation by email and website domain is ".com" ordered by the category
-		this->mQuery4( koTerm );
+		koResults = this->mQuery4( koTerm );
+      koTitleX = "Category";
+      koTitleY = "Number of organazation with " + koTerm + " email or website";
+      koTitleG = "Search Query 4";
 		break;
 	case '5':   //Query by phone numbers out-of-state area codes ordered by the state.
-		this->mQuery5( koTerm );
+		koResults = this->mQuery5( koTerm );
 		break;
    case 'B':   // Fall through
    case 'b':   // Display details of a Business
@@ -144,6 +158,19 @@ void DMS::query(const char acResponse)
 		this->mDisplay2( koTerm );
 		break;
 	}
+
+   if( koResults.size( ) > 0 )
+   {
+      Graph koGraph( koTitleX, koTitleY, koTitleG );
+
+      for( auto koIter = koResults.begin( ); koIter != koResults.end( ); koIter++ )
+      {
+		   koGraph.addItem( koIter->first, koIter->second );
+	   }
+	   //cout << "Number of " << koTerm << " in the directory ordered by State: " << endl;
+	   koGraph.initializeGraph();
+	   koGraph.generateGraph();
+   }
 }
 
 void DMS::display_results(void)
@@ -420,9 +447,10 @@ bool DMS::mIsNumber(const char acChar)
 	return(kbIsNumber);
 }
 
-void DMS::mQuery1( const std::string& aorTerm )
+std::vector< std::pair< std::string, int > > DMS::mQuery1( const std::string& aorTerm )
 {
-	multiset< string >           koResults;
+   std::vector< std::pair< std::string, int > > koResults;
+	multiset< string >           koResultSet;
 	multiset< string >::iterator koSetIter;
 	PersonAddressContact*        kopPerson;
 	BusinessAddressContact*      kopBusiness;
@@ -444,34 +472,30 @@ void DMS::mQuery1( const std::string& aorTerm )
 			// If the Contact was a PersonAddressContact
 			if (kopPerson != nullptr)
 			{
-				koResults.insert(kopPerson->MGetState());
+				koResultSet.insert(kopPerson->MGetState());
 			}
 			// If the Contact was a BusinessAddressContact
 			else if (kopBusiness != nullptr)
 			{
-				koResults.insert(kopBusiness->MGetState());
+				koResultSet.insert(kopBusiness->MGetState());
 			}
 		}
 	}
 
-	Graph g("State", "Number of " + aorTerm, "Search Query 1");
-
-	koSetIter = koResults.begin();
-	while (koSetIter != koResults.end())
+   koSetIter = koResultSet.begin();
+	while( koSetIter != koResultSet.end( ) )
 	{
-		this->voResults.push_back(*koSetIter + "\t" + to_string(koResults.count(*koSetIter)));
-		g.addItem(*koSetIter, koResults.count(*koSetIter));
-		koSetIter = koResults.upper_bound(*koSetIter);
+		koResults.push_back( pair< string, int >( *koSetIter, koResultSet.count( *koSetIter ) ) );
+		koSetIter = koResultSet.upper_bound( *koSetIter );
 	}
-	cout << "Number of " << aorTerm << " in the directory ordered by State: " << endl;
-	// g.display();
-	g.initializeGraph();
-	g.generateGraph();
+
+   return( koResults );
 }
 
 // the number of people in the directory whose email domain is “.edu” ordered by the gender.
-void DMS::mQuery2( const std::string& aorTerm )
+std::vector< std::pair< std::string, int > > DMS::mQuery2( const std::string& aorTerm )
 {
+   std::vector< std::pair< std::string, int > > koResults;
 	PersonEmailContact* PIt = nullptr;
 	string PEmail;
 	string PEmailAt;
@@ -495,20 +519,16 @@ void DMS::mQuery2( const std::string& aorTerm )
 				FemaleCount++;
 		}
 	}
-	this->voResults.push_back("Male \t" + to_string(MaleCount) + "\nFemale \t" + to_string(FemaleCount) + "\n");
-	Graph g("Gender", "No of Males and Females", "Search Query 2");
-	g.addItem("Males ", MaleCount);
-	g.addItem("Females ", FemaleCount);
-	cout << "Number of people in the directory whose email domain is \"" << aorTerm << "\" ordered by Gender: " << endl;
-	//g.display();
-	g.initializeGraph();
-	g.generateGraph();
+   koResults.push_back( pair< string, int >( "Males", MaleCount ) );
+   koResults.push_back( pair< string, int >( "Females", FemaleCount ) );
 
+   return( koResults );
 } 
 
 //query Organization by phone number that start with the area code ‘203’ ordered by category.
-void DMS::mQuery3( const std::string& aorTerm )
+std::vector< std::pair< std::string, int > > DMS::mQuery3( const std::string& aorTerm )
 {
+   std::vector< std::pair< std::string, int > > koResults;
 	BusinessPhoneContact* BIt = nullptr;
 	string BPhone;
 	string BAreaCode;
@@ -527,22 +547,18 @@ void DMS::mQuery3( const std::string& aorTerm )
 		}
 	}
 	BCI = BCategory.begin();
-	Graph g("Category", "Number of organazation with phone number starts with " + aorTerm, "Search Query 3");
 	while (BCI != BCategory.end())
 	{
-		this->voResults.push_back(*BCI + "\t" + to_string(BCategory.count(*BCI)));
-		g.addItem(*BCI, BCategory.count(*BCI));
+      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of organizations with phone number starts with " << aorTerm << " ordered by category: " << endl;
-	//g.display();
-	g.initializeGraph();
-	g.generateGraph();
 
+   return( koResults );
 }
 
-void DMS::mQuery4( const std::string& aorTerm )
+std::vector< std::pair< std::string, int > > DMS::mQuery4( const std::string& aorTerm )
 {
+   std::vector< std::pair< std::string, int > > koResults;
 	BusinessWebContact *BIt = nullptr;
 	string Temp;
 	multiset< string > BCategory;
@@ -573,21 +589,19 @@ void DMS::mQuery4( const std::string& aorTerm )
 		}
 	}
 	BCI = BCategory.begin();
-	Graph g("Category", "Number of organazation with " + aorTerm + " email or website", "Search Query 4");
+	
 	while (BCI != BCategory.end())
 	{
-		this->voResults.push_back(*BCI + "\t" + to_string(BCategory.count(*BCI)));
-		g.addItem(*BCI, BCategory.count(*BCI));
+      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of organisations in the directory whose email or website domain is \"" << aorTerm << "\" ordered by Category: " << endl;
-	//g.display();
-	g.initializeGraph();
-	g.generateGraph();
+
+   return( koResults );
 }
 
-void DMS::mQuery5( const std::string& aorTerm )
+std::vector< std::pair< std::string, int > > DMS::mQuery5( const std::string& aorTerm )
 {
+   std::vector< std::pair< std::string, int > > koResults;
 	PersonPhoneContact* PIt = nullptr;
 	PersonAddressContact* AddIt = nullptr;
 	multiset< string > Result;
@@ -613,6 +627,8 @@ void DMS::mQuery5( const std::string& aorTerm )
 			}
 		}
 	}
+
+   return( koResults );
 }
 
 void DMS::mDisplay1( const std::string& aorTerm )

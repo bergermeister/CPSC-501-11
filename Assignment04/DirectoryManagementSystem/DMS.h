@@ -24,6 +24,11 @@ public:        // Public Methods
    void populateDirectory( const std::string& aorFile );
    void query( const char acResponse );
    void display_results( void );
+   std::vector< std::pair< std::string, int > > mQuery1( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > mQuery2( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > mQuery3( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > mQuery4( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > mQuery5( const std::string& aorTerm );
   
 private:       // Private Methods
    void split( const std::string& s, std::vector< std::string >& v );
@@ -35,11 +40,6 @@ private:       // Private Methods
    bool mIsNumber( const char acChar );
    bool mIsWeb(const std::string& aorStr);
 
-   void mQuery1( const std::string& aorTerm );
-   void mQuery2( const std::string& aorTerm );
-   void mQuery3( const std::string& aorTerm );
-   void mQuery4( const std::string& aorTerm );
-   void mQuery5( const std::string& aorTerm );
    void mDisplay1( const std::string& aorTerm );
    void mDisplay2( const std::string& aorTerm );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
