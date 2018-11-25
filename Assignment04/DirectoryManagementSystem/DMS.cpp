@@ -310,14 +310,14 @@ void DMS::mParseBusiness(const std::string& aorLine)
 				keField = xeFieldWeb;
 				break;
 			case xeFieldWeb:
-				if (mIsEmail(koWords[kiIndex])) // check if the field is email
+				if (mIsWeb(koWords[kiIndex])) // check if the field is email
 				{
-					if (mIsWeb(koWords[kiIndex + 1]))
+					if (mIsEmail(koWords[kiIndex+1]))
 					{
 						this->voDirectory.insert(pair< string, Contact* >(koName,
 							new BusinessWebContact(koName,
 								Category,
-								koWords[kiIndex], koWords[kiIndex + 1])));
+								koWords[kiIndex+1], koWords[kiIndex])));
 						kiIndex++;
 					}
 					else
@@ -325,9 +325,16 @@ void DMS::mParseBusiness(const std::string& aorLine)
 						this->voDirectory.insert(pair< string, Contact* >(koName,
 							new BusinessWebContact(koName,
 								Category,
-								koWords[kiIndex])));
+								"", koWords[kiIndex])));
 					}
 				}
+            else if(mIsEmail(koWords[kiIndex]))
+            {
+               this->voDirectory.insert(pair< string, Contact* >(koName,
+							new BusinessWebContact(koName,
+								Category,
+                        koWords[kiIndex] )));
+            }
 				else
 				{
 					// Move back to recheck this string

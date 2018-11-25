@@ -17,10 +17,27 @@ BusinessAddressContact::BusinessAddressContact(const string & oName, const strin
 	const string & oState, const string & oZipcode)
 	: BusinessContact(oName, oCategory) // Deafult Constructor
 {
-	this->StreetAddress = oStreetAdd;
-	this->District = oDistrict;
-	this->State = oState;
-	this->ZipCode = oZipcode;
+   if( oDistrict.length( ) > 0 )
+   {
+	   this->StreetAddress = oStreetAdd;
+	   this->District = oDistrict;
+	   this->State = oState;
+	   this->ZipCode = oZipcode;
+   }
+   else
+   {
+	   vector< string > Words = Contact::mSplit( oStreetAdd, ',' );
+
+      this->StreetAddress = Words[ 0 ];
+      for( int i = 1; i < Words.size() - 3; i++ )
+      {
+         this->StreetAddress += "," + Words[ i ];
+      }
+
+      this->District = Words[ Words.size( ) - 3 ];
+      this->State    = Words[ Words.size( ) - 2 ];
+      this->ZipCode  = Words[ Words.size( ) - 1 ];
+   }
 }
 
 BusinessAddressContact::BusinessAddressContact(const BusinessAddressContact & oBAC) // Copy constructor

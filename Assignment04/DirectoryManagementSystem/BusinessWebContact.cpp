@@ -16,6 +16,7 @@ using namespace std;
 BusinessWebContact::BusinessWebContact(const string & oName, const string & oCategory, const string & oEmail, const string & oWebsite)
 	: BusinessContact(oName, oCategory) // Deafult Constructor
 {
+   this->Email   = oEmail;
 	this->Website = oWebsite;
 }
 
@@ -44,7 +45,7 @@ BusinessWebContact::~BusinessWebContact()  // Destructor
 
 string BusinessWebContact::MToString(void) const
 {
-	return( string( "Email:    \t\t" + this->Email) +
+	return( string( "Email:    \t\t" + this->Email) + "\n" +
            string( "Website:  \t\t" + this->Website));
 }
 
