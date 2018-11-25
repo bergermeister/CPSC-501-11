@@ -35,13 +35,13 @@ private:       // Private Methods
    bool mIsNumber( const char acChar );
    bool mIsWeb(const std::string& aorStr);
 
-   void mQuery1( void );
-   void mQuery2(void);
-   void mQuery3(void);
-   void mQuery4(void);
-   void mQuery5(void);
-   void mDisplay1( void );
-   void mDisplay2( void );
+   void mQuery1( const std::string& aorTerm );
+   void mQuery2( const std::string& aorTerm );
+   void mQuery3( const std::string& aorTerm );
+   void mQuery4( const std::string& aorTerm );
+   void mQuery5( const std::string& aorTerm );
+   void mDisplay1( const std::string& aorTerm );
+   void mDisplay2( const std::string& aorTerm );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
    static std::string mTrim( const std::string& aorStr );
 };

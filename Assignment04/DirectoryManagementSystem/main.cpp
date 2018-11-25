@@ -77,14 +77,14 @@ int main( int aiArgc, char** acpArgv )
 
 void mPrintMenu( void )
 {
-   cout << "n \t Stop program"                      << endl;
-   cout << "h \t Display Help Menu"                 << endl;
-   cout << "d \t Display entire directory"          << endl;
-   cout << "1 \t Query by name ordered by category" << endl;
-   cout << "2 \t Query by "                         << endl;
-   cout << "3 \t Query by "                         << endl;
-   cout << "4 \t Query by "                         << endl;
-   cout << "5 \t Query by "                         << endl;
-   cout << "b \t Display details of a Business"     << endl;
-   cout << "p \t Display details of a Person"       << endl;
+   cout << "n \t Stop program"                           << endl;
+   cout << "h \t Display Help Menu"                      << endl;
+   cout << "d \t Display entire directory"               << endl;
+   cout << "1 \t Query by name ordered by category"      << endl;
+   cout << "2 \t Query person by email domain ordered by gender"               << endl;
+   cout << "3 \t Query by business area code ordered by category"              << endl;
+   cout << "4 \t Query by business email/website domain ordered by category"   << endl;
+   cout << "5 \t Query by person with out of state area code ordered by state" << endl;
+   cout << "b \t Display details of a Business"          << endl;
+   cout << "p \t Display details of a Person"            << endl;
 }

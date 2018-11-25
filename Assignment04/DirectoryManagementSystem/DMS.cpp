@@ -85,10 +85,6 @@ void DMS::populateDirectory(const std::string& FileName)
 
 	vector< string > p;
 	split(FirstLine, p);
-	for (unsigned i = 0; i < p.size(); i++)
-	{
-		cout << p.at(i) << "\n";
-	}
 	ContNum = stoi(p.at(0));     // Get the number of contacts
 	ContType = mTrim(p.at(1));            // Get the type of contacts
 	p.clear();
@@ -96,11 +92,11 @@ void DMS::populateDirectory(const std::string& FileName)
 	for (int i = 0; i < ContNum; i++)
 	{
 		getline(inFile, Line);
-		if (ContType.find( "erson" ) != string::npos )
+		if( ( ContType.find( "erson" ) != string::npos ) || ( ContType.find( "eople" ) != string::npos ) )
 		{
 			this->mParsePerson(Line);
 		}
-		else if (ContType.find( "usiness" ) != string::npos )
+		else if( ContType.find( "usiness" ) != string::npos )
 		{
 			this->mParseBusiness(Line);
 		}
@@ -112,8 +108,10 @@ void DMS::query(const char acResponse)
 {
 	using namespace std;
 
-	//vector< string > koWords = Contact::mSplit( aorResponse, ' ' );
-	//multimap< string, Contact* >::iterator koIter;
+   string koTerm;
+   
+   cout << "Enter search term: ";
+   cin  >> koTerm;
 
 	this->voResults.clear();
 
@@ -123,27 +121,27 @@ void DMS::query(const char acResponse)
 		this->DisplayDirectory();
 		break;
 	case '1':   // Query by name ordered by type (Gender or category)
-		this->mQuery1();
+		this->mQuery1( koTerm );
 		break;
 	case '2':   // Query by email domain is “.edu” ordered by the gender.
-		this->mQuery2();
+		this->mQuery2( koTerm );
 		break;
 	case '3':   //query Organization by phone number that start with the area code ‘203’ ordered by category.
-		this->mQuery3();
+		this->mQuery3( koTerm );
 		break;
-	case '4':   //Query  Organisation by email and website domain is ".com" ordered by the category
-		this->mQuery4();
+	case '4':   //Query Organisation by email and website domain is ".com" ordered by the category
+		this->mQuery4( koTerm );
 		break;
 	case '5':   //Query by phone numbers out-of-state area codes ordered by the state.
-		this->mQuery5();
+		this->mQuery5( koTerm );
 		break;
    case 'B':   // Fall through
    case 'b':   // Display details of a Business
-      this->mDisplay1();
+      this->mDisplay1( koTerm );
       break;
 	case 'P':   // Fall through
 	case 'p':   // Display details of a person
-		this->mDisplay2();
+		this->mDisplay2( koTerm );
 		break;
 	}
 }
@@ -415,22 +413,18 @@ bool DMS::mIsNumber(const char acChar)
 	return(kbIsNumber);
 }
 
-void DMS::mQuery1(void)
+void DMS::mQuery1( const std::string& aorTerm )
 {
-	string                       koName;
 	multiset< string >           koResults;
 	multiset< string >::iterator koSetIter;
 	PersonAddressContact*        kopPerson;
 	BusinessAddressContact*      kopBusiness;
 
-	cout << "Enter the name: ";
-	cin >> koName;
-
 	// Iterate through the directory and save all Contacts 
 	for (auto koIter = this->voDirectory.begin(); koIter != this->voDirectory.end(); koIter++)
 	{
 		// If the contact contains the name provided
-		if (koIter->second->MGetFullName().find(koName) != string::npos)
+		if (koIter->second->MGetFullName().find( aorTerm ) != string::npos)
 		{
 			// Ensure pointers are null to start
 			kopPerson = nullptr;
@@ -453,7 +447,7 @@ void DMS::mQuery1(void)
 		}
 	}
 
-	Graph g("State", "Number of " + koName, "Search Query 1");
+	Graph g("State", "Number of " + aorTerm, "Search Query 1");
 
 
 	koSetIter = koResults.begin();
@@ -463,13 +457,14 @@ void DMS::mQuery1(void)
 		g.addItem(*koSetIter, koResults.count(*koSetIter));
 		koSetIter = koResults.upper_bound(*koSetIter);
 	}
-	cout << "Number of Johns in the directory ordered by State: " << endl;
+	cout << "Number of " << aorTerm << " in the directory ordered by State: " << endl;
 	// g.display();
-	g.initializeGraph();
-	g.generateGraph();
+	//g.initializeGraph();
+	//g.generateGraph();
 }
 
-void DMS::mQuery2() // the number of people in the directory whose email domain is “.edu” ordered by the gender.
+// the number of people in the directory whose email domain is “.edu” ordered by the gender.
+void DMS::mQuery2( const std::string& aorTerm )
 {
 	PersonEmailContact* PIt = nullptr;
 	string PEmail;
@@ -486,7 +481,7 @@ void DMS::mQuery2() // the number of people in the directory whose email domain 
 			PEmail = PIt->GetPersonEmail();
 			int i = PEmail.find('@');
 			PEmailAt = (PEmail.substr(i + 1, PEmail.length()));
-			int j = PEmailAt.find("edu");
+			int j = PEmailAt.find(aorTerm);
 			string Gender = PIt->MGetGender();
 			if ((j != -1) && (Gender == "Male"))
 				MaleCount++;
@@ -498,13 +493,15 @@ void DMS::mQuery2() // the number of people in the directory whose email domain 
 	Graph g("Gender", "No of Males and Females", "Search Query 2");
 	g.addItem("Males ", MaleCount);
 	g.addItem("Females ", FemaleCount);
-	cout << "Number of people in the directory whose email domain is “.edu” ordered by Gender: " << endl;
+	cout << "Number of people in the directory whose email domain is \"" << aorTerm << "\" ordered by Gender: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();
 
-}
-void DMS::mQuery3() //query Organization by phone number that start with the area code ‘203’ ordered by category.
+} 
+
+//query Organization by phone number that start with the area code ‘203’ ordered by category.
+void DMS::mQuery3( const std::string& aorTerm )
 {
 	BusinessPhoneContact* BIt = nullptr;
 	string BPhone;
@@ -519,25 +516,26 @@ void DMS::mQuery3() //query Organization by phone number that start with the are
 		{
 			BPhone = BIt->GetBusinessPhone();
 			BAreaCode = BPhone.substr(2, 3);
-			if (BAreaCode == "203")
+			if (BAreaCode == aorTerm)
 				BCategory.insert(BIt->GetCategory());
 		}
 	}
 	BCI = BCategory.begin();
-	Graph g("Category", "Number of organazation with phone number starts with 203", "Search Query 3");
+	Graph g("Category", "Number of organazation with phone number starts with " + aorTerm, "Search Query 3");
 	while (BCI != BCategory.end())
 	{
 		this->voResults.push_back(*BCI + "\t" + to_string(BCategory.count(*BCI)));
 		g.addItem(*BCI, BCategory.count(*BCI));
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of people in the directory whose email domain is “.edu” ordered by Gender: " << endl;
+	cout << "Number of people in the directory whose email domain is \"" << aorTerm << "\" ordered by Gender: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();
 
 }
-void DMS::mQuery4()
+
+void DMS::mQuery4( const std::string& aorTerm )
 {
 	BusinessWebContact *BIt = nullptr;
 	string PWeb;
@@ -572,8 +570,7 @@ void DMS::mQuery4()
 	g.generateGraph();
 }
 
-
-void DMS::mQuery5()
+void DMS::mQuery5( const std::string& aorTerm )
 {
 	PersonPhoneContact* PIt = nullptr;
 	PersonAddressContact* AddIt = nullptr;
@@ -602,22 +599,18 @@ void DMS::mQuery5()
 	}
 }
 
-void DMS::mDisplay1( void )
+void DMS::mDisplay1( const std::string& aorTerm )
 {
-   string                                 koName;
 	multimap< string, Contact* >::iterator koIter;
 	multimap< string, Contact* >::iterator koEnd;
 	string                                 koDetails;
 	BusinessContact*                       kopBusiness;
 
-	cout << "Enter the name: ";
-	cin >> koName;
-
 	koIter = this->voDirectory.begin();
 	while( koIter != this->voDirectory.end( ) )
 	{
 		// If the contact contains the name provided
-		if( koIter->second->MGetFullName( ).find( koName ) != string::npos )
+		if( koIter->second->MGetFullName( ).find( aorTerm ) != string::npos )
 		{
 			kopBusiness = dynamic_cast< BusinessContact* >( koIter->second );
 			koDetails =  "Name:     \t" + kopBusiness->MGetFullName( ) + "\n";
@@ -638,22 +631,18 @@ void DMS::mDisplay1( void )
 	}
 }
 
-void DMS::mDisplay2(void)
+void DMS::mDisplay2( const std::string& aorTerm )
 {
-	string                  koName;
 	multimap< string, Contact* >::iterator koIter;
 	multimap< string, Contact* >::iterator koEnd;
-	string                  koDetails;
-	PersonContact*          kopPerson;
-
-	cout << "Enter the name: ";
-	cin >> koName;
+	string                                 koDetails;
+	PersonContact*                         kopPerson;
 
 	koIter = this->voDirectory.begin();
 	while (koIter != this->voDirectory.end())
 	{
 		// If the contact contains the name provided
-		if (koIter->second->MGetFullName().find(koName) != string::npos)
+		if (koIter->second->MGetFullName().find(aorTerm) != string::npos)
 		{
 			kopPerson = dynamic_cast<PersonContact*>(koIter->second);
 			koDetails = "Name:   \t" + kopPerson->MGetFullName() + "\n";
