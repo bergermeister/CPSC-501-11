@@ -107,7 +107,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;PATH="$(ProjectDir).";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
     </ClCompile>
     <Link>
@@ -183,6 +183,9 @@
     <None Include="..\DirectoryManagementSystem\EXCEL.EXE" />
     <None Include="..\DirectoryManagementSystem\MSO.DLL" />
     <None Include="..\DirectoryManagementSystem\VBE6EXT.OLB" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="UTInput1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

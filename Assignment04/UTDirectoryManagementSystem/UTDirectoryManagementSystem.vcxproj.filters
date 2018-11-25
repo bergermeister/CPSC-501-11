@@ -95,4 +95,9 @@
     <None Include="..\DirectoryManagementSystem\MSO.DLL" />
     <None Include="..\DirectoryManagementSystem\VBE6EXT.OLB" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="UTInput1.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
