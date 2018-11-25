@@ -24,6 +24,7 @@ public:
 	virtual ~BusinessWebContact(); // Virtual Destructor
 	virtual string MToString(void) const;
 	string GetBusinessEmail();
+   string GetWebsite( void ) const;
 
 private:
 	string Email;

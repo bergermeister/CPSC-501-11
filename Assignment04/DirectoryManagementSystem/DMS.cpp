@@ -544,33 +544,43 @@ void DMS::mQuery3( const std::string& aorTerm )
 void DMS::mQuery4( const std::string& aorTerm )
 {
 	BusinessWebContact *BIt = nullptr;
-	string PWeb;
-	string PWebAt;
-	string Domain;
+	string Temp;
 	multiset< string > BCategory;
 	multiset< string >::iterator BCI;
 	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
 	{
 		BIt = dynamic_cast<BusinessWebContact*>(It->second);
-		if (BIt != nullptr)
+		if( BIt != nullptr )
 		{
-			PWeb = BIt->GetBusinessEmail();
-			//int i = PEmail.find('@');
-			//PWebAt = (PWeb.substr(i + 1, PWeb.length()));
-			int j = PWebAt.find("com");
-			//if(j=="com")
-			//BCategory.insert(BIt->GetCategory());
+         int i, j;
+         Temp = BIt->GetBusinessEmail();
+         if( ( i = Temp.find('@') ) != string::npos )
+         {
+			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
+            {
+			      BCategory.insert( BIt->GetCategory( ) );
+            }
+         }
+
+         Temp = BIt->GetWebsite( );
+         if( ( i = Temp.find_last_of('.') ) != string::npos )
+         {
+			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
+            {
+			      BCategory.insert( BIt->GetCategory( ) );
+            }
+         }
 		}
 	}
 	BCI = BCategory.begin();
-	Graph g("Category", "Number of organazation with .com email or website", "Search Query 4");
+	Graph g("Category", "Number of organazation with " + aorTerm + " email or website", "Search Query 4");
 	while (BCI != BCategory.end())
 	{
 		this->voResults.push_back(*BCI + "\t" + to_string(BCategory.count(*BCI)));
 		g.addItem(*BCI, BCategory.count(*BCI));
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of organisations in the directory whose email or website domain is “.com” ordered by Category: " << endl;
+	cout << "Number of organisations in the directory whose email or website domain is \"" << aorTerm << "\" ordered by Category: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();

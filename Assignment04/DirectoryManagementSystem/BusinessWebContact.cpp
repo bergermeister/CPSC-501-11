@@ -53,3 +53,8 @@ string BusinessWebContact::GetBusinessEmail()
 {
 	return( this->Email );
 }
+
+string BusinessWebContact::GetWebsite( void ) const
+{
+   return( this->Website );
+}
