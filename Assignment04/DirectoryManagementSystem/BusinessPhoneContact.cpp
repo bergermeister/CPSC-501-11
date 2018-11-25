@@ -46,3 +46,8 @@ string BusinessPhoneContact::GetBusinessPhone()
 {
 	return Phone;
 }
+
+std::string BusinessPhoneContact::MToString( void ) const
+{
+   return( std::string( "Phone number:\t" + this->Phone ) );
+}

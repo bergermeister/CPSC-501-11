@@ -52,3 +52,11 @@ string BusinessAddressContact::MGetState( void ) const
 {
    return( this->State );
 }
+
+std::string BusinessAddressContact::MToString( void ) const
+{
+   return( "Address:\n\tStreet:  \t" + this->StreetAddress + "\n" +
+                      "\tDistrict:\t" + this->District      + "\n" + 
+                      "\tState:   \t" + this->State         + "\n" + 
+                      "\tZip:     \t" + this->ZipCode       + "\n" );
+}

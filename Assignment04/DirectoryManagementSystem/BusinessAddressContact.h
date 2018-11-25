@@ -25,6 +25,7 @@ public:
 	virtual ~BusinessAddressContact(); // Virtual Destructor
 
    string MGetState( void ) const;
+   virtual std::string MToString( void ) const;
 
 private:
 	string StreetAddress;

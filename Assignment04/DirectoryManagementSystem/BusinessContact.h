@@ -23,9 +23,10 @@ public:
    BusinessContact& operator=( const BusinessContact& aorBusiness );
 
    virtual void display( void );
+   virtual std::string MToString( void ) const;
    static  bool MIsValid( const std::string& aorStr );
+   
    std::string GetCategory();
-
 };
 
 #endif

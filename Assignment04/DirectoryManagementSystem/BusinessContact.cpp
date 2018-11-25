@@ -44,6 +44,11 @@ void BusinessContact::display( void )
    Contact::display( );
 }
 
+std::string BusinessContact::MToString( void ) const
+{
+   return( std::string( "Category:\t" + this->voType ) );
+}
+
 bool BusinessContact::MIsValid( const std::string& aorStr )
 {
    const int  kiNumInvalid = 12;

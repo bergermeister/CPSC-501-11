@@ -25,7 +25,6 @@ public:
 	virtual string MToString(void) const;
 	string GetBusinessEmail();
 
-
 private:
 	string Email;
 	string Website;

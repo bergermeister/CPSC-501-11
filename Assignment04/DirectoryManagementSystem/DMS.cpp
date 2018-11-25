@@ -449,7 +449,6 @@ void DMS::mQuery1( const std::string& aorTerm )
 
 	Graph g("State", "Number of " + aorTerm, "Search Query 1");
 
-
 	koSetIter = koResults.begin();
 	while (koSetIter != koResults.end())
 	{
@@ -459,8 +458,8 @@ void DMS::mQuery1( const std::string& aorTerm )
 	}
 	cout << "Number of " << aorTerm << " in the directory ordered by State: " << endl;
 	// g.display();
-	//g.initializeGraph();
-	//g.generateGraph();
+	g.initializeGraph();
+	g.generateGraph();
 }
 
 // the number of people in the directory whose email domain is “.edu” ordered by the gender.
@@ -528,7 +527,7 @@ void DMS::mQuery3( const std::string& aorTerm )
 		g.addItem(*BCI, BCategory.count(*BCI));
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of people in the directory whose email domain is \"" << aorTerm << "\" ordered by Gender: " << endl;
+	cout << "Number of organizations with phone number starts with " << aorTerm << " ordered by category: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();

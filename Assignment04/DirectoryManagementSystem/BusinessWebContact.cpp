@@ -41,14 +41,14 @@ void BusinessWebContact::display(void)
 BusinessWebContact::~BusinessWebContact()  // Destructor
 {
 }
+
 string BusinessWebContact::MToString(void) const
 {
-	return(string("Email:\t\t" + this->Email));
-	return(string("Website:\t\t" + this->Website));
+	return( string( "Email:    \t\t" + this->Email) +
+           string( "Website:  \t\t" + this->Website));
 }
 
 string BusinessWebContact::GetBusinessEmail()
 {
-	return Email;
-	return Website;
+	return( this->Email );
 }
