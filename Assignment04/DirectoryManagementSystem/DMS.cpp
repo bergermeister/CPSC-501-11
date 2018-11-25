@@ -125,13 +125,14 @@ void DMS::query(const char acResponse)
 	case '1':   // Query by name ordered by type (Gender or category)
 		this->mQuery1();
 		break;
-	case '2':   // Query by email domain is ì.eduî ordered by the gender.
+	case '2':   // Query by email domain is ‚Äú.edu‚Äù ordered by the gender.
 		this->mQuery2();
 		break;
-	case '3':   //query Organization by phone number that start with the area code ë203í ordered by category.
+	case '3':   //query Organization by phone number that start with the area code ‚Äò203‚Äô ordered by category.
 		this->mQuery3();
 		break;
-	case '4':   //
+	case '4':   //Query  Organisation by email and website domain is ".com" ordered by the category
+		this->mQuery4();
 		break;
 	case '5':   //Query by phone numbers out-of-state area codes ordered by the state.
 		this->mQuery5();
@@ -485,7 +486,7 @@ void DMS::mQuery1(void)
 	g.generateGraph();
 }
 
-void DMS::mQuery2() // the number of people in the directory whose email domain is ì.eduî ordered by the gender.
+void DMS::mQuery2() // the number of people in the directory whose email domain is ‚Äú.edu‚Äù ordered by the gender.
 {
 	PersonEmailContact* PIt = nullptr;
 	string PEmail;
@@ -514,13 +515,13 @@ void DMS::mQuery2() // the number of people in the directory whose email domain 
 	Graph g("Gender", "No of Males and Females", "Search Query 2");
 	g.addItem("Males ", MaleCount);
 	g.addItem("Females ", FemaleCount);
-	cout << "Number of people in the directory whose email domain is ì.eduî ordered by Gender: " << endl;
+	cout << "Number of people in the directory whose email domain is ‚Äú.edu‚Äù ordered by Gender: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();
 
 }
-void DMS::mQuery3() //query Organization by phone number that start with the area code ë203í ordered by category.
+void DMS::mQuery3() //query Organization by phone number that start with the area code ‚Äò203‚Äô ordered by category.
 {
 	BusinessPhoneContact* BIt = nullptr;
 	string BPhone;
@@ -547,12 +548,47 @@ void DMS::mQuery3() //query Organization by phone number that start with the are
 		g.addItem(*BCI, BCategory.count(*BCI));
 		BCI = BCategory.upper_bound(*BCI);
 	}
-	cout << "Number of people in the directory whose email domain is ì.eduî ordered by Gender: " << endl;
+	cout << "Number of people in the directory whose email domain is ‚Äú.edu‚Äù ordered by Gender: " << endl;
 	//g.display();
 	g.initializeGraph();
 	g.generateGraph();
 
 }
+void DMS::mQuery4()
+{
+	BusinessWebContact *BIt = nullptr;
+	string PWeb;
+	string PWebAt;
+	string Domain;
+	multiset< string > BCategory;
+	multiset< string >::iterator BCI;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessWebContact*>(It->second);
+		if (PIt != nullptr)
+		{
+			PWeb = PIt->GetBusinessEmail();
+			int i = PEmail.find('@');
+			PWebAt = (PWeb.substr(i + 1, PWeb.length()));
+			int j = PWebAt.find("com");
+			if(j=="com")
+			BCategory.insert(BIt->GetCategory());
+		}
+	}
+	BCI = BCategory.begin();
+	Graph g("Category", "Number of organazation with .com email or website", "Search Query 4");
+	while (BCI != BCategory.end())
+	{
+		this->voResults.push_back(*BCI + "\t" + to_string(BCategory.count(*BCI)));
+		g.addItem(*BCI, BCategory.count(*BCI));
+		BCI = BCategory.upper_bound(*BCI);
+	}
+	cout << "Number of organisations in the directory whose email or website domain is ‚Äú.com‚Äù ordered by Category: " << endl;
+	//g.display();
+	g.initializeGraph();
+	g.generateGraph();
+}
+
 
 void DMS::mQuery5()
 {
