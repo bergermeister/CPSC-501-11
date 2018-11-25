@@ -38,6 +38,7 @@ private:       // Private Methods
    void mQuery1( void );
    void mQuery2(void);
    void mQuery3(void);
+   void mQuery4(void);
    void mQuery5(void);
    void mDisplay2( void );
    static bool mCompareAddress( Contact* aopContact1, Contact* aopContact2 );
