@@ -45,9 +45,9 @@ namespace UTDirectoryManagementSystem
 		  koResults = koDMS.mQuery2("edu");
 
 		  Assert::IsTrue(koResults.size() == 2, (const wchar_t*)"Incorrect Number of Contacts");
-		  Assert::IsTrue(koResults[0].first == "Male", (const wchar_t*)"Incorrect Category");
+		  Assert::IsTrue(koResults[0].first == "Males", (const wchar_t*)"Incorrect Category");
 		  Assert::IsTrue(koResults[0].second == 0, (const wchar_t*)"Incorrect Count of .edu in Male Category");
-		  Assert::IsTrue(koResults[1].first == "Female", (const wchar_t*)"Incorrect Category");
+		  Assert::IsTrue(koResults[1].first == "Females", (const wchar_t*)"Incorrect Category");
 		  Assert::IsTrue(koResults[1].second == 1, (const wchar_t*)"Incorrect Count of .edu in Female Category");
 
       }
