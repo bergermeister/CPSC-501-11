@@ -122,10 +122,13 @@
     <ClInclude Include="Contact.h" />
     <ClInclude Include="DMS.h" />
     <ClInclude Include="Graph.h" />
+    <ClInclude Include="Partition.h" />
     <ClInclude Include="PersonAddressContact.h" />
     <ClInclude Include="PersonContact.h" />
     <ClInclude Include="PersonEmailContact.h" />
     <ClInclude Include="PersonPhoneContact.h" />
+    <ClInclude Include="Query.h" />
+    <ClInclude Include="TimingWheel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BusinessAddressContact.cpp" />
@@ -136,10 +139,13 @@
     <ClCompile Include="DMS.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Partition.cpp" />
     <ClCompile Include="PersonAddressContact.cpp" />
     <ClCompile Include="PersonContact.cpp" />
     <ClCompile Include="PersonEmailContact.cpp" />
     <ClCompile Include="PersonPhoneContact.cpp" />
+    <ClCompile Include="Query.cpp" />
+    <ClCompile Include="TimingWheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input3.txt" />

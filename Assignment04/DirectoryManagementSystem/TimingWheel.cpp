@@ -1,0 +1,94 @@
+#include "TimingWheel.h"
+
+TimingWheel::TimingWheel( const int aiMaxDelay )
+{
+   // If the given delay is greater than or equal to the Min Delay
+   if( aiMaxDelay >= xiMinDelay )
+   {
+      // Set the Max delay to the given delay
+      this->viMaxDelay = aiMaxDelay + 1;
+   }
+   else
+   {
+      // Otherwise use the default
+      this->viMaxDelay = xiMaxDelayDefault + 1;
+   }
+
+   // Allocate memory for the max delay
+   this->vopSlot = new Partition*[ this->viMaxDelay ];
+
+   // Start at slot 0
+   this->viCurrentSlot = 0;
+}
+
+TimingWheel::TimingWheel( const TimingWheel& aorWheel )
+{
+   // Call assignment operator
+   *this = aorWheel;
+}
+
+TimingWheel::~TimingWheel( void )
+{
+   // Loop through each slot
+   for( auto kiIndex = 0; kiIndex < this->viMaxDelay; kiIndex++ )
+   {
+      // If the slot is not empty
+      if( this->vopSlot[ kiIndex ] != nullptr )
+      {
+         // Free the allocated memory
+         delete this->vopSlot[ kiIndex ];
+      }
+   }
+
+   // Free the allocated memory for the array
+   delete[ ] this->vopSlot;
+}
+
+TimingWheel& TimingWheel::operator=( const TimingWheel& aorWheel )
+{
+   if( this != &aorWheel )
+   {
+      // TODO
+   }
+
+   return( *this );
+}
+
+void TimingWheel::insert( int aiProcessingTime, int aiServerNum, Query aoQuery )
+{
+   int        kiIndex;
+   Partition* kopPartition;
+
+   // Ensure the processing time is valid
+   if( ( aiProcessingTime >= xiMinDelay ) && ( aiProcessingTime <= this->viMaxDelay ) )
+   {
+      // Determine the slot index
+      kiIndex = ( this->viCurrentSlot + aiProcessingTime ) % this->viMaxDelay;
+
+      // Insert a new Partition in the slot with the appropriate delay
+      this->vopSlot[ kiIndex ] = new Partition( aiServerNum, aoQuery, this->vopSlot[ kiIndex ] );
+   }
+}
+
+void TimingWheel::schedule( DMS& aorDMS )
+{
+   Partition* kopPartition = this->vopSlot[ this->viCurrentSlot ];
+
+   while( kopPartition != nullptr )
+   {
+      // TODO Process the Query
+
+      // Move to the next Partition
+      kopPartition = kopPartition->MGetNext( );
+   }
+}
+
+void TimingWheel::clear_curr_slot( void )
+{
+   // If there are partitions in the current slot
+   if( this->vopSlot[ this->viCurrentSlot ] != nullptr )
+   {
+      // Free the allocated memory for the given slot
+      delete this->vopSlot[ this->viCurrentSlot ];
+   }
+}

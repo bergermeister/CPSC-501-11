@@ -51,6 +51,9 @@
     <ClInclude Include="..\DirectoryManagementSystem\Graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\DirectoryManagementSystem\Partition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\DirectoryManagementSystem\DMS.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\DirectoryManagementSystem\Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\DirectoryManagementSystem\Partition.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
