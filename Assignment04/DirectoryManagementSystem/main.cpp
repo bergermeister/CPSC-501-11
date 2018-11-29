@@ -9,6 +9,7 @@
 #include "DMS.h"
 #include "Query.h"
 #include "TimingWheel.h"
+#include <queue>
 #include <vector>
 #include <string>
 #include <iostream>
@@ -19,7 +20,7 @@ void mPrintMenu( void );
 void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
 void print_status( void );
 void print_final_statistics( void );
-void generate_query_queue( int aiCount, TimingWheel& aorTW );
+void generate_query_queue( int aiCount, queue< Query >& aorQueries );
 
 int main( int aiArgc, char** acpArgv )
 {
@@ -28,6 +29,7 @@ int main( int aiArgc, char** acpArgv )
    int              kiCountServer;
    int              kiCountQuery;
    vector< string > koFiles;
+   queue< Query >   koQueries;
    
    // Obtain the User Input
    get_user_input( aiArgc, acpArgv, kiCountServer, kiCountQuery, koFiles );
@@ -47,11 +49,13 @@ int main( int aiArgc, char** acpArgv )
    }
 
    // Generate a queue of Queries
-   generate_query_queue( kiCountQuery, koTW );
+   generate_query_queue( kiCountQuery, koQueries );
 
    // TODO
-   while( true /* Query Queue Not Empty? */ )
+   while( !koQueries.empty( ) )
    {
+      // 
+
       koTW.schedule( koDMS );
       print_status( );
       koTW.clear_curr_slot( );
@@ -123,7 +127,7 @@ void print_final_statistics( void )
    // TODO
 }
 
-void generate_query_queue( int aiCount, TimingWheel& aorTW )
+void generate_query_queue( int aiCount, queue< Query >& aorQueries )
 {
    // TODO
 }

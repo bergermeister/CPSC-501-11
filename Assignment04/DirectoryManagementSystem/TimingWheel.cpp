@@ -1,7 +1,9 @@
 #include "TimingWheel.h"
 
-TimingWheel::TimingWheel( const int aiMaxDelay )
+TimingWheel::TimingWheel( const int aiMaxDelay, const int aiServerCount )
 {
+   int kiIndex;
+
    // If the given delay is greater than or equal to the Min Delay
    if( aiMaxDelay >= xiMinDelay )
    {
@@ -19,6 +21,12 @@ TimingWheel::TimingWheel( const int aiMaxDelay )
 
    // Start at slot 0
    this->viCurrentSlot = 0;
+
+   // Enqueue the initial list of servers
+   for( kiIndex = 0; kiIndex < aiServerCount; kiIndex++ )
+   {
+      this->voAvailServer.push( kiIndex + 1 );
+   }
 }
 
 TimingWheel::TimingWheel( const TimingWheel& aorWheel )
@@ -77,6 +85,10 @@ void TimingWheel::schedule( DMS& aorDMS )
    while( kopPartition != nullptr )
    {
       // TODO Process the Query
+      kopPartition->MProcess( aorDMS );
+
+      // Partition completed, return server to available queue
+      this->voAvailServer.push( kopPartition->MServerNum( ) );
 
       // Move to the next Partition
       kopPartition = kopPartition->MGetNext( );
@@ -91,4 +103,22 @@ void TimingWheel::clear_curr_slot( void )
       // Free the allocated memory for the given slot
       delete this->vopSlot[ this->viCurrentSlot ];
    }
+}
+
+bool TimingWheel::MServerAvailable( void ) const
+{
+   return( !this->voAvailServer.empty( ) );
+}
+
+int TimingWheel::MNextAvailable( void )
+{
+   int kiServer = -1;
+
+   if( !this->voAvailServer.empty( ) )
+   {
+      kiServer = this->voAvailServer.front( );
+      this->voAvailServer.pop( );
+   }
+
+   return( kiServer );
 }

@@ -25,3 +25,13 @@ Query& Query::operator=( const Query& aorQuery )
 
    return( *this );
 }
+
+const char Query::MSelection( void ) const
+{
+   return( this->vcSelection );
+}
+
+const std::string& Query::MSearch( void ) const
+{
+   return( this->voSearch );
+}

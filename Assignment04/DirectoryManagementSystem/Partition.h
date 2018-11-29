@@ -2,6 +2,7 @@
 #define Partition_h
 
 #include "Query.h"
+#include "DMS.h"
 
 class Partition
 {
@@ -17,7 +18,9 @@ public:
 
    Partition& operator=( const Partition& aorPartition );
 
+   int        MServerNum( void ) const;
    Partition* MGetNext( void );
+   void       MProcess( DMS& aorDMS );
 };
 
 #endif

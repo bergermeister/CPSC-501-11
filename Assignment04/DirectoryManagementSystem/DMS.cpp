@@ -104,50 +104,62 @@ void DMS::populateDirectory(const std::string& FileName)
 }
 
 
-void DMS::query(const char acResponse)
+std::vector< std::pair< std::string, int > > DMS::query( const char acType, const string& aorSearch )
 {
 	using namespace std;
 
-   string koTerm;
-   string koTitleG, koTitleX, koTitleY;
+   string                        koTerm;
+   string                        koTitleG, koTitleX, koTitleY;
    vector< pair< string, int > > koResults;
    
-   cout << "Enter search term: ";
-   cin  >> koTerm;
+   // If the search term was no provided
+   if( aorSearch.length( ) == 0 )
+   {
+      // Prompt the user for the search term
+      cout << "Enter search term: ";
+      cin  >> koTerm;
+   }
+   else
+   {
+      // Record the given search term
+      koTerm = aorSearch;
+   }
 
+   // Clear the results
 	this->voResults.clear();
 
-	switch (acResponse)
+   // Switch based on the type of query
+	switch( acType )
 	{
 	case 'd':   // Display entire directory
 		this->DisplayDirectory();
 		break;
 	case '1':   // Query by name ordered by type (Gender or category)
-		koResults = this->mQuery1( koTerm );
+		koResults = this->MQuery1( koTerm );
       koTitleX = "State";
       koTitleY = "Number of " + koTerm;
       koTitleG = "Search Query 1";
 		break;
 	case '2':   // Query by email domain is “.edu” ordered by the gender.
-		koResults = this->mQuery2( koTerm );
+		koResults = this->MQuery2( koTerm );
       koTitleX = "Gender";
       koTitleY = "No of Males and Females";
       koTitleG = "Search Query 2";
 		break;
 	case '3':   //query Organization by phone number that start with the area code ‘203’ ordered by category.
-		koResults = this->mQuery3( koTerm );
+		koResults = this->MQuery3( koTerm );
       koTitleX = "Category";
       koTitleY = "Number of organazation with phone number starts with " + koTerm;
       koTitleG = "Search Query 3";
 		break;
 	case '4':   //Query Organisation by email and website domain is ".com" ordered by the category
-		koResults = this->mQuery4( koTerm );
+		koResults = this->MQuery4( koTerm );
       koTitleX = "Category";
       koTitleY = "Number of organazation with " + koTerm + " email or website";
       koTitleG = "Search Query 4";
 		break;
 	case '5':   //Query by phone numbers out-of-state area codes ordered by the state.
-		koResults = this->mQuery5( koTerm );
+		koResults = this->MQuery5( koTerm );
 		break;
    case 'B':   // Fall through
    case 'b':   // Display details of a Business
@@ -167,10 +179,194 @@ void DMS::query(const char acResponse)
       {
 		   koGraph.addItem( koIter->first, koIter->second );
 	   }
-	   //cout << "Number of " << koTerm << " in the directory ordered by State: " << endl;
+	   
 	   koGraph.initializeGraph();
 	   koGraph.generateGraph();
    }
+
+   return( koResults );
+}
+
+std::vector< std::pair< std::string, int > > DMS::MQuery1( const std::string& aorTerm )
+{
+   std::vector< std::pair< std::string, int > > koResults;
+	multiset< string >           koResultSet;
+	multiset< string >::iterator koSetIter;
+	PersonAddressContact*        kopPerson;
+	BusinessAddressContact*      kopBusiness;
+
+	// Iterate through the directory and save all Contacts 
+	for (auto koIter = this->voDirectory.begin(); koIter != this->voDirectory.end(); koIter++)
+	{
+		// If the contact contains the name provided
+		if (koIter->second->MGetFullName().find( aorTerm ) != string::npos)
+		{
+			// Ensure pointers are null to start
+			kopPerson = nullptr;
+			kopBusiness = nullptr;
+
+			// Attempt to cast to Person and Business Address Contact Pointers
+			kopPerson = dynamic_cast<PersonAddressContact*>(koIter->second);
+			kopBusiness = dynamic_cast<BusinessAddressContact*>(koIter->second);
+
+			// If the Contact was a PersonAddressContact
+			if (kopPerson != nullptr)
+			{
+				koResultSet.insert(kopPerson->MGetState());
+			}
+			// If the Contact was a BusinessAddressContact
+			else if (kopBusiness != nullptr)
+			{
+				koResultSet.insert(kopBusiness->MGetState());
+			}
+		}
+	}
+
+   koSetIter = koResultSet.begin();
+	while( koSetIter != koResultSet.end( ) )
+	{
+		koResults.push_back( pair< string, int >( *koSetIter, koResultSet.count( *koSetIter ) ) );
+		koSetIter = koResultSet.upper_bound( *koSetIter );
+	}
+
+   return( koResults );
+}
+
+std::vector< std::pair< std::string, int > > DMS::MQuery2( const std::string& aorTerm )
+{
+   std::vector< std::pair< std::string, int > > koResults;
+	PersonEmailContact* PIt = nullptr;
+	string PEmail;
+	string PEmailAt;
+	string Domain;
+	int MaleCount = 0;
+	int FemaleCount = 0;
+
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		PIt = dynamic_cast<PersonEmailContact*>(It->second);
+		if (PIt != nullptr)
+		{
+			PEmail = PIt->GetPersonEmail();
+			int i = PEmail.find('@');
+			PEmailAt = (PEmail.substr(i + 1, PEmail.length()));
+			int j = PEmailAt.find(aorTerm);
+			string Gender = PIt->MGetGender();
+			if ((j != -1) && (Gender == "Male"))
+				MaleCount++;
+			if ((j != -1) && (Gender == "Female"))
+				FemaleCount++;
+		}
+	}
+   koResults.push_back( pair< string, int >( "Males", MaleCount ) );
+   koResults.push_back( pair< string, int >( "Females", FemaleCount ) );
+
+   return( koResults );
+} 
+
+std::vector< std::pair< std::string, int > > DMS::MQuery3( const std::string& aorTerm )
+{
+   std::vector< std::pair< std::string, int > > koResults;
+	BusinessPhoneContact* BIt = nullptr;
+	string BPhone;
+	string BAreaCode;
+	multiset< string > BCategory;
+	multiset< string >::iterator BCI;
+
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessPhoneContact*>(It->second);
+		if (BIt != nullptr)
+		{
+			BPhone = BIt->GetBusinessPhone();
+			BAreaCode = BPhone.substr(2, 3);
+			if (BAreaCode == aorTerm)
+				BCategory.insert(BIt->GetCategory());
+		}
+	}
+	BCI = BCategory.begin();
+	while (BCI != BCategory.end())
+	{
+      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
+		BCI = BCategory.upper_bound(*BCI);
+	}
+
+   return( koResults );
+}
+
+std::vector< std::pair< std::string, int > > DMS::MQuery4( const std::string& aorTerm )
+{
+   std::vector< std::pair< std::string, int > > koResults;
+	BusinessWebContact *BIt = nullptr;
+	string Temp;
+	multiset< string > BCategory;
+	multiset< string >::iterator BCI;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessWebContact*>(It->second);
+		if( BIt != nullptr )
+		{
+         int i, j;
+         Temp = BIt->GetBusinessEmail();
+         if( ( i = Temp.find('@') ) != string::npos )
+         {
+			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
+            {
+			      BCategory.insert( BIt->GetCategory( ) );
+            }
+         }
+
+         Temp = BIt->GetWebsite( );
+         if( ( i = Temp.find_last_of('.') ) != string::npos )
+         {
+			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
+            {
+			      BCategory.insert( BIt->GetCategory( ) );
+            }
+         }
+		}
+	}
+	BCI = BCategory.begin();
+	
+	while (BCI != BCategory.end())
+	{
+      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
+		BCI = BCategory.upper_bound(*BCI);
+	}
+
+   return( koResults );
+}
+
+std::vector< std::pair< std::string, int > > DMS::MQuery5( const std::string& aorTerm )
+{
+   std::vector< std::pair< std::string, int > > koResults;
+	PersonPhoneContact* PIt = nullptr;
+	PersonAddressContact* AddIt = nullptr;
+	multiset< string > Result;
+	string PhoneNo;
+	string AreaCode;
+	string State;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		AddIt = dynamic_cast<PersonAddressContact*>(It->second);
+		PIt = static_cast<PersonPhoneContact*>(It->second);
+		if (PIt != nullptr)
+		{
+			PhoneNo = PIt->GetPersonPhone();
+			AreaCode = PhoneNo.substr(2, 3);
+			if (AreaCode != "203") // || AreaCode == "475" || AreaCode == "860" || AreaCode == "959")
+			{
+				if (AddIt != nullptr)
+				{
+					//State = AddIt->MGetState();
+					Result.insert(AddIt->MGetState());
+					cout << AreaCode << "\t" << PhoneNo << "\n";
+				}
+			}
+		}
+	}
+
+   return( koResults );
 }
 
 void DMS::display_results(void)
@@ -445,190 +641,6 @@ bool DMS::mIsNumber(const char acChar)
 	}
 
 	return(kbIsNumber);
-}
-
-std::vector< std::pair< std::string, int > > DMS::mQuery1( const std::string& aorTerm )
-{
-   std::vector< std::pair< std::string, int > > koResults;
-	multiset< string >           koResultSet;
-	multiset< string >::iterator koSetIter;
-	PersonAddressContact*        kopPerson;
-	BusinessAddressContact*      kopBusiness;
-
-	// Iterate through the directory and save all Contacts 
-	for (auto koIter = this->voDirectory.begin(); koIter != this->voDirectory.end(); koIter++)
-	{
-		// If the contact contains the name provided
-		if (koIter->second->MGetFullName().find( aorTerm ) != string::npos)
-		{
-			// Ensure pointers are null to start
-			kopPerson = nullptr;
-			kopBusiness = nullptr;
-
-			// Attempt to cast to Person and Business Address Contact Pointers
-			kopPerson = dynamic_cast<PersonAddressContact*>(koIter->second);
-			kopBusiness = dynamic_cast<BusinessAddressContact*>(koIter->second);
-
-			// If the Contact was a PersonAddressContact
-			if (kopPerson != nullptr)
-			{
-				koResultSet.insert(kopPerson->MGetState());
-			}
-			// If the Contact was a BusinessAddressContact
-			else if (kopBusiness != nullptr)
-			{
-				koResultSet.insert(kopBusiness->MGetState());
-			}
-		}
-	}
-
-   koSetIter = koResultSet.begin();
-	while( koSetIter != koResultSet.end( ) )
-	{
-		koResults.push_back( pair< string, int >( *koSetIter, koResultSet.count( *koSetIter ) ) );
-		koSetIter = koResultSet.upper_bound( *koSetIter );
-	}
-
-   return( koResults );
-}
-
-// the number of people in the directory whose email domain is “.edu” ordered by the gender.
-std::vector< std::pair< std::string, int > > DMS::mQuery2( const std::string& aorTerm )
-{
-   std::vector< std::pair< std::string, int > > koResults;
-	PersonEmailContact* PIt = nullptr;
-	string PEmail;
-	string PEmailAt;
-	string Domain;
-	int MaleCount = 0;
-	int FemaleCount = 0;
-
-	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
-	{
-		PIt = dynamic_cast<PersonEmailContact*>(It->second);
-		if (PIt != nullptr)
-		{
-			PEmail = PIt->GetPersonEmail();
-			int i = PEmail.find('@');
-			PEmailAt = (PEmail.substr(i + 1, PEmail.length()));
-			int j = PEmailAt.find(aorTerm);
-			string Gender = PIt->MGetGender();
-			if ((j != -1) && (Gender == "Male"))
-				MaleCount++;
-			if ((j != -1) && (Gender == "Female"))
-				FemaleCount++;
-		}
-	}
-   koResults.push_back( pair< string, int >( "Males", MaleCount ) );
-   koResults.push_back( pair< string, int >( "Females", FemaleCount ) );
-
-   return( koResults );
-} 
-
-//query Organization by phone number that start with the area code ‘203’ ordered by category.
-std::vector< std::pair< std::string, int > > DMS::mQuery3( const std::string& aorTerm )
-{
-   std::vector< std::pair< std::string, int > > koResults;
-	BusinessPhoneContact* BIt = nullptr;
-	string BPhone;
-	string BAreaCode;
-	multiset< string > BCategory;
-	multiset< string >::iterator BCI;
-
-	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
-	{
-		BIt = dynamic_cast<BusinessPhoneContact*>(It->second);
-		if (BIt != nullptr)
-		{
-			BPhone = BIt->GetBusinessPhone();
-			BAreaCode = BPhone.substr(2, 3);
-			if (BAreaCode == aorTerm)
-				BCategory.insert(BIt->GetCategory());
-		}
-	}
-	BCI = BCategory.begin();
-	while (BCI != BCategory.end())
-	{
-      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
-		BCI = BCategory.upper_bound(*BCI);
-	}
-
-   return( koResults );
-}
-
-std::vector< std::pair< std::string, int > > DMS::mQuery4( const std::string& aorTerm )
-{
-   std::vector< std::pair< std::string, int > > koResults;
-	BusinessWebContact *BIt = nullptr;
-	string Temp;
-	multiset< string > BCategory;
-	multiset< string >::iterator BCI;
-	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
-	{
-		BIt = dynamic_cast<BusinessWebContact*>(It->second);
-		if( BIt != nullptr )
-		{
-         int i, j;
-         Temp = BIt->GetBusinessEmail();
-         if( ( i = Temp.find('@') ) != string::npos )
-         {
-			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
-            {
-			      BCategory.insert( BIt->GetCategory( ) );
-            }
-         }
-
-         Temp = BIt->GetWebsite( );
-         if( ( i = Temp.find_last_of('.') ) != string::npos )
-         {
-			   if( ( Temp.substr( i + 1, Temp.length( ) ) ) == aorTerm )
-            {
-			      BCategory.insert( BIt->GetCategory( ) );
-            }
-         }
-		}
-	}
-	BCI = BCategory.begin();
-	
-	while (BCI != BCategory.end())
-	{
-      koResults.push_back( pair< string, int >( *BCI, BCategory.count( *BCI ) ) );
-		BCI = BCategory.upper_bound(*BCI);
-	}
-
-   return( koResults );
-}
-
-std::vector< std::pair< std::string, int > > DMS::mQuery5( const std::string& aorTerm )
-{
-   std::vector< std::pair< std::string, int > > koResults;
-	PersonPhoneContact* PIt = nullptr;
-	PersonAddressContact* AddIt = nullptr;
-	multiset< string > Result;
-	string PhoneNo;
-	string AreaCode;
-	string State;
-	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
-	{
-		AddIt = dynamic_cast<PersonAddressContact*>(It->second);
-		PIt = static_cast<PersonPhoneContact*>(It->second);
-		if (PIt != nullptr)
-		{
-			PhoneNo = PIt->GetPersonPhone();
-			AreaCode = PhoneNo.substr(2, 3);
-			if (AreaCode != "203") // || AreaCode == "475" || AreaCode == "860" || AreaCode == "959")
-			{
-				if (AddIt != nullptr)
-				{
-					//State = AddIt->MGetState();
-					Result.insert(AddIt->MGetState());
-					cout << AreaCode << "\t" << PhoneNo << "\n";
-				}
-			}
-		}
-	}
-
-   return( koResults );
 }
 
 void DMS::mDisplay1( const std::string& aorTerm )

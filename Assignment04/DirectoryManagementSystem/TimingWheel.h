@@ -4,19 +4,22 @@
 #include "DMS.h"
 #include "Query.h"
 #include "Partition.h"
+#include <queue>
 
 class TimingWheel
 {
 private:
-   static const int xiMinDelay        =  3;
-   static const int xiMaxDelayDefault = 10;
+   static const int xiMinDelay           =  3;
+   static const int xiMaxDelayDefault    = 10;
+   static const int xiServerCountDefault = 4;
 
-   Partition** vopSlot;
-   int         viMaxDelay;
-   int         viCurrentSlot;
+   Partition**       vopSlot;
+   int               viMaxDelay;
+   int               viCurrentSlot;
+   std::queue< int > voAvailServer;
 
 public:
-   TimingWheel( const int aiMaxDelay = xiMaxDelayDefault );
+   TimingWheel( const int aiMaxDelay = xiMaxDelayDefault, const int aiServerCount = xiServerCountDefault );
    TimingWheel( const TimingWheel& aorWheel );
    ~TimingWheel( void );
 
@@ -25,6 +28,9 @@ public:
    void insert( int aiProcessingTime, int aiServerNum, Query aoQuery );
    void schedule( DMS& aorDMS );
    void clear_curr_slot( void );
+
+   bool MServerAvailable( void ) const;
+   int  MNextAvailable( void );
 };
 
 #endif

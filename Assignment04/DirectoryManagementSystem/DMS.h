@@ -19,16 +19,16 @@ public:        // Public Methods
    
    DMS& operator=( const DMS& aorDMS );
 
-   void CreateDirectory( std::string Name, Contact* ContInfo); // Create directory of contacts
+   void CreateDirectory( std::string Name, Contact* ContInfo ); // Create directory of contacts
 	void DisplayDirectory( void ); // Display just for testing :)
    void populateDirectory( const std::string& aorFile );
-   void query( const char acResponse );
+   std::vector< std::pair< std::string, int > > query( const char acType, const std::string& aorSearch = "" );
+   std::vector< std::pair< std::string, int > > MQuery1( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > MQuery2( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > MQuery3( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > MQuery4( const std::string& aorTerm );
+   std::vector< std::pair< std::string, int > > MQuery5( const std::string& aorTerm );
    void display_results( void );
-   std::vector< std::pair< std::string, int > > mQuery1( const std::string& aorTerm );
-   std::vector< std::pair< std::string, int > > mQuery2( const std::string& aorTerm );
-   std::vector< std::pair< std::string, int > > mQuery3( const std::string& aorTerm );
-   std::vector< std::pair< std::string, int > > mQuery4( const std::string& aorTerm );
-   std::vector< std::pair< std::string, int > > mQuery5( const std::string& aorTerm );
   
 private:       // Private Methods
    void split( const std::string& s, std::vector< std::string >& v );

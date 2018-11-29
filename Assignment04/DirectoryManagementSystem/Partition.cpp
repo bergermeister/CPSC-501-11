@@ -32,7 +32,17 @@ Partition& Partition::operator=( const Partition& aorPartition )
    return( *this );
 }
 
+int Partition::MServerNum( void ) const
+{
+   return( this->viServerNum );
+}
+
 Partition* Partition::MGetNext( void )
 {
    return( this->vopNext );
+}
+
+void Partition::MProcess( DMS& aorDMS )
+{
+   aorDMS.query( this->voQuery.MSelection( ), this->voQuery.MSearch( ) );
 }
