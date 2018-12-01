@@ -94,6 +94,12 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
 
    if( aiArgc < 4 )
    {
+      cout << "Enter the number of servers: ";
+      cin  >> kiCountServer;
+
+      cout << "Enter the number of queries: ";
+      cin  >> kiCountQuery;
+
       cout << "Enter the number of input files: " << endl;
       cin  >> kiCountFile;
       cout << "Enter the file names: " << endl; 
