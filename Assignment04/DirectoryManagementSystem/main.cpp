@@ -115,6 +115,9 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
          aorFiles.push_back( string( acpArgv[ kiIndex ] ) );
       }
    }
+
+   airCountServer = kiCountServer;
+   airCountQuery  = kiCountQuery;
 }
 
 void print_status( void )

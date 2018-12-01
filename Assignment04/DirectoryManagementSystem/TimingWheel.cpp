@@ -8,16 +8,22 @@ TimingWheel::TimingWheel( const int aiMaxDelay, const int aiServerCount )
    if( aiMaxDelay >= xiMinDelay )
    {
       // Set the Max delay to the given delay
-      this->viMaxDelay = aiMaxDelay + 1;
+      this->viSlotCount = aiMaxDelay + 1;
    }
    else
    {
       // Otherwise use the default
-      this->viMaxDelay = xiMaxDelayDefault + 1;
+      this->viSlotCount = xiMaxDelayDefault + 1;
    }
 
    // Allocate memory for the max delay
-   this->vopSlot = new Partition*[ this->viMaxDelay ];
+   this->vopSlot = new Partition*[ this->viSlotCount ];
+
+   // Ensure each slot is null
+   for( kiIndex = 0; kiIndex < this->viSlotCount; kiIndex++ )
+   {
+      this->vopSlot[ kiIndex ] = nullptr;
+   }
 
    // Start at slot 0
    this->viCurrentSlot = 0;
@@ -38,7 +44,7 @@ TimingWheel::TimingWheel( const TimingWheel& aorWheel )
 TimingWheel::~TimingWheel( void )
 {
    // Loop through each slot
-   for( auto kiIndex = 0; kiIndex < this->viMaxDelay; kiIndex++ )
+   for( auto kiIndex = 0; kiIndex < this->viSlotCount; kiIndex++ )
    {
       // If the slot is not empty
       if( this->vopSlot[ kiIndex ] != nullptr )
@@ -68,10 +74,10 @@ void TimingWheel::insert( int aiProcessingTime, int aiServerNum, Query aoQuery )
    Partition* kopPartition;
 
    // Ensure the processing time is valid
-   if( ( aiProcessingTime >= xiMinDelay ) && ( aiProcessingTime <= this->viMaxDelay ) )
+   if( ( aiProcessingTime >= xiMinDelay ) && ( aiProcessingTime <= this->viSlotCount ) )
    {
       // Determine the slot index
-      kiIndex = ( this->viCurrentSlot + aiProcessingTime ) % this->viMaxDelay;
+      kiIndex = ( this->viCurrentSlot + aiProcessingTime ) % this->viSlotCount;
 
       // Insert a new Partition in the slot with the appropriate delay
       this->vopSlot[ kiIndex ] = new Partition( aiServerNum, aoQuery, this->vopSlot[ kiIndex ] );
@@ -102,6 +108,7 @@ void TimingWheel::clear_curr_slot( void )
    {
       // Free the allocated memory for the given slot
       delete this->vopSlot[ this->viCurrentSlot ];
+      this->vopSlot[ this->viCurrentSlot ] = nullptr;
    }
 }
 

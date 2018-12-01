@@ -14,7 +14,7 @@ private:
    static const int xiServerCountDefault = 4;
 
    Partition**       vopSlot;
-   int               viMaxDelay;
+   int               viSlotCount;
    int               viCurrentSlot;
    std::queue< int > voAvailServer;
 
