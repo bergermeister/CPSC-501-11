@@ -4,44 +4,54 @@
   BusinessWebContact.cpp
   Contact.cpp
   DMS.cpp
-f:\oops\try1\assignment04\directorymanagementsystem\graph.h(12): warning C4278: 'DocumentProperties': identifier in type library 'MSO.DLL' is already a macro; use the 'rename' qualifier
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(189): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(195): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(435): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(251): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(253): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(311): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(320): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(309): warning C4101: 'j': unreferenced local variable
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(385): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(391): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(631): warning C4305: 'argument': truncation from 'int' to 'const _Elem'
           with
           [
               _Elem=char
           ]
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(435): warning C4309: 'argument': truncation of constant value
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(512): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(514): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(573): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(582): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(571): warning C4101: 'j': unreferenced local variable
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(174): warning C4267: 'initializing': conversion from 'size_t' to '_Ty2', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(631): warning C4309: 'argument': truncation of constant value
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(795): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(797): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(820): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(822): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(845): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(847): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\professional\vc\tools\msvc\14.15.26726\include\utility(174): warning C4267: 'initializing': conversion from 'size_t' to '_Ty2', possible loss of data
           with
           [
               _Ty2=int
           ]
-  f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(488): note: see reference to function template instantiation 'std::pair<std::string,int>::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
+  c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(228): note: see reference to function template instantiation 'std::pair<std::string,int>::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
           with
           [
               _Other1=const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,
               _Other2=unsigned __int64
           ]
-  f:\oops\try1\assignment04\directorymanagementsystem\dms.cpp(488): note: see reference to function template instantiation 'std::pair<std::string,int>::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
+  c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\dms.cpp(228): note: see reference to function template instantiation 'std::pair<std::string,int>::pair<const std::basic_string<char,std::char_traits<char>,std::allocator<char>>&,unsigned __int64,0>(_Other1,_Other2 &&) noexcept(false)' being compiled
           with
           [
               _Other1=const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &,
               _Other2=unsigned __int64
           ]
   Graph.cpp
-f:\oops\try1\assignment04\directorymanagementsystem\graph.cpp(49): warning C4101: 'error': unreferenced local variable
-f:\oops\try1\assignment04\directorymanagementsystem\graph.cpp(87): warning C4101: 'error': unreferenced local variable
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\graph.cpp(49): warning C4101: 'error': unreferenced local variable
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\graph.cpp(87): warning C4101: 'error': unreferenced local variable
   main.cpp
+  Partition.cpp
   PersonAddressContact.cpp
   PersonContact.cpp
   PersonEmailContact.cpp
   PersonPhoneContact.cpp
+  Query.cpp
+  TimingWheel.cpp
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\timingwheel.cpp(74): warning C4101: 'kopPartition': unreferenced local variable
   Generating Code...
-  DirectoryManagementSystem.vcxproj -> F:\oops\try1\Assignment04\x64\Debug\DirectoryManagementSystem.exe
+  LINK : C:\Users\Zainab Altaweel\Documents\GitHub\Assignment04\x64\Debug\DirectoryManagementSystem.exe not found or not built by the last incremental link; performing full link
+  DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\Assignment04\x64\Debug\DirectoryManagementSystem.exe

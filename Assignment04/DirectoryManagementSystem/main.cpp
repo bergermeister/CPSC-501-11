@@ -64,7 +64,29 @@ int main( int aiArgc, char** acpArgv )
    }
 
    print_final_statistics( );
-   
+
+   // Check searching terms methods
+    /*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();
+	for (size_t n = 0; n < AreaCodes.size(); n++)
+		cout << AreaCodes[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> Names = koDMS.GetFullNameTerms();
+	for (size_t n = 0; n < Names.size(); n++)
+		cout << Names[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> BEmails = koDMS.GetBusinessEmailDomainTerms();
+	for (size_t n = 0; n < BEmails.size(); n++)
+		cout << BEmails[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> PEmails = koDMS.GetPersonEmailDomainTerms();
+	for (size_t n = 0; n < PEmails.size(); n++)
+		cout << PEmails[n] << " ";
+	cout << endl;
+	cin.get();
+	*/
    return 0; 
 }
 
@@ -124,7 +146,9 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
 
    airCountServer = kiCountServer;
    airCountQuery  = kiCountQuery;
+
 }
+
 
 void print_status( void )
 {
