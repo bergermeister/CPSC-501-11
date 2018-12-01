@@ -9,10 +9,12 @@
 #include "DMS.h"
 #include "Query.h"
 #include "TimingWheel.h"
+#include "Factory.h"
 #include <queue>
 #include <vector>
 #include <string>
 #include <iostream>
+
 
 using namespace std;
 
@@ -64,6 +66,9 @@ int main( int aiArgc, char** acpArgv )
    }
 
    print_final_statistics( );
+
+   Factory Test;
+   Test.GenerateQueue(koDMS, 5);
 
    // Check searching terms methods
     /*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();

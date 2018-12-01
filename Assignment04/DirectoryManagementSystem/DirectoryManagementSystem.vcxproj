@@ -121,6 +121,7 @@
     <ClInclude Include="BusinessWebContact.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="DMS.h" />
+    <ClInclude Include="Factory.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="Partition.h" />
     <ClInclude Include="PersonAddressContact.h" />
@@ -137,6 +138,7 @@
     <ClCompile Include="BusinessWebContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="DMS.cpp" />
+    <ClCompile Include="Factory.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Partition.cpp" />
