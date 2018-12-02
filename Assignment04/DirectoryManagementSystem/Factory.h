@@ -23,7 +23,7 @@ private:
 	char QueryChar;
 	string QueryTerm;
 	queue<Query*> Queue;
-	vector<string> SearchingTerms;
+	vector<string> SearchingTerms1;
 	char ConvertToChar(int a);
 	string SelectSearchingTerm(DMS DMSo, int b);
 };

@@ -31,7 +31,7 @@ int main( int aiArgc, char** acpArgv )
    int              kiCountServer;
    int              kiCountQuery;
    vector< string > koFiles;
-   queue< Query >   koQueries;
+   queue< Query* >   koQueries;
    
    // Obtain the User Input
    get_user_input( aiArgc, acpArgv, kiCountServer, kiCountQuery, koFiles );
@@ -51,7 +51,21 @@ int main( int aiArgc, char** acpArgv )
    }
 
    // Generate a queue of Queries
-   generate_query_queue( kiCountQuery, koQueries );
+  // generate_query_queue( kiCountQuery, koQueries );
+
+   Factory Test;
+   koQueries = Test.GenerateQueue(koDMS, kiCountQuery);
+   cout << "Number of elements in Queue: " << koQueries.size();
+   Query* p;
+   while (koQueries.empty())
+   {
+	   p = koQueries.front();
+
+	   std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch();
+	   koQueries.pop();
+   }
+   cout << std::endl; 
+   cin.get();
 
    // TODO
    while( !koQueries.empty( ) )
@@ -66,9 +80,6 @@ int main( int aiArgc, char** acpArgv )
    }
 
    print_final_statistics( );
-
-   Factory Test;
-   Test.GenerateQueue(koDMS, 5);
 
    // Check searching terms methods
     /*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();

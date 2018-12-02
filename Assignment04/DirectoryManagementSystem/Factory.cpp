@@ -34,53 +34,53 @@ void Factory::GenerateSerchingTerms()
 	
 }
 
-queue<Query*> Factory::GenerateQueue(DMS& koDMS, int QueryCount)
+queue<Query*> Factory::GenerateQueue(DMS& DMSo, int QueryCount)
 {
+
 	int ran;
-	string SearchingTerm;
+	//string SearchingTerm;
+	//SearchingTerm = SelectSearchingTerm(koDMS, ran);
+
 	Query* p;
 	for (int i = 0; i < QueryCount; i++)
 	{
-		srand(time(NULL));// choose a random number between 1 and 5 to select one of the queries
+		srand(time(NULL));// choose a random number between 1 and 4 to select one of the queries
 		ran = (rand() % 4) + 1;
-
 		char c = ConvertToChar(ran);
-		SearchingTerm = SelectSearchingTerm(koDMS, ran);
-		Queue.push(new Query(c, SearchingTerm));
-		while (!Queue.empty())
+
+		string SearchTerm;
+		switch (ran)
+		{
+		case 1:
+			this->SearchingTerms1 = DMSo.GetFullNameTerms();
+			break;
+		case 2:
+			this->SearchingTerms1 = DMSo.GetPersonEmailDomainTerms();
+			break;
+		case 3:
+			this->SearchingTerms1 = DMSo.GetAreaCodeTerms();
+			break;
+		case 4:
+			this->SearchingTerms1 = DMSo.GetBusinessEmailDomainTerms();
+			break;
+		}
+		int randomIndex = rand() % SearchingTerms1.size();
+		SearchTerm = SearchingTerms1[randomIndex];
+		Queue.push(new Query(c, SearchTerm));
+
+		/*while (!Queue.empty())
 		{
 			p = Queue.front();
-
 			std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch();
 			Queue.pop();
 		}
-		cout << std::endl;
+		cout << std::endl;*/
 	}
-	cin.get();
-
-	/*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();
-	for (size_t n = 0; n < AreaCodes.size(); n++)
-		cout << AreaCodes[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> Names = koDMS.GetFullNameTerms();
-	for (size_t n = 0; n < Names.size(); n++)
-		cout << Names[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> BEmails = koDMS.GetBusinessEmailDomainTerms();
-	for (size_t n = 0; n < BEmails.size(); n++)
-		cout << BEmails[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> PEmails = koDMS.GetPersonEmailDomainTerms();
-	for (size_t n = 0; n < PEmails.size(); n++)
-		cout << PEmails[n] << " ";
-	cout << endl;
-	cin.get();
-	*/
+	//cin.get();
+	
 	return Queue;
 }
+
 char Factory::ConvertToChar(int a)
 {
 	switch (a)
@@ -103,34 +103,26 @@ char Factory::ConvertToChar(int a)
 	}
 }
 
-string Factory::SelectSearchingTerm(DMS DMSo, int b)
+/*string Factory::SelectSearchingTerm(DMS DMSo, int b)
 {
-
-	/*vector<string> BusinessDomainTerms;
-	BusinessDomainTerms.reserve(DMSo.GetBusinessWebDomainTerms().size() + DMSo.GetBusinessEmailDomainTerms().size());
-	BusinessDomainTerms.insert(BusinessDomainTerms.end(), DMSo.GetBusinessWebDomainTerms().begin(), DMSo.GetBusinessWebDomainTerms().end());
-	BusinessDomainTerms.insert(BusinessDomainTerms.end(), DMSo.GetBusinessEmailDomainTerms().begin(), DMSo.GetBusinessEmailDomainTerms().end());
-	*/
 	string SearchTerm;
 	switch (b)
 	{
 	case 1:
-		this->SearchingTerms = DMSo.GetFullNameTerms();
+		this->SearchingTerms1 = DMSo.GetFullNameTerms();
 		break;
 	case 2:
-		this->SearchingTerms = DMSo.GetPersonEmailDomainTerms();
-
+		this->SearchingTerms1 = DMSo.GetPersonEmailDomainTerms();
 		break;
 	case 3:
-		this->SearchingTerms = DMSo.GetAreaCodeTerms();
-
-		return SearchTerm;
+		this->SearchingTerms1 = DMSo.GetAreaCodeTerms();
 		break;
 	case 4:
-		this->SearchingTerms = DMSo.GetBusinessEmailDomainTerms();
+		this->SearchingTerms1 = DMSo.GetBusinessEmailDomainTerms();
 		break;
 	}
-	//int randomIndex = rand() % SearchingTerms.size();
-	//SearchTerm = SearchingTerms[randomIndex];
+
+	int randomIndex = rand() % SearchingTerms1.size();
+	SearchTerm = SearchingTerms1[randomIndex];
 	return SearchTerm;
-}
+}*/
