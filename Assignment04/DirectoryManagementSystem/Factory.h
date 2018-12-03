@@ -16,7 +16,7 @@ public:
 	~Factory();
 	Factory& operator=(const Factory& F);
 	void GenerateSerchingTerms();
-	queue<Query*> GenerateQueue(DMS& DMSo, int QueryCount);
+	queue<Query*> & GenerateQueue(DMS& DMSo, int QueryCount);
 	
 private:
 	//int QueryCount;
