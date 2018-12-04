@@ -14,7 +14,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-
+#include <ctime>
 
 using namespace std;
 
@@ -31,8 +31,11 @@ int main( int aiArgc, char** acpArgv )
    int              kiCountServer;
    int              kiCountQuery;
    vector< string > koFiles;
-   queue< Query* >   koQueries;
-   
+   queue< Query* >  koQueries;
+
+   // Seed random number
+   srand( time( NULL ) );
+
    // Obtain the User Input
    get_user_input( aiArgc, acpArgv, kiCountServer, kiCountQuery, koFiles );
 

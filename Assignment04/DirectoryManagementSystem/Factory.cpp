@@ -5,7 +5,6 @@
 #include<vector>
 #include<iostream>
 #include <cstdlib>
-#include <ctime>
 
 using namespace std;
 
@@ -43,7 +42,6 @@ queue<Query*> & Factory::GenerateQueue(DMS& DMSo, int QueryCount)
 	Query* p;
 	for (int i = 0; i < QueryCount; i++)
 	{
-		srand(time(NULL));// choose a random number between 1 and 4 to select one of the queries
 		ran = (rand() % 4) + 1;
 		char c = ConvertToChar(ran);
 
