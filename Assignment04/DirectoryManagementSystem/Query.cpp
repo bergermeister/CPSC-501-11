@@ -20,7 +20,8 @@ Query& Query::operator=( const Query& aorQuery )
 {
    if( this != &aorQuery )
    {
-      // TODO
+      this->vcSelection = aorQuery.vcSelection;
+      this->voSearch    = aorQuery.voSearch;
    }
 
    return( *this );
