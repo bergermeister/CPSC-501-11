@@ -9,10 +9,12 @@
 #include "DMS.h"
 #include "Query.h"
 #include "TimingWheel.h"
+#include "Factory.h"
 #include <queue>
 #include <vector>
 #include <string>
 #include <iostream>
+
 
 using namespace std;
 
@@ -29,7 +31,7 @@ int main( int aiArgc, char** acpArgv )
    int              kiCountServer;
    int              kiCountQuery;
    vector< string > koFiles;
-   queue< Query >   koQueries;
+   queue< Query* >   koQueries;
    
    // Obtain the User Input
    get_user_input( aiArgc, acpArgv, kiCountServer, kiCountQuery, koFiles );
@@ -49,7 +51,21 @@ int main( int aiArgc, char** acpArgv )
    }
 
    // Generate a queue of Queries
-   generate_query_queue( kiCountQuery, koQueries );
+  // generate_query_queue( kiCountQuery, koQueries );
+
+   Factory Test;
+   koQueries = Test.GenerateQueue(koDMS, kiCountQuery);
+   cout << "Number of elements in Queue: " << koQueries.size();
+   Query* p;
+   while (koQueries.empty())
+   {
+	   p = koQueries.front();
+
+	   std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch();
+	   koQueries.pop();
+   }
+   cout << std::endl; 
+   cin.get();
 
    // TODO
    while( !koQueries.empty( ) )
@@ -64,7 +80,29 @@ int main( int aiArgc, char** acpArgv )
    }
 
    print_final_statistics( );
-   
+
+   // Check searching terms methods
+    /*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();
+	for (size_t n = 0; n < AreaCodes.size(); n++)
+		cout << AreaCodes[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> Names = koDMS.GetFullNameTerms();
+	for (size_t n = 0; n < Names.size(); n++)
+		cout << Names[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> BEmails = koDMS.GetBusinessEmailDomainTerms();
+	for (size_t n = 0; n < BEmails.size(); n++)
+		cout << BEmails[n] << " ";
+	cout << endl;
+
+	std::vector<std::string> PEmails = koDMS.GetPersonEmailDomainTerms();
+	for (size_t n = 0; n < PEmails.size(); n++)
+		cout << PEmails[n] << " ";
+	cout << endl;
+	cin.get();
+	*/
    return 0; 
 }
 
@@ -124,7 +162,9 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
 
    airCountServer = kiCountServer;
    airCountQuery  = kiCountQuery;
+
 }
+
 
 void print_status( void )
 {

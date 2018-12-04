@@ -739,3 +739,118 @@ std::string DMS::mTrim(const std::string& aorStr)
 
 	return(koResult);
 }
+std::vector<std::string> DMS::GetFullNameTerms()
+{
+	std::vector<std::string> FullNameTerms;
+	string FullName;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		FullName = It->second->MGetFullName();
+		if (std::find(FullNameTerms.begin(), FullNameTerms.end(), FullName) != FullNameTerms.end())
+			continue;
+		else
+			FullNameTerms.push_back(FullName);
+	}
+	return FullNameTerms;
+}
+
+std::vector<std::string> DMS::GetAreaCodeTerms()
+{
+	std::vector<std::string> AreaCodeTerms;
+	BusinessPhoneContact* BIt = nullptr;
+	string BPhone;
+	string BAreaCode;
+	vector< string >::iterator BCI;
+
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessPhoneContact*>(It->second);
+		if (BIt != nullptr)
+		{
+			BPhone = BIt->GetBusinessPhone();
+			BAreaCode = BPhone.substr(2, 3);
+			if (std::find(AreaCodeTerms.begin(), AreaCodeTerms.end(), BAreaCode) != AreaCodeTerms.end())
+				continue;
+			else
+				AreaCodeTerms.push_back(BAreaCode);
+		}
+	}
+	return AreaCodeTerms;
+}
+
+std::vector<std::string> DMS::GetPersonEmailDomainTerms()
+{
+	std::vector<std::string> EmailDomainTerms;
+
+	PersonEmailContact* PIt = nullptr;
+	string PEmail;
+	string PEmailAt;
+	string Domain;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		PIt = dynamic_cast<PersonEmailContact*>(It->second);
+		if (PIt != nullptr)
+		{
+			PEmail = PIt->GetPersonEmail();
+			int i = PEmail.find('@');
+			PEmailAt = (PEmail.substr(i + 1, PEmail.length()));
+			int j = PEmailAt.find(".");
+			Domain = (PEmailAt.substr(j + 1, PEmailAt.length()));
+			if (std::find(EmailDomainTerms.begin(), EmailDomainTerms.end(), Domain) != EmailDomainTerms.end())
+				continue;
+			else
+				EmailDomainTerms.push_back(Domain);
+		}
+	}
+	return EmailDomainTerms;
+}
+std::vector<std::string> DMS::GetBusinessEmailDomainTerms()
+{
+	std::vector<std::string> BusinessEmailDomainTerms;
+	BusinessWebContact *BIt = nullptr;
+	string BEmail;
+	string BEmailAt;
+	string Domain;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessWebContact*>(It->second);
+		if (BIt != nullptr)
+		{
+			BEmail = BIt->GetBusinessEmail();
+			int i = BEmail.find('@');
+			BEmailAt = (BEmail.substr(i + 1, BEmail.length()));
+			int j = BEmailAt.find(".");
+			Domain = (BEmailAt.substr(j + 1, BEmailAt.length()));
+			if (std::find(BusinessEmailDomainTerms.begin(), BusinessEmailDomainTerms.end(), Domain) != BusinessEmailDomainTerms.end())
+				continue;
+			else
+				BusinessEmailDomainTerms.push_back(Domain);
+		}
+	}
+	return BusinessEmailDomainTerms;
+}
+std::vector<std::string> DMS::GetBusinessWebDomainTerms()
+{
+	std::vector<std::string> BusinessWebDomainTerms;
+	BusinessWebContact *BIt = nullptr;
+	string Website;
+	string WebsiteAt;
+	string WebDomain;
+	for (auto It = this->voDirectory.begin(); It != this->voDirectory.end(); It++)
+	{
+		BIt = dynamic_cast<BusinessWebContact*>(It->second);
+		if (BIt != nullptr)
+		{
+			Website = BIt->GetWebsite();
+			int x = Website.find('@');
+			WebsiteAt = (Website.substr(x + 1, Website.length()));
+			int y = WebsiteAt.find(".");
+			WebDomain = (WebsiteAt.substr(y + 1, WebsiteAt.length()));
+			if (std::find(BusinessWebDomainTerms.begin(), BusinessWebDomainTerms.end(), (WebDomain)) != BusinessWebDomainTerms.end())
+				continue;
+			else
+				BusinessWebDomainTerms.push_back(WebDomain);
+		}
+	}
+	return BusinessWebDomainTerms;
+}

@@ -2,7 +2,6 @@
 #define Query_h
 
 #include <string>
-
 class Query
 {
 private:       // Private Attributes
@@ -11,6 +10,7 @@ private:       // Private Attributes
 
 public:        // Public Methods
    Query( void );
+   Query(char ch, std::string SearchingTerm);
    Query( const Query& aorQuery );
    ~Query( void );
 

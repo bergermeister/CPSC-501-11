@@ -5,6 +5,12 @@ Query::Query( void )
    // TODO
 }
 
+Query::Query(char ch, std::string SearchingTerm)
+{
+	vcSelection = ch;
+	voSearch = SearchingTerm;
+}
+
 Query::Query( const Query& aorQuery )
 {
    // Call assignment operator
