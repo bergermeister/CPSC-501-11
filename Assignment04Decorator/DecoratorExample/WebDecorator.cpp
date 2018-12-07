@@ -5,17 +5,13 @@
 #include<iostream>
 using namespace std;
 
-//WebDecorator::WebDecorator{
-
-//}
-
-WebDecorator::WebDecorator(Contact* aopContact, string web) :ContactDecorator(aopContact)
-{ 
+WebDecorator::WebDecorator(ContactDecorator* aopContact, string web) :ContactDecorator(*aopContact)
+{  
 	Website = web; 
 
 }
 
-WebDecorator::WebDecorator(const WebDecorator& aorDecorator){
+WebDecorator::WebDecorator(const WebDecorator& aorDecorator):ContactDecorator(aorDecorator){
 
 	*this = aorDecorator;
 }
@@ -28,7 +24,8 @@ WebDecorator& WebDecorator::operator=(const WebDecorator& aorDecorator)
 {
 	if (this != &aorDecorator)
 	{
-		this->vopContact = aorDecorator.vopContact;
+		ContactDecorator::operator=(aorDecorator);
+		Website = aorDecorator.Website;
 	}
 
 	return(*this);
@@ -36,9 +33,7 @@ WebDecorator& WebDecorator::operator=(const WebDecorator& aorDecorator)
 
 void WebDecorator::display(void) const
 {
-	if (this->vopContact != nullptr)
-	{
-		this->vopContact->display();
-	}
+	ContactDecorator::display();
+	cout << "Website:\t" << Website<< endl;
 }
 

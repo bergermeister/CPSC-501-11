@@ -10,7 +10,7 @@ private:
 	ContactDecorator *vopContact;
 public:
 
-	WebDecorator(Contact* aopContact, string web);
+	WebDecorator(ContactDecorator* aopContact, string web);
 	WebDecorator(const WebDecorator& aorDecorator);
 	virtual ~WebDecorator(void);
 

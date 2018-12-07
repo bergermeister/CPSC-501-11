@@ -10,7 +10,8 @@ private:
 	Contact *vopContact;
 public:
 
-	EmailDecorator(Contact* aopContact, string email);
+	EmailDecorator(ContactDecorator* aopContact, string email);
+	//EmailDecorator(ContactDecorator * aopContact, string email);
 	EmailDecorator(const EmailDecorator& aorDecorator);
 	virtual ~EmailDecorator(void);
 
