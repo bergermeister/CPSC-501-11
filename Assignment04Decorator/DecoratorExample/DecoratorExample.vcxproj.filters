@@ -36,6 +36,12 @@
     <ClCompile Include="EmailDecorator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Contact.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EmailDecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

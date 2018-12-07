@@ -3,7 +3,7 @@
 
 #include "Contact.h"
 
-class ContactDecorator
+class ContactDecorator: public Contact
 {
 private:
    Contact* vopContact;

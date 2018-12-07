@@ -115,6 +115,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.cpp" />
+    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.cpp" />
     <ClCompile Include="BusinessContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="ContactDecorator.cpp" />
@@ -124,6 +126,8 @@
     <ClCompile Include="WebDecorator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.h" />
+    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.h" />
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="ContactDecorator.h" />
