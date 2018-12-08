@@ -1,3 +1,14 @@
+/**
+ * @file       WebDecorator.h
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Web Decorator class interface
+ */
+#ifndef WebDecorator_h
+#define WebDecorator_h
+
 #include"ContactDecorator.h"
 #include<string>
 #include<iostream>
@@ -7,7 +18,7 @@ class WebDecorator:public ContactDecorator{
 
 private:
 	string Website;
-	ContactDecorator *vopContact;
+
 public:
 
 	WebDecorator(ContactDecorator* aopContact, string web);
@@ -21,3 +32,5 @@ public:
 	//WebDecorator();
 
 };
+
+#endif

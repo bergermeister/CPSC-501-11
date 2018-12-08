@@ -1,4 +1,14 @@
-#pragma once
+/**
+ * @file       AddressDecorator.h
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Address Decorator Class Interface
+ */
+#ifndef AddressDecorator_h
+#define AddressDecorator_h
+
 #include<string>
 #include"Contact.h"
 #include"ContactDecorator.h"
@@ -21,3 +31,5 @@ public:
 	AddressDecorator operator=(const AddressDecorator& AddDec);
 	virtual void display() const;
 };
+
+#endif

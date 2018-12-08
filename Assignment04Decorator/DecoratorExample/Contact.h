@@ -1,3 +1,11 @@
+/**
+ * @file       Contact.h
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Contact class interface
+ */
 #ifndef Contact_h
 #define Contact_h
 

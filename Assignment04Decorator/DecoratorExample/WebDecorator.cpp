@@ -1,3 +1,11 @@
+/**
+ * @file       WebDecorator.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Web Decorator class implementation
+ */
 #include"WebDecorator.h"
 #include"ContactDecorator.h"
 #include"Contact.h"

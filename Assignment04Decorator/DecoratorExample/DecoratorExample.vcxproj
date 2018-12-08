@@ -115,24 +115,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.cpp" />
-    <ClCompile Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.cpp" />
+    <ClCompile Include="AddressDecorator.cpp" />
     <ClCompile Include="BusinessContact.cpp" />
     <ClCompile Include="Contact.cpp" />
     <ClCompile Include="ContactDecorator.cpp" />
     <ClCompile Include="EmailDecorator.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PersonContact.cpp" />
+    <ClCompile Include="PhoneDecorator.cpp" />
     <ClCompile Include="WebDecorator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\AddressDecorator.h" />
-    <ClInclude Include="..\..\..\Assignment04Decorator\DecoratorExample\PhoneDecorator.h" />
+    <ClInclude Include="AddressDecorator.h" />
     <ClInclude Include="BusinessContact.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="ContactDecorator.h" />
     <ClInclude Include="EmailDecorator.h" />
     <ClInclude Include="PersonContact.h" />
+    <ClInclude Include="PhoneDecorator.h" />
     <ClInclude Include="WebDecorator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,3 +1,11 @@
+/**
+ * @file       PersonContact.h
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Contact class interface
+ */
 #ifndef PersonContact_h
 #define PersonContact_h
 

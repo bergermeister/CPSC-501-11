@@ -1,3 +1,11 @@
+/**
+ * @file       PersonContact.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel, Udaya Sree Reddy Teegulla
+ * @date       2018-12-07
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Person Contact class implementation
+ */
 #include "PersonContact.h"
 #include "Contact.h"
 #include <string>
