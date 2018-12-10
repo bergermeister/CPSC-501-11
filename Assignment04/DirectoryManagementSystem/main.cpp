@@ -30,6 +30,7 @@ int main( int aiArgc, char** acpArgv )
    DMS              koDMS;
    int              kiCountServer;
    int              kiCountQuery;
+   int              kiTotalTime = 0;
    vector< string > koFiles;
    queue< Query* >  koQueries;
 
@@ -65,11 +66,16 @@ int main( int aiArgc, char** acpArgv )
 		   // create random time for each query 
 		   int ProcessingTime = (rand() % 9) + 1;
 		   int ServerNum = koTW.MNextAvailable();
-		   //koTW.insert(8, ServerNum, koQueries.front());
-		   koTW.schedule(koDMS);
-		   print_status();
-		   koTW.clear_curr_slot();
+		   koTW.insert(ProcessingTime, ServerNum, *koQueries.front());
 	   }
+
+      koTW.schedule(koDMS);
+		print_status();
+		koTW.clear_curr_slot();
+
+      // Update time
+      koTW++; // Move to next time slot
+      kiTotalTime++;
    }
 
    print_final_statistics( );

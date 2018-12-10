@@ -72,6 +72,12 @@ TimingWheel& TimingWheel::operator=( const TimingWheel& aorWheel )
    return( *this );
 }
 
+TimingWheel& TimingWheel::operator++( void )
+{
+   this->viCurrentSlot = ( this->viCurrentSlot + 1 ) % this->viSlotCount;
+   return( *this );
+}
+
 void TimingWheel::insert( int aiProcessingTime, int aiServerNum, Query aoQuery )
 {
    int        kiIndex;

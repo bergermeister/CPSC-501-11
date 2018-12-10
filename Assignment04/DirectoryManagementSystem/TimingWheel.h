@@ -24,6 +24,7 @@ public:
    ~TimingWheel( void );
 
    TimingWheel& operator=( const TimingWheel& aorWheel );
+   TimingWheel& operator++( void );
 
    void insert( int aiProcessingTime, int aiServerNum, Query aoQuery );
    void schedule( DMS& aorDMS );
