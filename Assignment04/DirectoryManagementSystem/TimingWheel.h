@@ -31,6 +31,7 @@ public:
 
    bool MServerAvailable( void ) const;
    int  MNextAvailable( void );
+
 };
 
 #endif

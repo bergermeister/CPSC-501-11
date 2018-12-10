@@ -45,4 +45,5 @@ Partition* Partition::MGetNext( void )
 void Partition::MProcess( DMS& aorDMS )
 {
    aorDMS.query( this->voQuery.MSelection( ), this->voQuery.MSearch( ) );
+   
 }

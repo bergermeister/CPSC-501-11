@@ -1,5 +1,6 @@
 #include "TimingWheel.h"
-
+#include <iostream>
+using namespace std;
 TimingWheel::TimingWheel( const int aiMaxDelay, const int aiServerCount )
 {
    int kiIndex;
@@ -62,7 +63,10 @@ TimingWheel& TimingWheel::operator=( const TimingWheel& aorWheel )
 {
    if( this != &aorWheel )
    {
-      // TODO
+	   this->vopSlot = aorWheel.vopSlot;
+	   this->voAvailServer = aorWheel.voAvailServer;
+	   this->viCurrentSlot = aorWheel.viCurrentSlot;
+	   this->viSlotCount = aorWheel.viSlotCount;
    }
 
    return( *this );
@@ -129,3 +133,4 @@ int TimingWheel::MNextAvailable( void )
 
    return( kiServer );
 }
+

@@ -22,7 +22,7 @@ void mPrintMenu( void );
 void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
 void print_status( void );
 void print_final_statistics( void );
-void generate_query_queue( int aiCount, queue< Query >& aorQueries );
+void generate_query_queue( int aiCount, queue< Query* >& aorQueries, DMS CurrentDMS);
 
 int main( int aiArgc, char** acpArgv )
 {
@@ -54,58 +54,26 @@ int main( int aiArgc, char** acpArgv )
    }
 
    // Generate a queue of Queries
-  // generate_query_queue( kiCountQuery, koQueries );
+   generate_query_queue( kiCountQuery, koQueries, koDMS);
 
-   Factory Test;
-   koQueries = Test.GenerateQueue(koDMS, kiCountQuery);
-   cout << "Number of elements in Queue: " << koQueries.size()<<"\n";
-   Query* p;
-   while (!koQueries.empty())
-   {
-	   p = koQueries.front();
-	   std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch() <<"\n";
-	   koQueries.pop();
-   }
-   cout << std::endl; 
-   
    // TODO
    while( !koQueries.empty( ) )
    {
-      // 
-
-      koTW.schedule( koDMS );
-      print_status( );
-      koTW.clear_curr_slot( );
-
-
+      // check if there is an available server 
+	   if (koTW.MServerAvailable())
+	   {	//Find the next available server
+		   // create random time for each query 
+		   int ProcessingTime = (rand() % 9) + 1;
+		   int ServerNum = koTW.MNextAvailable();
+		   //koTW.insert(8, ServerNum, koQueries.front());
+		   koTW.schedule(koDMS);
+		   print_status();
+		   koTW.clear_curr_slot();
+	   }
    }
 
    print_final_statistics( );
-
-   // Check searching terms methods
-    /*std::vector<std::string> AreaCodes = koDMS.GetAreaCodeTerms();
-	for (size_t n = 0; n < AreaCodes.size(); n++)
-		cout << AreaCodes[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> Names = koDMS.GetFullNameTerms();
-	for (size_t n = 0; n < Names.size(); n++)
-		cout << Names[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> BEmails = koDMS.GetBusinessEmailDomainTerms();
-	for (size_t n = 0; n < BEmails.size(); n++)
-		cout << BEmails[n] << " ";
-	cout << endl;
-
-	std::vector<std::string> PEmails = koDMS.GetPersonEmailDomainTerms();
-	for (size_t n = 0; n < PEmails.size(); n++)
-		cout << PEmails[n] << " ";
-	cout << endl;
-	cin.get();
-	*/
    cin.get();
-
    return 0; 
 }
 
@@ -179,7 +147,17 @@ void print_final_statistics( void )
    // TODO
 }
 
-void generate_query_queue( int aiCount, queue< Query >& aorQueries )
+void generate_query_queue( int aiCount, queue< Query* >& aorQueries, DMS CurrentDMS )
 {
-   // TODO
+	Factory Test;
+	aorQueries = Test.GenerateQueue(CurrentDMS, aiCount);
+	cout << "Number of elements in Queue: " << aorQueries.size() << "\n";
+	/*Query* p;
+	while (!aorQueries.empty())
+	{
+		p = aorQueries.front();
+		std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch() << "\n";
+		aorQueries.pop();
+	}
+	cout << std::endl;*/
 }
