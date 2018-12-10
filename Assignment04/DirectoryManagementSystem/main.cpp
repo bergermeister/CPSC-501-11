@@ -58,18 +58,16 @@ int main( int aiArgc, char** acpArgv )
 
    Factory Test;
    koQueries = Test.GenerateQueue(koDMS, kiCountQuery);
-   cout << "Number of elements in Queue: " << koQueries.size();
+   cout << "Number of elements in Queue: " << koQueries.size()<<"\n";
    Query* p;
-   while (koQueries.empty())
+   while (!koQueries.empty())
    {
 	   p = koQueries.front();
-
-	   std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch();
+	   std::cout << " Query" << p->MSelection() << "\t SearchingTerm" << p->MSearch() <<"\n";
 	   koQueries.pop();
    }
    cout << std::endl; 
-   cin.get();
-
+   
    // TODO
    while( !koQueries.empty( ) )
    {
@@ -106,6 +104,8 @@ int main( int aiArgc, char** acpArgv )
 	cout << endl;
 	cin.get();
 	*/
+   cin.get();
+
    return 0; 
 }
 

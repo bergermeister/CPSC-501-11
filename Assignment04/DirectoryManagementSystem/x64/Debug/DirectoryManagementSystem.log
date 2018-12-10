@@ -1,7 +1,3 @@
-﻿  Factory.cpp
-c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\factory.cpp(46): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\factory.cpp(43): warning C4101: 'p': unreferenced local variable
-  main.cpp
-  Generating Code...
-c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\factory.cpp(103): warning C4715: 'Factory::ConvertToChar': not all control paths return a value
+﻿  main.cpp
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\main.cpp(37): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\Assignment04\x64\Debug\DirectoryManagementSystem.exe
