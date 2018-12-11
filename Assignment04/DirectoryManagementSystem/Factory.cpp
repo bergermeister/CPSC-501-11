@@ -33,7 +33,7 @@ void Factory::GenerateSerchingTerms()
 	
 }
 
-queue<Query*> & Factory::GenerateQueue(DMS& DMSo, int QueryCount)
+queue<Query*> & Factory::GenerateQueue(const DMS& DMSo, int QueryCount)
 {
 	int ran;
 	//string SearchingTerm;

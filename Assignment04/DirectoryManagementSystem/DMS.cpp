@@ -739,7 +739,7 @@ std::string DMS::mTrim(const std::string& aorStr)
 
 	return(koResult);
 }
-std::vector<std::string> DMS::GetFullNameTerms()
+std::vector<std::string> DMS::GetFullNameTerms() const
 {
 	std::vector<std::string> FullNameTerms;
 	string FullName;
@@ -754,7 +754,7 @@ std::vector<std::string> DMS::GetFullNameTerms()
 	return FullNameTerms;
 }
 
-std::vector<std::string> DMS::GetAreaCodeTerms()
+std::vector<std::string> DMS::GetAreaCodeTerms() const
 {
 	std::vector<std::string> AreaCodeTerms;
 	BusinessPhoneContact* BIt = nullptr;
@@ -778,7 +778,7 @@ std::vector<std::string> DMS::GetAreaCodeTerms()
 	return AreaCodeTerms;
 }
 
-std::vector<std::string> DMS::GetPersonEmailDomainTerms()
+std::vector<std::string> DMS::GetPersonEmailDomainTerms() const
 {
 	std::vector<std::string> EmailDomainTerms;
 
@@ -804,7 +804,7 @@ std::vector<std::string> DMS::GetPersonEmailDomainTerms()
 	}
 	return EmailDomainTerms;
 }
-std::vector<std::string> DMS::GetBusinessEmailDomainTerms()
+std::vector<std::string> DMS::GetBusinessEmailDomainTerms() const
 {
 	std::vector<std::string> BusinessEmailDomainTerms;
 	BusinessWebContact *BIt = nullptr;
@@ -829,7 +829,7 @@ std::vector<std::string> DMS::GetBusinessEmailDomainTerms()
 	}
 	return BusinessEmailDomainTerms;
 }
-std::vector<std::string> DMS::GetBusinessWebDomainTerms()
+std::vector<std::string> DMS::GetBusinessWebDomainTerms() const
 {
 	std::vector<std::string> BusinessWebDomainTerms;
 	BusinessWebContact *BIt = nullptr;

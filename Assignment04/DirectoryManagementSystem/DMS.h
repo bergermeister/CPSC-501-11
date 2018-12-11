@@ -29,11 +29,11 @@ public:        // Public Methods
    std::vector< std::pair< std::string, int > > MQuery4( const std::string& aorTerm );
    std::vector< std::pair< std::string, int > > MQuery5( const std::string& aorTerm );
    void display_results( void );
-   std::vector<std::string>GetFullNameTerms();
-   std::vector<std::string>GetAreaCodeTerms();
-   std::vector<std::string>GetPersonEmailDomainTerms();
-   std::vector<std::string>GetBusinessEmailDomainTerms();
-   std::vector<std::string>GetBusinessWebDomainTerms();
+   std::vector<std::string>GetFullNameTerms() const;
+   std::vector<std::string>GetAreaCodeTerms() const;
+   std::vector<std::string>GetPersonEmailDomainTerms() const;
+   std::vector<std::string>GetBusinessEmailDomainTerms() const;
+   std::vector<std::string>GetBusinessWebDomainTerms() const;
   
 private:       // Private Methods
    void split( const std::string& s, std::vector< std::string >& v );

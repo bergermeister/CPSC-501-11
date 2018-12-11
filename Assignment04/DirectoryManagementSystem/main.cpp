@@ -22,7 +22,7 @@ void mPrintMenu( void );
 void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
 void print_status( int aiTime, const TimingWheel& aorTW );
 void print_final_statistics( void );
-void generate_query_queue( int aiCount, queue< Query* >& aorQueries, DMS CurrentDMS);
+void generate_query_queue( int aiCount, queue< Query* >& aorQueries, const DMS& CurrentDMS);
 
 int main( int aiArgc, char** acpArgv )
 {
@@ -153,7 +153,7 @@ void print_final_statistics( void )
    // TODO
 }
 
-void generate_query_queue( int aiCount, queue< Query* >& aorQueries, DMS CurrentDMS )
+void generate_query_queue( int aiCount, queue< Query* >& aorQueries, const DMS& CurrentDMS )
 {
 	Factory Test;
 	aorQueries = Test.GenerateQueue(CurrentDMS, aiCount);
