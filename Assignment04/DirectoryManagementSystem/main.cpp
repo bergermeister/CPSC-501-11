@@ -20,7 +20,7 @@ using namespace std;
 
 void mPrintMenu( void );
 void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
-void print_status( void );
+void print_status( int aiTime, const TimingWheel& aorTW );
 void print_final_statistics( void );
 void generate_query_queue( int aiCount, queue< Query* >& aorQueries, DMS CurrentDMS);
 
@@ -70,11 +70,11 @@ int main( int aiArgc, char** acpArgv )
 	   }
 
       koTW.schedule(koDMS);
-		print_status();
+		print_status( kiTotalTime, koTW );
 		koTW.clear_curr_slot();
 
       // Update time
-      koTW++; // Move to next time slot
+      ++koTW; // Move to next time slot
       kiTotalTime++;
    }
 
@@ -143,9 +143,9 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
 }
 
 
-void print_status( void )
+void print_status( int aiTime, const TimingWheel& aorTW )
 {
-   //
+   std::cout << "System Time: " << aiTime << "\t\t" << aorTW << std::endl;
 }
 
 void print_final_statistics( void )

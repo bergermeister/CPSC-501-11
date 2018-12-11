@@ -5,6 +5,7 @@
 #include "Query.h"
 #include "Partition.h"
 #include <queue>
+#include <iostream>
 
 class TimingWheel
 {
@@ -33,6 +34,7 @@ public:
    bool MServerAvailable( void ) const;
    int  MNextAvailable( void );
 
+   friend std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW );
 };
 
 #endif

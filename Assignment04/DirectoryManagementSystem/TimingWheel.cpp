@@ -140,3 +140,27 @@ int TimingWheel::MNextAvailable( void )
    return( kiServer );
 }
 
+std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW )
+{
+   Partition* kopPartition = aorTW.vopSlot[ aorTW.viCurrentSlot ];
+
+   aorOut << "Processed: ";
+
+   if( kopPartition == nullptr )
+   {
+      aorOut << "None";
+   }
+   else
+   {
+      while( kopPartition != nullptr )
+      {
+         aorOut << kopPartition << " ";
+
+         // Move to the next Partition
+         kopPartition = kopPartition->MGetNext( );
+      }
+   }
+
+   return( aorOut );
+}
+

@@ -47,3 +47,12 @@ void Partition::MProcess( DMS& aorDMS )
    aorDMS.query( this->voQuery.MSelection( ), this->voQuery.MSearch( ) );
    
 }
+
+std::ostream& operator<<( std::ostream& aorOut, const Partition& aorPartition )
+{
+   aorOut << "[" << aorPartition.viServerNum << ",";
+   aorOut << aorPartition.voQuery.MSelection( ) << ",";
+   aorOut << aorPartition.voQuery.MSearch( ) << "]";
+
+   return( aorOut );
+}

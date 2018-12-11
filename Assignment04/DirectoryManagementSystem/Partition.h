@@ -3,6 +3,7 @@
 
 #include "Query.h"
 #include "DMS.h"
+#include <iostream>
 
 class Partition
 {
@@ -21,6 +22,8 @@ public:
    int        MServerNum( void ) const;
    Partition* MGetNext( void );
    void       MProcess( DMS& aorDMS );
+
+   friend std::ostream& operator<<( std::ostream& aorOut, const Partition& aorPartition );
 };
 
 #endif
