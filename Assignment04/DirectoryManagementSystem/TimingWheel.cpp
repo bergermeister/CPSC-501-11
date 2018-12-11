@@ -102,7 +102,7 @@ void TimingWheel::schedule( DMS& aorDMS )
    {
       // TODO Process the Query
       kopPartition->MProcess( aorDMS );
-
+	  ProccessedQueriesNum++;
       // Partition completed, return server to available queue
       this->voAvailServer.push( kopPartition->MServerNum( ) );
 
@@ -136,9 +136,14 @@ int TimingWheel::MNextAvailable( void )
       kiServer = this->voAvailServer.front( );
       this->voAvailServer.pop( );
    }
-
    return( kiServer );
 }
+
+int TimingWheel::GetProccessedQueriesNum()
+{
+	return this->ProccessedQueriesNum;
+}
+
 
 std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW )
 {

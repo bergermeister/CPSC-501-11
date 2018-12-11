@@ -739,6 +739,10 @@ std::string DMS::mTrim(const std::string& aorStr)
 
 	return(koResult);
 }
+int DMS::GetDirectorySize()
+{
+	return this->voDirectory.size();
+}
 std::vector<std::string> DMS::GetFullNameTerms() const
 {
 	std::vector<std::string> FullNameTerms;

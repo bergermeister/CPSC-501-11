@@ -34,6 +34,7 @@ public:        // Public Methods
    std::vector<std::string>GetPersonEmailDomainTerms() const;
    std::vector<std::string>GetBusinessEmailDomainTerms() const;
    std::vector<std::string>GetBusinessWebDomainTerms() const;
+   int GetDirectorySize();
   
 private:       // Private Methods
    void split( const std::string& s, std::vector< std::string >& v );

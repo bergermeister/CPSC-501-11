@@ -18,6 +18,7 @@ private:
    int               viSlotCount;
    int               viCurrentSlot;
    std::queue< int > voAvailServer;
+   int ProccessedQueriesNum;
 
 public:
    TimingWheel( const int aiMaxDelay = xiMaxDelayDefault, const int aiServerCount = xiServerCountDefault );
@@ -35,6 +36,7 @@ public:
    int  MNextAvailable( void );
 
    friend std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW );
+   int GetProccessedQueriesNum();
 };
 
 #endif

@@ -1,7 +1,3 @@
 ﻿  main.cpp
-c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\main.cpp(37): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Partition.cpp
-  TimingWheel.cpp
-c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\timingwheel.cpp(78): warning C4101: 'kopPartition': unreferenced local variable
-  Generating Code...
+c:\users\zainab altaweel\documents\github\assignment04\directorymanagementsystem\main.cpp(41): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   DirectoryManagementSystem.vcxproj -> C:\Users\Zainab Altaweel\Documents\GitHub\Assignment04\x64\Debug\DirectoryManagementSystem.exe
