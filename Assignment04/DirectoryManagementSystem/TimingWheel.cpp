@@ -154,7 +154,7 @@ std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW )
    {
       while( kopPartition != nullptr )
       {
-         aorOut << kopPartition << " ";
+         aorOut << *kopPartition << " ";
 
          // Move to the next Partition
          kopPartition = kopPartition->MGetNext( );

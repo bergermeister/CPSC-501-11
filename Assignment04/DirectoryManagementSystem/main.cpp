@@ -64,9 +64,10 @@ int main( int aiArgc, char** acpArgv )
 	   if (koTW.MServerAvailable())
 	   {	//Find the next available server
 		   // create random time for each query 
-		   int ProcessingTime = (rand() % 9) + 1;
+		   int ProcessingTime = (rand() % 8) + 3;
 		   int ServerNum = koTW.MNextAvailable();
 		   koTW.insert(ProcessingTime, ServerNum, *koQueries.front());
+         koQueries.pop( );
 	   }
 
       koTW.schedule(koDMS);

@@ -173,15 +173,15 @@ std::vector< std::pair< std::string, int > > DMS::query( const char acType, cons
 
    if( koResults.size( ) > 0 )
    {
-      Graph koGraph( koTitleX, koTitleY, koTitleG );
-
-      for( auto koIter = koResults.begin( ); koIter != koResults.end( ); koIter++ )
-      {
-		   koGraph.addItem( koIter->first, koIter->second );
-	   }
-	   
-	   koGraph.initializeGraph();
-	   koGraph.generateGraph();
+      //Graph koGraph( koTitleX, koTitleY, koTitleG );
+      //
+      //for( auto koIter = koResults.begin( ); koIter != koResults.end( ); koIter++ )
+      //{
+		//   koGraph.addItem( koIter->first, koIter->second );
+	   //}
+	   //
+	   //koGraph.initializeGraph();
+	   //koGraph.generateGraph();
    }
 
    return( koResults );
