@@ -4,7 +4,7 @@
  * @date       2018-12-11
  * @compiler   Visual C++ 2017
  *
- * @brief Directory Management System class interface
+ * @brief Factory class implementation
  */
 #include "Factory.h"
 #include "Query.h"

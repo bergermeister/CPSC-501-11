@@ -1,3 +1,11 @@
+/**
+ * @file       Partition.cpp
+ * @author     Edward Eisenberger
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Partition class implementation
+ */
 #include "Partition.h"
 
 Partition::Partition( const int aiServerNum, Query aoQuery, Partition* aopNext )

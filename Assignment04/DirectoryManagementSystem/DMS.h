@@ -19,9 +19,10 @@ class DMS
 private:       // Private Attributes
    std::multimap< std::string, Contact* > voDirectory;
    std::vector< std::string >             voResults;
+   bool                                   vbGraphEn;
 
 public:        // Public Methods
-	DMS( void );
+	DMS( bool abGraphEn = true );
 	DMS( const DMS& aorDMS );
    ~DMS( void );
    
@@ -42,7 +43,7 @@ public:        // Public Methods
    std::vector<std::string>GetPersonEmailDomainTerms() const;
    std::vector<std::string>GetBusinessEmailDomainTerms() const;
    std::vector<std::string>GetBusinessWebDomainTerms() const;
-   int GetDirectorySize();
+   int GetDirectorySize() const;
   
 private:       // Private Methods
    void split( const std::string& s, std::vector< std::string >& v );

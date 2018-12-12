@@ -19,9 +19,9 @@
 using namespace std;
 
 void mPrintMenu( void );
-void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
+void get_user_input( int aiArgc, char** acpArgv, bool& abrGraphEn, int& airCountServer, int& airCountQuery, vector< string >& aorFiles );
 void print_status( int aiTime, const TimingWheel& aorTW );
-void print_final_statistics(DMS DMSObject, TimingWheel& TW, vector<int> MaxServ, vector<int> IdleServer);
+void print_final_statistics(const DMS& DMSObject, TimingWheel& TW, vector<int> MaxServ, vector<int> IdleServer);
 vector<int>IdleServer(int ServerID, int* ServOccurance);
 void generate_query_queue( int aiCount, queue< Query* >& aorQueries, const DMS& CurrentDMS);
 vector<int> MaxServer(int ServerID, int* ServOccurance);
@@ -29,10 +29,11 @@ vector<int> MaxServer(int ServerID, int* ServOccurance);
 int main( int aiArgc, char** acpArgv )
 {
    TimingWheel*     kopTW;
-   DMS              koDMS;
+   DMS*             kopDMS;
    int              kiCountServer;
    int              kiCountQuery;
    int              kiTotalTime = 0;
+   bool             kbGraphEn;
    vector< string > koFiles;
    queue< Query* >  koQueries;
    vector<int> MaxServ;
@@ -41,14 +42,17 @@ int main( int aiArgc, char** acpArgv )
    srand( time( NULL ) );
 
    // Obtain the User Input
-   get_user_input( aiArgc, acpArgv, kiCountServer, kiCountQuery, koFiles );
+   get_user_input( aiArgc, acpArgv, kbGraphEn, kiCountServer, kiCountQuery, koFiles );
+
+   // Create DMS object
+   kopDMS = new DMS( kbGraphEn );
 
    // Popule the DMS
    for( auto koIter = koFiles.begin( ); koIter != koFiles.end( ); koIter++ )
    {
       try
       {            
-         koDMS.populateDirectory( *koIter );
+         kopDMS->populateDirectory( *koIter );
       } 
       catch( exception koException )
       {             
@@ -61,7 +65,7 @@ int main( int aiArgc, char** acpArgv )
    kopTW = new TimingWheel( 10, kiCountServer );
 
    // Generate a queue of Queries
-   generate_query_queue( kiCountQuery, koQueries, koDMS);
+   generate_query_queue( kiCountQuery, koQueries, *kopDMS);
 
    // TODO
    int* ServOccurance = new int[kiCountServer];
@@ -82,7 +86,7 @@ int main( int aiArgc, char** acpArgv )
 		   koQueries.pop();
 	   }
 	   
-	   kopTW->schedule(koDMS);
+	   kopTW->schedule(*kopDMS);
 	   print_status(kiTotalTime, *kopTW);
 	   kopTW->clear_curr_slot();
 
@@ -91,7 +95,11 @@ int main( int aiArgc, char** acpArgv )
 	   kiTotalTime++;
    }
 
-   print_final_statistics(koDMS, *kopTW, MaxServ,IdleServ);
+   print_final_statistics(*kopDMS, *kopTW, MaxServ,IdleServ);
+
+   delete kopTW;
+   delete kopDMS;
+
    cin.get();
    return 0; 
 }
@@ -110,7 +118,7 @@ void mPrintMenu( void )
    cout << "p \t Display details of a Person"            << endl;
 }
 
-void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCountQuery, vector< string >& aorFiles )
+void get_user_input( int aiArgc, char** acpArgv, bool& abrGraphEn, int& airCountServer, int& airCountQuery, vector< string >& aorFiles )
 {
    int    kiCountFile;
    int    kiCountServer;
@@ -120,8 +128,10 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
    // Clear the collection of files
    aorFiles.clear( );
 
-   if( aiArgc < 4 )
+   if( aiArgc < 5 )
    {
+      abrGraphEn = true;
+
       cout << "Enter the number of servers: ";
       cin  >> kiCountServer;
 
@@ -140,11 +150,12 @@ void get_user_input( int aiArgc, char** acpArgv, int& airCountServer, int& airCo
    else
    {
       // Record the server and query counts
-      kiCountServer = stoi( acpArgv[ 1 ] );
-      kiCountQuery  = stoi( acpArgv[ 2 ] );
+      abrGraphEn    = acpArgv[ 1 ][ 0 ] == '1';
+      kiCountServer = stoi( acpArgv[ 2 ] );
+      kiCountQuery  = stoi( acpArgv[ 3 ] );
 
       // Record the list of files
-      for( int kiIndex = 3; kiIndex < aiArgc; kiIndex++ )
+      for( int kiIndex = 4; kiIndex < aiArgc; kiIndex++ )
       {
          aorFiles.push_back( string( acpArgv[ kiIndex ] ) );
       }
@@ -161,7 +172,7 @@ void print_status( int aiTime, const TimingWheel& aorTW )
    std::cout << "System Time: " << aiTime << "\t\t" << aorTW << std::endl;
 }
 
-void print_final_statistics(DMS DMSObject, TimingWheel& TW, vector<int> MaxServ, vector<int> IdleServer)
+void print_final_statistics(const DMS& DMSObject, TimingWheel& TW, vector<int> MaxServ, vector<int> IdleServer)
 {
 	cout << "\nFinal Statistics: \n";
 	cout << "The total size of the directory is " << DMSObject.GetDirectorySize();

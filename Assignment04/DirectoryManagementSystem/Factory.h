@@ -1,3 +1,11 @@
+/**
+ * @file       Factory.h
+ * @author     Edward Eisenberger, Zainab Al Taweel
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Factory class interface
+ */
 #include "Contact.h"
 #include <string>
 #include <map>

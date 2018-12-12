@@ -1,4 +1,11 @@
-
+/**
+ * @file       DMS.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Directory Management System class implementation
+ */
 #include "Contact.h"
 #include "PersonContact.h"
 #include "PersonAddressContact.h"
@@ -20,9 +27,9 @@
 
 using namespace std;
 
-DMS::DMS(void)
+DMS::DMS(bool abGraphEn)
 {
-	// TODO
+	this->vbGraphEn = abGraphEn;
 }
 
 DMS::DMS(const DMS& aorDMS)
@@ -36,7 +43,10 @@ DMS::~DMS(void)
 	// Delete all contacts to free memory
 	for (auto koIter = voDirectory.begin(); koIter != voDirectory.end(); koIter++)
 	{
-		delete koIter->second;
+      if( koIter->second != nullptr )
+      {
+		   delete koIter->second;
+      }
 	}
 }
 
@@ -171,17 +181,17 @@ std::vector< std::pair< std::string, int > > DMS::query( const char acType, cons
 		break;
 	}
 
-   if( koResults.size( ) > 0 )
+   if( ( koResults.size( ) > 0 ) && ( vbGraphEn ) )
    {
-      //Graph koGraph( koTitleX, koTitleY, koTitleG );
-      //
-      //for( auto koIter = koResults.begin( ); koIter != koResults.end( ); koIter++ )
-      //{
-		//   koGraph.addItem( koIter->first, koIter->second );
-	   //}
-	   //
-	   //koGraph.initializeGraph();
-	   //koGraph.generateGraph();
+      Graph koGraph( koTitleX, koTitleY, koTitleG );
+      
+      for( auto koIter = koResults.begin( ); koIter != koResults.end( ); koIter++ )
+      {
+		   koGraph.addItem( koIter->first, koIter->second );
+	   }
+	   
+	   koGraph.initializeGraph();
+	   koGraph.generateGraph();
    }
 
    return( koResults );
@@ -739,7 +749,7 @@ std::string DMS::mTrim(const std::string& aorStr)
 
 	return(koResult);
 }
-int DMS::GetDirectorySize()
+int DMS::GetDirectorySize() const
 {
 	return this->voDirectory.size();
 }
