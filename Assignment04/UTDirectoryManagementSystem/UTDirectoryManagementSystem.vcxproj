@@ -164,6 +164,7 @@
     <ClInclude Include="..\DirectoryManagementSystem\PersonContact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\PersonEmailContact.h" />
     <ClInclude Include="..\DirectoryManagementSystem\PersonPhoneContact.h" />
+    <ClInclude Include="..\DirectoryManagementSystem\Query.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +180,7 @@
     <ClCompile Include="..\DirectoryManagementSystem\PersonContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonEmailContact.cpp" />
     <ClCompile Include="..\DirectoryManagementSystem\PersonPhoneContact.cpp" />
+    <ClCompile Include="..\DirectoryManagementSystem\Query.cpp" />
     <ClCompile Include="UTDMS.cpp" />
   </ItemGroup>
   <ItemGroup>
