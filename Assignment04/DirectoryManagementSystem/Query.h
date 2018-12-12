@@ -1,3 +1,11 @@
+/**
+ * @file       DMS.h
+ * @author     Edward Eisenberger, Zainab Al Taweel
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Directory Management System class interface
+ */
 #ifndef Query_h
 #define Query_h
 

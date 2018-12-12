@@ -1,7 +1,7 @@
 /**
  * @file       main.cpp
  * @author     Edward Eisenberger
- * @date       2018-11-11
+ * @date       2018-12-11
  * @compiler   Visual C++ 2017
  *
  * @brief Main driver application for the Contact Hierarchy of classess
@@ -28,7 +28,7 @@ vector<int> MaxServer(int ServerID, int* ServOccurance);
 
 int main( int aiArgc, char** acpArgv )
 {
-   TimingWheel      koTW;
+   TimingWheel*     kopTW;
    DMS              koDMS;
    int              kiCountServer;
    int              kiCountQuery;
@@ -57,6 +57,9 @@ int main( int aiArgc, char** acpArgv )
       }
    }
 
+   // Create TimingWheel
+   kopTW = new TimingWheel( 10, kiCountServer );
+
    // Generate a queue of Queries
    generate_query_queue( kiCountQuery, koQueries, koDMS);
 
@@ -65,30 +68,30 @@ int main( int aiArgc, char** acpArgv )
    for (int i = 0; i < kiCountServer; i++)
 	   ServOccurance[i] = 0;
 
-   while (!koQueries.empty())
+   while (!koQueries.empty() || ( kopTW->MServerCount( ) < kiCountServer ) )
    {
 	   // check if there is an available server 
-	   if (koTW.MServerAvailable())
+	   if( ( koQueries.size( ) > 0 ) && ( kopTW->MServerAvailable( ) ) )
 	   {	//Find the next available server
 		   // create random time for each query 
 		   int ProcessingTime = (rand() % 8) + 3;
-		   int ServerNum = koTW.MNextAvailable();
+		   int ServerNum = kopTW->MNextAvailable();
 		   MaxServ = MaxServer(ServerNum, ServOccurance);
 		   IdleServ = IdleServer(ServerNum, ServOccurance);
-		   koTW.insert(ProcessingTime, ServerNum, *koQueries.front());
+		   kopTW->insert(ProcessingTime, ServerNum, *koQueries.front());
 		   koQueries.pop();
 	   }
 	   
-	   koTW.schedule(koDMS);
-	   print_status(kiTotalTime, koTW);
-	   koTW.clear_curr_slot();
+	   kopTW->schedule(koDMS);
+	   print_status(kiTotalTime, *kopTW);
+	   kopTW->clear_curr_slot();
 
 	   // Update time
-	   ++koTW; // Move to next time slot
+	   ++( *kopTW ); // Move to next time slot
 	   kiTotalTime++;
    }
 
-   print_final_statistics(koDMS, koTW, MaxServ,IdleServ);
+   print_final_statistics(koDMS, *kopTW, MaxServ,IdleServ);
    cin.get();
    return 0; 
 }

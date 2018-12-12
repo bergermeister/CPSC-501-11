@@ -127,6 +127,11 @@ bool TimingWheel::MServerAvailable( void ) const
    return( !this->voAvailServer.empty( ) );
 }
 
+int TimingWheel::MServerCount( void ) const
+{
+   return( this->voAvailServer.size( ) );
+}
+
 int TimingWheel::MNextAvailable( void )
 {
    int kiServer = -1;

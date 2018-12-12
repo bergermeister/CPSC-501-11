@@ -1,3 +1,11 @@
+/**
+ * @file       TimingWheel.h
+ * @author     Edward Eisenberger, Zainab Al Taweel
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Directory Management System class interface
+ */
 #ifndef TimingWheel_h
 #define TimingWheel_h
 
@@ -33,6 +41,7 @@ public:
    void clear_curr_slot( void );
 
    bool MServerAvailable( void ) const;
+   int  MServerCount( void ) const;
    int  MNextAvailable( void );
 
    friend std::ostream& operator<<( std::ostream& aorOut, const TimingWheel& aorTW );

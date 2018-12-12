@@ -1,3 +1,11 @@
+/**
+ * @file       Factory.cpp
+ * @author     Edward Eisenberger, Zainab Al Taweel
+ * @date       2018-12-11
+ * @compiler   Visual C++ 2017
+ *
+ * @brief Directory Management System class interface
+ */
 #include "Factory.h"
 #include "Query.h"
 #include"DMS.h"
